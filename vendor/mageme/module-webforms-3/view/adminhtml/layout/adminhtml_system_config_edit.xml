@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * MageMe
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the MageMe.com license that is
+ * available through the world-wide-web at this URL:
+ * https://mageme.com/license
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    MageMe
+ * @package     MageMe_WebForms
+ * @author      MageMe Team <support@mageme.com>
+ * @copyright   Copyright (c) MageMe (https://mageme.com)
+ * @license     https://mageme.com/license
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="MageMe_WebForms::css/styles.css"/>
+    </head>
+</page>

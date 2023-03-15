@@ -1,0 +1,15 @@
+<a
+        class="grid-button-action"
+        data-bind="
+        repeat: {
+            foreach: $col.getVisibleActions($row()._rowIndex).sort(function(left, right) { return left.sortOrder < right.sortOrder ? -1 : 1 }),
+            item: '$action'
+        }"
+        data-repeat-bind="
+        attr: {
+            href: $action().href,
+            target: $action().target
+        },
+        click: $col.getActionHandler($action()),
+        text: $action().label"
+></a>

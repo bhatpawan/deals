@@ -1,0 +1,10 @@
+<?php /** @var Tooltip $block */
+
+use MageMe\WebForms\Block\Form\Element\Field\Tooltip; ?>
+
+<div id="<?= $block->getHtmlId() ?>" class="tooltip-icon"></div>
+<script>
+    require(['MageMe_WebForms/js/opentip'], function () {
+        new Opentip("#<?= $block->getHtmlId()?>", "<?= $block->getTooltip()?>", {delay: 0});
+    })
+</script>

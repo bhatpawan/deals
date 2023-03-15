@@ -1,0 +1,8 @@
+<div class="data-grid-cell-content">
+    <div class="webforms-subject">
+        <a href="#" data-bind="text: $col.getLabel($row()), click: function() { $col.getPopup($row()) }"></a>
+        <!-- ko with: $row() -->
+        <div data-bind="visible: statusEnabled, css:statusClass, text: statusName"></div>
+        <!-- /ko -->
+    </div>
+</div>

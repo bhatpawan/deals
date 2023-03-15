@@ -1,0 +1,58 @@
+<?php
+/** @var MageMe\WebForms\Block\Form\Element\Form $block */
+
+$_uid           = $block->getUid();
+$_form          = $block->getForm();
+$_formStructure = $_form->getFieldsToFieldsets();
+?>
+<form method="post"
+      name="webform_<?= $_uid ?>"
+      id="webform_<?= $_uid ?>"
+      enctype="<?= $block->getEnctype() ?>"
+      class="form <?= $_form->getCssClass() ?>"
+      style="<?= $_form->getCssStyle() ?>"
+      <?php if ($block->getDescription()) { ?>aria-describedby="<?= $_uid ?>form_description"<?php } ?>
+      aria-label="<?= $_form->getName() ?>"
+      role="none">
+
+    <input name="form_key" type="hidden"/>
+    <input type="hidden" name="submitForm_<?= $_form->getId() ?>" value="1"/>
+    <input type="hidden" name="form_id" value="<?= $_form->getId() ?>"/>
+    <?php if ($block->getResult() && $block->getResult()->getId()) { ?>
+        <input type="hidden" name="result_id" value="<?php echo $block->getResult()->getId() ?>"/>
+    <?php } ?>
+
+    <?php if (is_array($block->getData('hidden'))) {
+        foreach ($block->getData('hidden') as $key => $value) {
+            ?>
+            <input type="hidden" name="<?= $key ?>" value="<?= $value ?>"/>
+            <?php
+        }
+    } ?>
+
+    <?php if (count($_form->_getHidden())) {
+        foreach ($_form->_getHidden() as $field) {
+            echo $field->toHtml();
+        }
+    } ?>
+
+    <?php foreach ($_formStructure as $fieldsetId => $fieldset) {
+        echo $block->getFieldsetBlock()
+            ->setFieldsetId($fieldsetId)
+            ->setFieldset($fieldset)
+            ->toHtml();
+    } ?>
+
+    <?php if ($_form->useCaptcha()) { ?>
+        <div id="recaptcha-container-<?= /* @noEscape */
+        $_uid ?>"
+             class="captcha-container"
+             data-bind="scope:'<?= /* @noEscape */
+             $_uid ?>'">
+            <!-- ko template: getTemplate() --><!-- /ko -->
+        </div>
+    <?php } ?>
+
+    <?= $block->getActionsToolbarBlock()->toHtml() ?>
+</form>
+

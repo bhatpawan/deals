@@ -1,0 +1,20 @@
+{
+    "name": "mageme/module-webforms-3-graph-ql",
+    "description": "GraphQL integration add-on for WebForms Pro 3",
+    "type": "magento2-module",
+    "version": "3.0.0",
+    "license": "https://mageme.com/license/",
+    "require": {
+        "magento/module-graph-ql": "100.4.*",
+        "mageme/module-webforms-3": ">=3.0.0",
+        "ext-json": "*"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "MageMe\\WebFormsGraphQl\\": ""
+        }
+    }
+}

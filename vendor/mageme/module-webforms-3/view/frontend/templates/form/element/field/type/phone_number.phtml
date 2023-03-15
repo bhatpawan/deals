@@ -1,0 +1,111 @@
+<?php
+/**
+ * @var PhoneNumber $block
+ */
+
+use MageMe\WebForms\Block\Form\Element\Field\Type\PhoneNumber;
+
+$validationRules = $block->getValidationRules();
+$validationDescriptions = $block->getValidationDescriptions();
+?>
+<input id='phone<?= $block->getFieldId() ?>'
+       name='phone<?= $block->getFieldName() ?>'
+       type='text'
+       class='<?= $block->getFieldClass() ?>'
+       style='<?= $block->getFieldStyle() ?>'
+       placeholder="<?= $block->getPlaceholder() ?>"
+    <?php if ($validationRules) { ?>
+        data-validate="{<?= implode(", ", $validationRules); ?>}"
+    <?php } ?>
+    <?php foreach ($validationDescriptions as $key => $data) {
+        echo $key . '=' . '"' . htmlspecialchars((string)$data) . '"';
+    }
+    ?>
+       <?php if ($block->getIsLabelHidden()) { ?>aria-label="<?= $block->getFieldLabel() ?>"
+<?php } else { ?> aria-labelledby="label_<?= $block->getFieldId() ?>" <?php } ?>
+       <?php if ($block->getIsRequired()) { ?>aria-required="true"<?php } ?>
+       <?php if ($block->getAutocomplete()) { ?>autocomplete="<?= $block->getAutocomplete() ?>" <?php } ?>
+    <?= htmlspecialchars((string)$block->getCustomAttributes()) ?>
+       data-mage-init='{
+            "MageMe_WebForms/js/prefill": {
+                "attribute": "<?= $block->getCustomerData() ?>"
+            }
+       }'
+/>
+<input id='<?= $block->getFieldId() ?>'
+       name='<?= $block->getFieldName() ?>'
+       type="hidden"
+    <?= htmlspecialchars((string)$block->getCustomAttributes()) ?>
+/>
+<script type='text/javascript'>
+    require([
+        'phoneInput',
+        'phoneUtils'
+    ], function () {
+        var input = document.getElementById("phone<?= $block->getFieldId(); ?>");
+        var preferredCountries = <?= $block->getPreferredCountries(); ?>;
+        var onlyCountries = <?= $block->getOnlyCountries(); ?>;
+        var initialCountry = '<?= $block->getInitialCountry(); ?>';
+        var initialValue = "<?= htmlspecialchars((string)$block->getFieldValue()); ?>";
+        var config = {
+            separateDialCode: true,
+        }
+        if (!!initialCountry) {
+            config['initialCountry'] = initialCountry;
+        } else {
+            config['initialCountry'] = 'auto';
+            config['geoIpLookup'] = function (success, failure) {
+                fetch("https://ipinfo.io/json").then(
+                    function (response) {
+                        return response.json();
+                    }
+                ).then(
+                    function (jsonResponse) {
+                        var countryCode = (jsonResponse && jsonResponse.country) ? jsonResponse.country : "us";
+                        var iti = window.intlTelInputGlobals.getInstance(input);
+                        try {
+                            iti.setCountry(countryCode);
+                            success(countryCode);
+                        } catch {}
+                        return jsonResponse;
+                    }
+                ).catch(
+                    function (err) {
+                        var iti = window.intlTelInputGlobals.getInstance(input);
+                        var countryCode = 'us';
+                        try {
+                            iti.setCountry(countryCode);
+                            failure(countryCode);
+                        } catch {}
+                    }
+                );
+            };
+        }
+
+        if (preferredCountries.length > 0) {
+            config['preferredCountries'] = preferredCountries;
+        }
+        if (onlyCountries.length > 0) {
+            config['onlyCountries'] = onlyCountries;
+        }
+        var phone = window.intlTelInput(input, config);
+        input.oninput = function() {
+            document.getElementById("<?= $block->getFieldId(); ?>").value = phone.getNumber();
+        };
+        if (!!initialValue) {
+            phone.setNumber(initialValue);
+            document.getElementById("<?= $block->getFieldId(); ?>").value = phone.getNumber();
+        }
+    });
+</script>
+<?php if ($block->getMask()) { ?>
+    <script>
+        require(['MageMe_WebForms/js/inputmask'], function () {
+            var element = document.getElementById("phone<?= $block->getFieldId(); ?>");
+            if (element) {
+                var im = new Inputmask("<?= $block->getMask(); ?>");
+                im.mask(element);
+            }
+        });
+    </script>
+<?php } ?>

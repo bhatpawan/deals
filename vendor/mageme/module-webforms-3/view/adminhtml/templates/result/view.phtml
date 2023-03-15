@@ -1,0 +1,80 @@
+<?php
+
+use MageMe\WebForms\Api\Data\FieldInterface;
+use MageMe\WebForms\Api\Data\FieldsetInterface;
+use MageMe\WebForms\Api\Data\ResultInterface;
+use MageMe\WebForms\Block\Adminhtml\Result\View;
+use MageMe\WebForms\Block\Form\Element\Field\AbstractField;
+use MageMe\WebForms\Config\Options\Field\DisplayOption;
+
+/** @var View $block */
+$result  = $block->getResult();
+$form    = $result->getForm();
+$options = $block->getOptions();
+
+$logicRules          = $form->getLogic(false);
+$fields_to_fieldsets = $form->getFieldsToFieldsets(true);
+?>
+<div class="webforms-result-view">
+    <?php
+    if (count($result->getFiles())) {
+        ?>
+        <a class="download-files" href="<?= $block->getUrl('webforms/result/exportFiles',
+            [ResultInterface::ID => $result->getId(), '_current' => true]) ?>"><?= __('Download Files') ?></a>
+        <?php
+    }
+    ?>
+    <?php
+    foreach ($fields_to_fieldsets as $fieldset_id => $fieldset) {
+        $k         = false;
+        $fieldHtml = '';
+
+        $target_fieldset     = [
+            "id" => 'fieldset_' . $fieldset_id,
+            'logic_visibility' => $fieldset['logic_visibility']
+        ];
+        $fieldset_visibility = $form->getTargetVisibility($target_fieldset, $logicRules,
+            $result->getData('field'));
+
+        if ($fieldset_visibility) {
+
+            /** @var FieldInterface|AbstractField $field */
+            foreach ($fieldset['fields'] as $field) {
+                $targetField = [
+                    "id" => 'field_' . $field->getId(),
+                    'logic_visibility' => $field->getData('logic_visibility')
+                ];
+                if ($field->hasData('visible')) {
+                    $fieldVisibility = $field->getData('visible');
+                } else {
+                    $fieldVisibility = $form->getTargetVisibility($targetField, $logicRules,
+                        $result->getData('field'));
+                }
+                $value = $field->getValueForResultAdminhtml($result->getData('field_' . $field->getId()), ['result_id' => $result->getId()]);
+                if ($value &&
+                    $fieldVisibility &&
+                    !in_array($field->getType(), $options['skip_fields']) &&
+                    $field->getDisplayInResult() != DisplayOption::OPTION_OFF
+                ) {
+                    $fieldName = $field->getName();
+                    if (strlen(trim((string)$field->getResultLabel())) > 0) {
+                        $fieldName = $field->getResultLabel();
+                    }
+
+                    $options['result_id'] = $result->getId();
+                    if (!empty($value)) {
+                        $k         = true;
+                        $fieldNameHtml  = $field->getDisplayInResult() != DisplayOption::OPTION_VALUE ?
+                            sprintf('<div class="field-name">%s</div>', $fieldName) : '';
+                        $fieldHtml .= sprintf('<div class="field-block">%s<div class="field-value">%s</div></div>', $fieldNameHtml, $value);
+                    }
+                }
+            }
+        }
+        if (!empty($fieldset[FieldsetInterface::NAME]) && $k && $fieldset[FieldsetInterface::IS_NAME_DISPLAYED_IN_RESULT]) {
+            $fieldHtml = sprintf('<div class="fieldset-block"><div class="fieldset-name">%s</div>%s</div>', $fieldset[FieldsetInterface::NAME], $fieldHtml);
+        }
+        echo $fieldHtml;
+    }
+    ?>
+</div>

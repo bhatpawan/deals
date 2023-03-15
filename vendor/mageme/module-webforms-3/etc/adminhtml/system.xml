@@ -1,0 +1,388 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="webforms" translate="label" type="text" sortOrder="1110" showInDefault="1" showInWebsite="1"
+                 showInStore="1">
+            <label>WebForms</label>
+            <tab>mageme</tab>
+            <resource>MageMe_WebForms::settings</resource>
+            <group id="general" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>General</label>
+                <field id="admin_toolbar" translate="label comment" type="select" sortOrder="5" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Admin Toolbar</label>
+                    <comment><![CDATA[Show WebForms toolbar icon next to the notification bell in the top toolbar]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="unread_enable" translate="label comment" type="select" sortOrder="7" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Unread Counter</label>
+                    <comment><![CDATA[Enable unread counter in toolbar and Manage Forms page.]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="unread_cron" translate="label comment" type="select" sortOrder="8" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Unread Counter Cron Job</label>
+                    <comment><![CDATA[Refresh unread counters via cron job. Enable if you have big numbers of incoming submissions.]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="ajax" translate="label comment" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Ajax Submission</label>
+                    <comment><![CDATA[Forms will be submitted without page reloading]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="use_translation" translate="label comment" type="select" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Use Magento Translations</label>
+                    <comment><![CDATA[Use Magento translations to automatically translate forms in frontend]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="login_redirect" translate="label comment" type="text" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Login Redirect URL</label>
+                    <comment><![CDATA[Custom login redirect URL(Key) if user is not authorized]]></comment>
+                </field>
+                <field id="preview_enabled" translate="label comment" type="select" sortOrder="40" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Enable Form Preview</label>
+                    <comment><![CDATA[Enable preview of web-forms in frontend]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="preview_store" translate="label comment" type="select" sortOrder="60" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Preview Store View</label>
+                    <comment><![CDATA[Select default Store View for the form preview]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Store</source_model>
+                    <depends>
+                        <field id="preview_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="customer_navigation_block_title" translate="label comment" type="text" sortOrder="70"
+                       showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Customer Area WebForms Block Title</label>
+                    <comment><![CDATA[Set WebForms block title in customer account area]]></comment>
+                </field>
+                <field id="use_uid" translate="label comment" type="select" sortOrder="80"
+                       showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Use Unique IDs</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>
+                        <![CDATA[Use randomly generated unique IDs for form elements. This should be enabled if you use multiple form instances on one page and have problems.]]></comment>
+                </field>
+                <field id="collect_customer_ip" translate="label comment" type="select" sortOrder="90" showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <label>Collect Customer IPs</label>
+                    <comment><![CDATA[Save IP addresses of your customers with the submission]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="show_select_db_value" translate="label comment" type="select" sortOrder="100" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Show Select Fields Db Values</label>
+                    <comment><![CDATA[Show actual db values in results grids for select, radio and checkbox group field types. This options affects column filter types as well.]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="result_allowed_statuses" translate="label comment" type="multiselect" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Result Statuses Allowed For Customer Edits</label>
+                    <can_be_empty>1</can_be_empty>
+                    <comment><![CDATA[Please select which statuses allow the customer to change his results. The result edit permission should be enabled in the Access Settings tab of the form.]]></comment>
+                    <source_model>MageMe\WebForms\Config\Options\Result\ApprovalStatus</source_model>
+                </field>
+            </group>
+            <group id="email" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Email</label>
+                <field id="email" translate="label comment" type="text" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Default Email Address For Notifications</label>
+                    <comment>
+                        <![CDATA[This address will be used by default to send you new results notifications. You can set multiple addresses comma-separated]]></comment>
+                </field>
+                <field id="customer_notification_reply_to" translate="label comment" type="text" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Reply-to Email Address For Customer</label>
+                    <comment><![CDATA[This address will be used in reply-to field in customer notification]]></comment>
+                    <validate>validate-email</validate>
+                </field>
+                <field id="email_from" translate="label comment" type="text" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Send All Emails From This Address</label>
+                    <comment>
+                        <![CDATA[In case you have problems receiving notifications this email address should be set to your mailbox used for sending out system emails. It doesn't affect reply-to values(except Gmail web-interface which has issues with it).]]></comment>
+                    <validate>validate-email</validate>
+                </field>
+                <field id="stoplist" translate="label comment" type="textarea" sortOrder="40" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Block Email Addresses</label>
+                    <comment>
+                        <![CDATA[Block specified email addresses from submission. You can use Regular Expressions to block address ranges]]></comment>
+                </field>
+            </group>
+            <group id="message" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Reply Messages</label>
+                <field id="files_purge_enable" translate="label comment" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Purge Sent Files Periodically</label>
+                    <comment><![CDATA[Automatically delete reply messages history files]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="files_purge_period" translate="label comment" type="text" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Purge Period(days)</label>
+                    <comment><![CDATA[Delete message files older than specified period]]></comment>
+                    <validate>required-entry validate-digits</validate>
+                    <depends>
+                        <field id="files_purge_enable">1</field>
+                    </depends>
+                </field>
+                <field id="nl2br" translate="label comment" type="select" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Convert newline characters to &lt;br&gt; html tags when saving message]]></label>
+                    <comment>
+                        <![CDATA[Convert newline characters in admin reply messages automatically. Useful when you are not using visual editor.]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="admin_copy" translate="label comment" type="select" sortOrder="40" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Send Copy To Admin</label>
+                    <comment><![CDATA[Send a copy of reply message to admin]]></comment>
+                    <source_model>MageMe\WebForms\Config\Options\Message\AdminCopy</source_model>
+                </field>
+            </group>
+            <group id="captcha" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Google reCAPTCHA</label>
+                <comment>
+                    <![CDATA[In order for reCaptcha to work please enter valid site and secret keys. You can get those by visiting <a href='http://www.google.com/recaptcha' target='_blank'>this page</a>]]></comment>
+                <field id="recaptcha_version" translate="label comment" type="select" sortOrder="1" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Version</label>
+                    <source_model>MageMe\WebForms\Config\Options\Captcha\Version</source_model>
+                </field>
+                <field id="mode" translate="label comment" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Mode</label>
+                    <source_model>MageMe\WebForms\Config\Options\Captcha\Mode</source_model>
+                </field>
+                <field id="theme" translate="label comment" type="select" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Theme</label>
+                    <source_model>MageMe\WebForms\Config\Options\Captcha\Theme</source_model>
+                    <depends>
+                        <field id="recaptcha_version">2</field>
+                    </depends>
+                </field>
+                <field id="public_key" translate="label comment" type="obscure" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Site Key v2</label>
+                    <depends>
+                        <field id="recaptcha_version">2</field>
+                    </depends>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+                <field id="private_key" translate="label comment" type="obscure" sortOrder="40" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Secret Key v2</label>
+                    <depends>
+                        <field id="recaptcha_version">2</field>
+                    </depends>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+                <field id="public_key3" translate="label comment" type="obscure" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Google API Website Key</label>
+                    <depends>
+                        <field id="recaptcha_version">3</field>
+                    </depends>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+                <field id="private_key3" translate="label comment" type="obscure" sortOrder="40" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Google API Secret Key</label>
+                    <depends>
+                        <field id="recaptcha_version">3</field>
+                    </depends>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+                <field id="position" translate="label comment" type="select" sortOrder="50" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Invisible Badge Position</label>
+                    <source_model>MageMe\WebForms\Config\Options\Captcha\Position</source_model>
+                    <depends>
+                        <field id="recaptcha_version">3</field>
+                    </depends>
+                </field>
+                <field id="score_threshold" translate="label comment" type="text" sortOrder="60" showInDefault="1"
+                       showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Minimum Score Threshold</label>
+                    <comment>The accepted value is between 0 and 1. Where 0 is likely a bot and 1 is likely a human.</comment>
+                    <depends>
+                        <field id="recaptcha_version">3</field>
+                    </depends>
+                </field>
+                <field id="validation_failure_message" translate="label" type="textarea" sortOrder="70" showInDefault="1"
+                       showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Validation Failure Message</label>
+                </field>
+                <field id="technical_failure_message" translate="label" type="textarea" sortOrder="80" showInDefault="1"
+                       showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Technical Failure Message</label>
+                </field>
+            </group>
+            <group id="map" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Google Maps</label>
+                <field id="google_api_key" translate="label comment" type="obscure" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Google Maps Api Key</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+            </group>
+            <group id="files" translate="label comment" type="text" sortOrder="80" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Files</label>
+                <field id="upload_limit" translate="label comment" type="text" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Upload Limit</label>
+                    <comment><![CDATA[Maximum upload file size in kB]]></comment>
+                </field>
+            </group>
+            <group id="images" translate="label comment" type="text" sortOrder="90" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Images</label>
+                <field id="cache" translate="label comment" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Enable Cache</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="upload_limit" translate="label comment" type="text" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Upload Limit</label>
+                    <comment><![CDATA[Maximum upload file size in kB]]></comment>
+                </field>
+                <field id="grid_thumbnail_width" translate="label comment" type="text" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Grid Thumbnail Width</label>
+                    <comment><![CDATA[Thumbnail width in results grid]]></comment>
+                </field>
+                <field id="grid_thumbnail_height" translate="label comment" type="text" sortOrder="40" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Grid Thumbnail Height</label>
+                    <comment><![CDATA[Thumbnail height in results grid]]></comment>
+                </field>
+                <field id="email_thumbnail_width" translate="label comment" type="text" sortOrder="50" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Email Thumbnail Width</label>
+                    <comment><![CDATA[Thumbnail width in email notifications]]></comment>
+                </field>
+                <field id="email_thumbnail_height" translate="label comment" type="text" sortOrder="60"
+                       showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Email Thumbnail Height</label>
+                    <comment><![CDATA[Thumbnail height in email notifications]]></comment>
+                </field>
+            </group>
+            <group id="contacts" translate="label comment" type="text" sortOrder="100" showInDefault="1"
+                   showInWebsite="1"
+                   showInStore="1">
+                <label>Contacts Form</label>
+                <comment>
+                    <![CDATA[Replace default Magento contacts page (yourdomain.com/contact/) with the preferred web-form.]]></comment>
+                <field id="enable" translate="label comment" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="webform" translate="label comment" type="select" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Contacts Form</label>
+                    <comment><![CDATA[Select web-form to replace default contacts page]]></comment>
+                    <source_model>MageMe\WebForms\Config\Options\Form</source_model>
+                </field>
+            </group>
+            <group id="slideout" translate="label comment" type="text" sortOrder="102" showInDefault="1"
+                   showInWebsite="1" showInStore="1">
+                <label>Slide-out Form</label>
+                <comment><![CDATA[The form will be displayed on all pages of the site.]]></comment>
+                <field id="enable" translate="label comment" type="select" sortOrder="1" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="webform" translate="label comment" type="select" sortOrder="5" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Form</label>
+                    <comment><![CDATA[Select web-form for slide-out]]></comment>
+                    <source_model>MageMe\WebForms\Config\Options\Form</source_model>
+                </field>
+                <field id="slider_position" translate="label comment" type="select" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Position</label>
+                    <source_model>MageMe\WebForms\Config\Options\SlideOut\Position</source_model>
+                </field>
+                <field id="button_text" translate="label comment" type="text" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Button Text</label>
+                </field>
+                <field id="button_color" translate="label comment" type="text" sortOrder="40" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Button Color</label>
+                    <frontend_model>MageMe\WebForms\Block\Adminhtml\Config\Color</frontend_model>
+                </field>
+                <field id="button_text_color" translate="label comment" type="text" sortOrder="50" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Button Text Color</label>
+                    <frontend_model>MageMe\WebForms\Block\Adminhtml\Config\Color</frontend_model>
+                </field>
+                <field id="button_width" translate="label comment" type="text" sortOrder="55" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Button Width (px)</label>
+                </field>
+                <field id="background_color" translate="label comment" type="text" sortOrder="60" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Form Background Color</label>
+                    <frontend_model>MageMe\WebForms\Block\Adminhtml\Config\Color</frontend_model>
+                </field>
+                <field id="border_color" translate="label comment" type="text" sortOrder="70" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Form Border Color</label>
+                    <frontend_model>MageMe\WebForms\Block\Adminhtml\Config\Color</frontend_model>
+                </field>
+                <field id="form_width" translate="label comment" type="text" sortOrder="80" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Form Width (px)</label>
+                </field>
+                <field id="form_margin_bottom" translate="label comment" type="text" sortOrder="90" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Form Bottom Margin (px)</label>
+                </field>
+            </group>
+            <group id="accessibility" translate="label comment" type="text" sortOrder="105" showInDefault="1"
+                   showInWebsite="1"
+                   showInStore="1">
+                <label>Accessibility</label>
+                <field id="accessible_calendar" translate="label comment" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Use Accessible Date Picker</label>
+                    <comment><![CDATA[Enable accessible date picker for compatibility with screen readers]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="data_cleanup" translate="label comment" type="text" sortOrder="110" showInDefault="1"
+                   showInWebsite="1"
+                   showInStore="0">
+                <label>Data Cleanup</label>
+                <field id="purge_data_on_account_delete" translate="label comment" type="select" sortOrder="30"
+                       showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <label>Purge Deleted Customer Data</label>
+                    <comment><![CDATA[Purge all associated customer submissions if the account is deleted]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

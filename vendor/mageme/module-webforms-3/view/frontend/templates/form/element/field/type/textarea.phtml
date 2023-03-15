@@ -1,0 +1,45 @@
+<?php
+/**
+ * @var Textarea $block
+ */
+
+use MageMe\WebForms\Block\Form\Element\Field\Type\Textarea;
+
+$validationRules = $block->getValidationRules();
+$validationDescriptions = $block->getValidationDescriptions();
+?>
+<textarea id='<?= $block->getFieldId() ?>'
+          name='<?= $block->getFieldName() ?>'
+          class='<?= $block->getFieldClass() ?>'
+          rows='<?= $block->getRows() ?>'
+          style='<?= $block->getFieldStyle() ?>'
+          placeholder="<?= $block->getPlaceholder() ?>"
+          <?php if ($validationRules) { ?>
+              data-validate="{<?= implode(", ", $validationRules); ?>}"
+          <?php } ?>
+          <?php foreach ($validationDescriptions as $key => $data) {
+              echo $key . '=' . '"' . htmlspecialchars((string)$data) . '"';
+          }
+          ?>
+          <?php if ($block->getIsLabelHidden()) { ?>aria-label="<?= $block->getFieldLabel() ?>"
+          <?php } else { ?> aria-labelledby="label_<?= $block->getFieldId() ?>" <?php } ?>
+          <?php if ($block->getIsRequired()) { ?>aria-required="true"<?php } ?>
+          <?php if ($block->getAutocomplete()) { ?>autocomplete="<?= $block->getAutocomplete() ?>" <?php } ?>
+          <?= htmlspecialchars((string)$block->getCustomAttributes()) ?>
+          data-mage-init='{
+                "MageMe_WebForms/js/prefill": {
+                    "attribute": "<?= $block->getCustomerData() ?>"
+                }
+          }'
+><?= $block->getFieldValue(); ?></textarea>
+<?php if ($block->getMask()) { ?>
+    <script>
+        require(['MageMe_WebForms/js/inputmask'], function () {
+            var element = document.getElementById("<?= $block->getFieldId(); ?>");
+            if (element) {
+                var im = new Inputmask("<?= $block->getMask(); ?>");
+                im.mask(element);
+            }
+        });
+    </script>
+<?php } ?>

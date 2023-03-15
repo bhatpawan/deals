@@ -1,0 +1,32 @@
+<svg id="Слой_1" data-name="Слой 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30" height="120" viewBox="0 0 30 120">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke-miterlimit: 10;
+        stroke: url(#Безымянный_градиент_39);
+      }
+
+      .cls-2 {
+        fill: url(#Безымянный_градиент_173);
+      }
+
+      .cls-3 {
+        fill: #e5e5e5;
+      }
+    </style>
+    <linearGradient id="Безымянный_градиент_39" data-name="Безымянный градиент 39" x1="10.28" y1="94.64" x2="22.45" y2="115.73" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#979695"/>
+    </linearGradient>
+    <linearGradient id="Безымянный_градиент_173" data-name="Безымянный градиент 173" x1="7.64" y1="68.18" x2="23.52" y2="84.07" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f6ec46"/>
+      <stop offset="1" stop-color="#ecb144"/>
+    </linearGradient>
+  </defs>
+  <title>stars</title>
+  <polygon class="cls-1" points="15.58 92.71 19.09 99.83 26.95 100.97 21.26 106.51 22.61 114.34 15.58 110.64 8.55 114.34 9.89 106.51 4.21 100.97 12.06 99.83 15.58 92.71"/>
+  <polygon class="cls-2" points="15.58 63.35 19.09 70.47 26.95 71.61 21.26 77.16 22.61 84.98 15.58 81.29 8.55 84.98 9.89 77.16 4.21 71.61 12.06 70.47 15.58 63.35"/>
+  <polygon class="cls-3" points="15.58 32.99 19.09 40.11 26.95 41.26 21.26 46.8 22.61 54.62 15.58 50.93 8.55 54.62 9.89 46.8 4.21 41.26 12.06 40.11 15.58 32.99"/>
+  <circle class="cls-3" cx="15.58" cy="15.76" r="2.83"/>
+</svg>

@@ -1,0 +1,61 @@
+<?php
+/** @var MageMe\WebForms\Block\Form\Element\Field $block */
+
+use MageMe\WebForms\Model\Logic;
+
+$_uid   = $block->getUid();
+$_field = $block->getField();
+$_field->setData('uid', $_uid);
+$_field->setData('result', $block->getResult());
+$aria_labelledby = "aria-labelledby=\"label_field" . $block->getFieldUid() . "\"";
+if ($_field->getIsLabelHidden()) {
+    $aria_labelledby = "";
+}
+$aria_describedby = "";
+if ($_field->getComment()) {
+    $aria_describedby = "aria-describedby=\"comment_field" . $block->getFieldUid() . "\"";
+}
+?>
+<div id="field_<?= $block->getFieldUid(); ?>" role="group"
+     class="field <?= $_field->getCssContainerClass(); ?> webforms-fields-<?= $_field->getId() ?><?php if ($_field->getCode()) { ?> webforms-fields-<?= $_field->getCode();
+     } ?> <?php if ($_field->getIsRequired()) { ?>required<?php } ?>"
+    <?= $aria_labelledby ?>
+    <?= $aria_describedby ?>
+    <?php if ($_field->getData('logic_visibility') == Logic::VISIBILITY_HIDDEN) {
+        echo 'style="display:none"';
+    } ?>>
+
+    <?php if (!$_field->getIsLabelHidden()) { ?>
+        <label class="label"
+               id="label_field<?= $block->getFieldUid() ?>"
+            <?= $_field->getLabelForForFormDefaultTemplate($block->getUid()); ?>>
+            <?= $block->applyTranslation($_field->getName()); ?>
+            <?php
+            $tooltip = $_field->getTooltip();
+            if ($tooltip) {
+                echo $block->getTooltipBlock()->toHtml();
+            }
+            ?>
+        </label>
+    <?php } ?>
+
+    <div class="control" role="group" <?= $aria_labelledby ?>>
+        <?= $_field->toHtml(); ?>
+
+        <?php if ($_field->getValidationRequiredMessage()) { ?>
+            <div style="display:none" class="validation-advice"
+                 id="advice-required-entry-field<?= $block->getFieldUid() ?>">
+                <?= $block->applyTranslation($_field->getValidationRequiredMessage()); ?>
+            </div>
+        <?php } ?>
+
+        <?php if ($_field->getComment()) { ?>
+            <p class="webforms-fields-comment"
+               id="comment_field<?= $block->getFieldUid() ?>"
+               tabindex="0">
+                <?= nl2br((string)$block->applyTranslation($_field->getComment())); ?>
+            </p>
+        <?php } ?>
+    </div>
+
+</div>

@@ -1,0 +1,13 @@
+<div class="pagebuilder-content-type pagebuilder-webforms-button" data-bind="event: { mouseover: onMouseOver, mouseout: onMouseOut }, mouseoverBubble: false">
+    <div attr="data.main.attributes" ko-style="data.main.style" css="data.main.css">
+        <button class="placeholder-button hide-badge" type="button" css="data.button.css">
+            <span class="hide-badge" data-bind="liveEdit: { field: 'button_text', placeholder: buttonPlaceholder, selectAll: true }"></span>
+            <div class="popup-badge"></div>
+            <div ifnot="popupBinded" class="pagebuilder-webforms-button-placeholder">
+                <span class="placeholder-text"  text="placeholderText"></span>
+            </div>
+        </button>
+    </div>
+    <render args="getOptions().template" />
+</div>
+

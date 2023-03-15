@@ -1,0 +1,83 @@
+<?php
+/** @var ToolbarEntry $block */
+
+use MageMe\WebForms\Api\Data\FormInterface;
+use MageMe\WebForms\Block\Adminhtml\ToolbarEntry;
+
+$_forms            = $block->getForms();
+$_totalUnreadCount = $block->getTotalUnreadCount();
+?>
+<div class="admin-webforms admin__action-dropdown-wrap">
+    <a
+        href="<?= /* @noEscape */
+        $block->getUrl('webforms/form') ?>"
+        class="admin__action-dropdown"
+        title="<?= $block->escapeHtml(__('WebForms')) ?>"
+        data-mage-init='{"dropdown":{}}'
+        data-toggle="dropdown">
+            <span class="admin__action-dropdown-text">
+                <span class="webforms-account-text"><?= $block->escapeHtml(__('WebForms')) ?></span>
+            </span>
+        <?php if ($_totalUnreadCount) { ?>
+            <span class="notifications-counter">
+                <?= $_totalUnreadCount ?>
+            </span>
+        <?php } ?>
+    </a>
+    <ul class="admin__action-dropdown-menu">
+        <?php if ($block->isManageFormsAllowed()) : ?>
+            <li>
+                <a
+                    href="<?= /* @noEscape */
+                    $block->getUrl('webforms/form') ?>"
+                    title="<?= $block->escapeHtml(__('Manage Forms')) ?>">
+                    <?= $block->escapeHtml(__('Manage Forms')) ?>
+                </a>
+            </li>
+        <?php endif; ?>
+        <?php if ($block->isQuickresponseAllowed()) : ?>
+            <li>
+                <a
+                    href="<?= /* @noEscape */
+                    $block->getUrl('webforms/quickresponse') ?>"
+                    title="<?= $block->escapeHtml(__('Manage Quick Responses')) ?>">
+                    <?= $block->escapeHtml(__('Manage Quick Responses')) ?>
+                </a>
+            </li>
+        <?php endif; ?>
+
+        <?php
+        foreach ($_forms as $_form) {
+            $_formUnreadCount = $block->getFormUnreadCount($_form);
+            if ($block->isFormAllowed($_form)) {
+                ?>
+                <li>
+                    <a class="form-link"
+                        href="<?= /* @noEscape */
+                        $block->getUrl('webforms/result', [FormInterface::ID => $_form->getId()]) ?>"
+                        title="<?= $block->escapeHtml($_form->getName()) ?>">
+                        <span class="form-name"><?= $block->escapeHtml($_form->getName()) ?></span>
+                        <?php if($_formUnreadCount):?>
+                            <span class="notifications-counter">
+                                <?= $_formUnreadCount ?>
+                            </span>
+                        <?php endif; ?>
+                    </a>
+                </li>
+                <?php
+            }
+        }
+        ?>
+
+        <?php if ($block->isSettingsAllowed()) : ?>
+            <li>
+                <a
+                    href="<?= /* @noEscape */
+                    $block->getUrl('webforms/settings') ?>"
+                    title="<?= $block->escapeHtml(__('Settings')) ?>">
+                    <?= $block->escapeHtml(__('Settings')) ?>
+                </a>
+            </li>
+        <?php endif; ?>
+    </ul>
+</div>

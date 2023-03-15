@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="MageMe_WebForms::webforms" title="WebForms" module="MageMe_WebForms"
+             parent="Magento_Backend::content" sortOrder="500"
+             resource="MageMe_WebForms::manage_forms"/>
+        <add id="MageMe_WebForms::manage_forms" title="Manage Forms" module="MageMe_WebForms" sortOrder="10" parent="MageMe_WebForms::webforms" action="webforms/form/" resource="MageMe_WebForms::manage_forms"/>
+        <add id="MageMe_WebForms::quickresponse" title="Manage Quick Responses" module="MageMe_WebForms" sortOrder="20" parent="MageMe_WebForms::webforms" action="webforms/quickresponse/" resource="MageMe_WebForms::quickresponse"/>
+        <add id="MageMe_WebForms::settings" title="Settings" module="MageMe_WebForms" sortOrder="30" parent="MageMe_WebForms::webforms" action="webforms/settings/" resource="MageMe_WebForms::settings"/>
+    </menu>
+</config>

@@ -1,0 +1,1406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">webforms_form_form.webforms_form_form_data_source</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="back"
+                    class="MageMe\WebForms\Block\Adminhtml\Form\Edit\Button\Back"/>
+            <button name="reset"
+                    class="MageMe\WebForms\Block\Adminhtml\Form\Edit\Button\Reset"/>
+            <button name="view"
+                    class="MageMe\WebForms\Block\Adminhtml\Form\Edit\Button\View"/>
+            <button name="add_fieldset"
+                    class="MageMe\WebForms\Block\Adminhtml\Form\Edit\Button\AddFieldset"/>
+            <button name="add_field"
+                    class="MageMe\WebForms\Block\Adminhtml\Form\Edit\Button\AddField"/>
+            <button name="save"
+                    class="MageMe\WebForms\Block\Adminhtml\Form\Edit\Button\Save"/>
+        </buttons>
+        <namespace>webforms_form_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>webforms_form_form.webforms_form_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="webforms_form_form_data_source"
+                component="Magento_Ui/js/form/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">form_id</param>
+            </storageConfig>
+            <submitUrl path="webforms/form/save"/>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <dataProvider class="WebformsFormFormDataProvider" name="webforms_form_form_data_source">
+            <settings>
+                <requestFieldName>form_id</requestFieldName>
+                <primaryFieldName>form_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="information" sortOrder="10">
+        <settings>
+            <label translate="true">Information</label>
+            <collapsible>true</collapsible>
+            <opened>true</opened>
+        </settings>
+
+        <field name="form_id" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+            </settings>
+        </field>
+
+        <field name="store" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+            </settings>
+        </field>
+
+        <field name="is_active" sortOrder="5" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                    <item name="toggleLabels" xsi:type="array">
+                        <item name="on" xsi:type="string">Yes</item>
+                        <item name="off" xsi:type="string">No</item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Enable Form</label>
+                <imports>
+                    <link name="disabled">${ $.provider }:data.isManageAllowed</link>
+                </imports>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+
+        <field name="name" sortOrder="10" formElement="input">
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Name</label>
+            </settings>
+        </field>
+
+        <field name="code" sortOrder="20" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        Code is used to help identify this web-form in scripts.
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Code</label>
+                <scopeLabel>[GLOBAL]</scopeLabel>
+            </settings>
+        </field>
+
+        <field name="is_url_parameters_accepted" sortOrder="30" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        Accept URL parameters to set field values. Use field Code value as parameter name.
+                    </item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Accept URL Parameters</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+
+        <field name="is_survey" sortOrder="40" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        Survey mode allows filling up the form only one time.
+                    </item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Survey Mode</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+
+        <field name="captcha_mode" sortOrder="45" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        Default value is set in Forms Settings.
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Captcha Mode</label>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="MageMe\WebForms\Config\Options\Captcha\Mode"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+        <field name="redirect_url" sortOrder="50" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        Redirect to specified url after successful submission.
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Redirect URL</label>
+            </settings>
+        </field>
+
+
+
+        <field name="is_menu_link_enabled" sortOrder="70" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        Show web-form in admin backend menu under Web-forms section.
+                    </item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Display Form in Admin Menu</label>
+                <scopeLabel>[GLOBAL]</scopeLabel>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+    </fieldset>
+
+    <fieldset name="form_texts" sortOrder="20">
+        <settings>
+            <label translate="true">Form Texts</label>
+            <collapsible>true</collapsible>
+            <opened>false</opened>
+        </settings>
+
+        <field name="title" sortOrder="10" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Title</label>
+            </settings>
+        </field>
+
+        <field name="description" sortOrder="30"
+               formElement="wysiwyg"
+               template="ui/form/field">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        This text will appear under the form name.
+                    </item>
+                    <item name="wysiwygConfigData" xsi:type="array">
+                        <item name="add_variables" xsi:type="boolean">true</item>
+                        <item name="add_widgets" xsi:type="boolean">true</item>
+                        <item name="add_images" xsi:type="boolean">true</item>
+                        <item name="add_directives" xsi:type="boolean">true</item>
+                        <item name="height" xsi:type="string">20em</item>
+                        <item name="is_pagebuilder_enabled" xsi:type="boolean">false</item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Description</label>
+            </settings>
+            <formElements>
+                <wysiwyg>
+                    <settings>
+                        <rows>14</rows>
+                        <wysiwyg>true</wysiwyg>
+                    </settings>
+                </wysiwyg>
+            </formElements>
+        </field>
+
+        <field name="success_text" sortOrder="40"
+               formElement="wysiwyg"
+               template="ui/form/field">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        This text will be displayed after the form completion.
+                    </item>
+                    <item name="wysiwygConfigData" xsi:type="array">
+                        <item name="add_variables" xsi:type="boolean">true</item>
+                        <item name="add_widgets" xsi:type="boolean">true</item>
+                        <item name="add_images" xsi:type="boolean">true</item>
+                        <item name="add_directives" xsi:type="boolean">true</item>
+                        <item name="height" xsi:type="string">20em</item>
+                        <item name="is_pagebuilder_enabled" xsi:type="boolean">false</item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Success Text</label>
+            </settings>
+            <formElements>
+                <wysiwyg>
+                    <settings>
+                        <rows>14</rows>
+                        <wysiwyg>true</wysiwyg>
+                    </settings>
+                </wysiwyg>
+            </formElements>
+        </field>
+
+        <field name="is_success_session_displayed" sortOrder="45" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        Display the success text as the session message after redirection.
+                    </item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Display On Redirection</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+
+        <field name="below_text" sortOrder="50"
+               formElement="wysiwyg"
+               template="ui/form/field">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        This text will be displayed below the form.
+                    </item>
+                    <item name="wysiwygConfigData" xsi:type="array">
+                        <item name="add_variables" xsi:type="boolean">true</item>
+                        <item name="add_widgets" xsi:type="boolean">true</item>
+                        <item name="add_images" xsi:type="boolean">true</item>
+                        <item name="add_directives" xsi:type="boolean">true</item>
+                        <item name="height" xsi:type="string">20em</item>
+                        <item name="is_pagebuilder_enabled" xsi:type="boolean">false</item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Text Below the Form</label>
+            </settings>
+            <formElements>
+                <wysiwyg>
+                    <settings>
+                        <rows>14</rows>
+                        <wysiwyg>true</wysiwyg>
+                    </settings>
+                </wysiwyg>
+            </formElements>
+        </field>
+
+        <field name="submit_button_text" sortOrder="60" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        Set text for the submit button of the form. If empty the default value "Submit" will be used.
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Submit Button Text</label>
+            </settings>
+        </field>
+    </fieldset>
+
+    <fieldset name="form_scripts" sortOrder="30">
+        <settings>
+            <label translate="true">Form Scripts</label>
+            <collapsible>true</collapsible>
+            <opened>false</opened>
+        </settings>
+
+        <field name="on_load_script" sortOrder="10"
+               formElement="textarea"
+               template="ui/form/field">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        JavaScript that is executed when the form is displayed.
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">On Load Script</label>
+            </settings>
+            <formElements>
+                <textarea>
+                    <settings>
+                        <rows>14</rows>
+                    </settings>
+                </textarea>
+            </formElements>
+        </field>
+
+        <field name="after_submission_script" sortOrder="20"
+               formElement="textarea"
+               template="ui/form/field">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        JavaScript that is executed after the successful submission.
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">After Submission Script</label>
+            </settings>
+            <formElements>
+                <textarea>
+                    <settings>
+                        <rows>14</rows>
+                    </settings>
+                </textarea>
+            </formElements>
+        </field>
+    </fieldset>
+
+    <fieldset name="seo_settings" sortOrder="40">
+        <settings>
+            <label translate="true">Search Engine Optimization</label>
+            <collapsible>true</collapsible>
+            <opened>false</opened>
+        </settings>
+
+        <field name="url_key" sortOrder="10" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">URL Key</label>
+            </settings>
+        </field>
+
+        <field name="meta_title" sortOrder="20" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Meta Title</label>
+            </settings>
+        </field>
+
+        <field name="meta_keywords" sortOrder="30" formElement="textarea">
+            <settings>
+                <dataType>textarea</dataType>
+                <label translate="true">Meta Keywords</label>
+            </settings>
+        </field>
+
+        <field name="meta_description" sortOrder="40" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        Maximum 255 chars. Meta Description should optimally be between 150-160 characters.
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>textarea</dataType>
+                <label translate="true">Meta Description</label>
+                <validation>
+                    <rule name="max_text_length" xsi:type="number">255</rule>
+                </validation>
+            </settings>
+        </field>
+    </fieldset>
+
+    <fieldset name="design_settings" sortOrder="50">
+        <settings>
+            <label translate="true">Design Settings</label>
+            <collapsible>true</collapsible>
+            <opened>false</opened>
+        </settings>
+
+        <field name="template" sortOrder="10" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="string">form/default.phtml</item>
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        Select default template for the form view.
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">View Template</label>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="MageMe\WebForms\Config\Options\Form\Template"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+        <field name="css_class" sortOrder="20" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        Add custom CSS to the form.
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">CSS Classes</label>
+            </settings>
+        </field>
+
+        <field name="css_style" sortOrder="30" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        Add custom CSS style to the form.
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">CSS Style</label>
+            </settings>
+        </field>
+
+        <field name="submit_button_position" sortOrder="33" formElement="select">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Submit Button Position</label>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="MageMe\WebForms\Config\Options\SubmitButtonPosition"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+        <field name="submit_button_size" sortOrder="36" formElement="select">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Submit Button Size</label>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="MageMe\WebForms\Config\Options\SubmitButtonSize"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+        <field name="is_displayed_after_submission" sortOrder="40" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        Don't hide form after successful submission.
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Display Form After Submission</label>
+                <scopeLabel>[GLOBAL]</scopeLabel>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+
+        <field name="is_scrolled_after_submission" sortOrder="50" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        Scroll to the top of success message after form submission.
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Scroll to Success Message</label>
+                <scopeLabel>[GLOBAL]</scopeLabel>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+
+        <field name="is_async_loaded" sortOrder="60" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        <![CDATA[Load form asynchronously with the ajax request.]]>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Asynchronous Form Loading</label>
+                <scopeLabel>[GLOBAL]</scopeLabel>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+
+        <field name="is_width_lg_showed" sortOrder="70" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        Show large screen width controls in Fieldsets and Fields tab.
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Large Screen Width Controls</label>
+                <scopeLabel>[GLOBAL]</scopeLabel>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+
+        <field name="is_width_md_showed" sortOrder="80" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        Show medium screen width controls in Fieldsets and Fields tab.
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Medium Screen Width Controls</label>
+                <scopeLabel>[GLOBAL]</scopeLabel>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+
+        <field name="is_width_sm_showed" sortOrder="90" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        Show small screen width controls in Fieldsets and Fields tab.
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Small Screen Width Controls</label>
+                <scopeLabel>[GLOBAL]</scopeLabel>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+
+
+    </fieldset>
+
+    <fieldset name="approval_settings" sortOrder="60">
+        <settings>
+            <label translate="true">Result Approval Settings</label>
+            <collapsible>true</collapsible>
+            <opened>false</opened>
+        </settings>
+
+        <field name="is_approval_controls_enabled" sortOrder="10" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        You can switch submission result status: pending, approved or not approved.
+                    </item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Enable Result Approval Controls</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+
+        <field name="is_approval_notification_enabled" sortOrder="20" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        Send customer notification email on submission result status change.
+                    </item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Enable Approval Status Notification</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+
+        <field name="approval_notification_bcc" sortOrder="30" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        Send blind carbon copy of notification to specified address. You can set multiple addresses comma-separated.
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Bcc Email Address</label>
+            </settings>
+        </field>
+
+        <field name="approval_notification_notapproved_template_id" sortOrder="40" formElement="select">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Result NOT Approved Notification Email Template</label>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="MageMe\WebForms\Config\Options\EmailTemplate"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+        <field name="approval_notification_approved_template_id" sortOrder="50" formElement="select">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Result Approved Notification Email Template</label>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="MageMe\WebForms\Config\Options\EmailTemplate"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+        <field name="approval_notification_completed_template_id" sortOrder="60" formElement="select">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Result Completed Notification Email Template</label>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="MageMe\WebForms\Config\Options\EmailTemplate"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+    </fieldset>
+
+    <fieldset name="email_settings" sortOrder="70">
+        <settings>
+            <label translate="true">Email Settings</label>
+            <collapsible>true</collapsible>
+            <opened>false</opened>
+        </settings>
+
+        <field name="is_email_header_enabled" sortOrder="10" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        Add header with Store Group, IP and other information to the message.
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Add Header to the Message</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+
+        <field name="email_reply_template_id" sortOrder="20" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        Email template for replies.
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Reply Template</label>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="MageMe\WebForms\Config\Options\EmailTemplate"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+        <fieldset name="admin_notification" sortOrder="30">
+            <settings>
+                <label translate="true">Admin Notification</label>
+                <collapsible>false</collapsible>
+            </settings>
+
+            <field name="is_admin_notification_enabled" sortOrder="10" formElement="checkbox">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="default" xsi:type="number">0</item>
+                        <item name="additionalInfo" xsi:type="string" translate="true">
+                            Send new results by email. If you have Select/Contact field in the form, email notification will be sent twice: to admin and to selected contact.
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Enable Admin Notification</label>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+
+            <field name="admin_notification_template_id" sortOrder="20" formElement="select">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="default" xsi:type="number">0</item>
+                        <item name="additionalInfo" xsi:type="string" translate="true">
+                            Email template for admin notification letters.
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Admin Notification Template</label>
+                </settings>
+                <formElements>
+                    <select>
+                        <settings>
+                            <options class="MageMe\WebForms\Config\Options\EmailTemplate"/>
+                        </settings>
+                    </select>
+                </formElements>
+            </field>
+
+            <field name="admin_notification_email" sortOrder="30" formElement="email">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="additionalInfo" xsi:type="string" translate="true">
+                            If empty default notification email address will be used. You can set multiple addresses comma-separated.
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Notification Email Address</label>
+                </settings>
+            </field>
+
+            <field name="admin_notification_bcc" sortOrder="40" formElement="email">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="additionalInfo" xsi:type="string" translate="true">
+                            Send blind carbon copy of notification to specified address. You can set multiple addresses comma-separated.
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Bcc Email Address</label>
+                </settings>
+            </field>
+
+            <field name="is_admin_notification_attachment_enabled" sortOrder="50" formElement="checkbox">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="default" xsi:type="number">0</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Attach customer uploaded files to admin notification</label>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+
+            <field name="admin_notification_sender_name" sortOrder="60" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="additionalInfo" xsi:type="string" translate="true">
+                            Sender name for the admin notification.
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Sender Name</label>
+                </settings>
+            </field>
+
+            <field name="admin_notification_sender_email" sortOrder="70" formElement="email">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="additionalInfo" xsi:type="string" translate="true">
+                            Sender email for the admin notification.
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Sender Email Address</label>
+                </settings>
+            </field>
+        </fieldset>
+
+        <fieldset name="customer_notification" sortOrder="40">
+            <settings>
+                <label translate="true">Customer Notification</label>
+                <collapsible>false</collapsible>
+            </settings>
+
+            <field name="is_customer_notification_enabled" sortOrder="10" formElement="checkbox">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="default" xsi:type="number">0</item>
+                        <item name="additionalInfo" xsi:type="string" translate="true">
+                            Send customer notification email.
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Enable Customer Notification</label>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+
+            <field name="customer_notification_template_id" sortOrder="20" formElement="select">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="default" xsi:type="number">0</item>
+                        <item name="additionalInfo" xsi:type="string" translate="true">
+                            Email template for customers notification letters.
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Customer Notification Template</label>
+                </settings>
+                <formElements>
+                    <select>
+                        <settings>
+                            <options class="MageMe\WebForms\Config\Options\EmailTemplate"/>
+                        </settings>
+                    </select>
+                </formElements>
+            </field>
+
+            <field name="customer_notification_sender_name" sortOrder="30" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="additionalInfo" xsi:type="string" translate="true">
+                            Sender name for the customer notification. Leave empty for Store Name.
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Sender Name</label>
+                </settings>
+            </field>
+
+            <field name="customer_notification_reply_to" sortOrder="40" formElement="email">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="additionalInfo" xsi:type="string" translate="true">
+                            Set reply-to parameter in customer notifications.
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Reply-to Address for the Customer</label>
+                </settings>
+            </field>
+
+            <field name="customer_notification_bcc" sortOrder="50" formElement="email">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="additionalInfo" xsi:type="string" translate="true">
+                            Send blind carbon copy of customer notification to specified address. You can set multiple addresses comma-separated.
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Bcc Email Address</label>
+                </settings>
+            </field>
+
+            <field name="is_customer_notification_attachment_enabled" sortOrder="60" formElement="checkbox">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="default" xsi:type="number">0</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Attach customer uploaded files to customer notification</label>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+        </fieldset>
+    </fieldset>
+
+    <fieldset name="access_settings" sortOrder="80">
+        <settings>
+            <label translate="true">Access Settings</label>
+            <collapsible>true</collapsible>
+            <opened>false</opened>
+        </settings>
+
+        <fieldset name="customer_access" sortOrder="10">
+            <settings>
+                <label translate="true">Customer Access</label>
+                <collapsible>false</collapsible>
+            </settings>
+
+            <field name="is_customer_access_limited" sortOrder="10" formElement="checkbox">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="default" xsi:type="number">0</item>
+                        <item name="additionalInfo" xsi:type="string" translate="true">
+                            Limit access to the form for certain customer groups.
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Limit Customer Access</label>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+
+            <field name="access_groups" sortOrder="20" formElement="multiselect">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="additionalInfo" xsi:type="string" translate="true">
+                            Allow form access for selected customer groups only.
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <label translate="true">Allowed Customer Groups</label>
+                </settings>
+                <formElements>
+                    <multiselect>
+                        <settings>
+                            <options class="MageMe\WebForms\Config\Options\CustomerGroup"/>
+                        </settings>
+                    </multiselect>
+                </formElements>
+            </field>
+        </fieldset>
+
+        <fieldset name="customer_dashboard" sortOrder="20">
+            <settings>
+                <label translate="true">Customer Dashboard</label>
+                <collapsible>false</collapsible>
+            </settings>
+
+            <field name="is_customer_dashboard_enabled" sortOrder="10" formElement="checkbox">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="default" xsi:type="number">0</item>
+                        <item name="additionalInfo" xsi:type="string" translate="true">
+                            Add link to the form and submission results to customer dashboard menu.
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Add Form to the Customer Dashboard</label>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+
+            <field name="dashboard_groups" sortOrder="20" formElement="multiselect">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="additionalInfo" xsi:type="string" translate="true">
+                            Add form to dashboard for selected customer groups only.
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <label translate="true">Customer Groups</label>
+                </settings>
+                <formElements>
+                    <multiselect>
+                        <settings>
+                            <options class="MageMe\WebForms\Config\Options\CustomerGroup"/>
+                        </settings>
+                    </multiselect>
+                </formElements>
+            </field>
+
+            <field name="customer_result_permissions" sortOrder="30" formElement="multiselect">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="additionalInfo" xsi:type="string" translate="true">
+                            Permissions identify which actions customer can perform with results in the dashboard area.
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <label translate="true">Result Permissions</label>
+                </settings>
+                <formElements>
+                    <multiselect>
+                        <settings>
+                            <options class="MageMe\WebForms\Config\Options\Result\Permission"/>
+                        </settings>
+                    </multiselect>
+                </formElements>
+            </field>
+        </fieldset>
+
+        <fieldset name="file_access" sortOrder="30">
+            <settings>
+                <label translate="true">File Access</label>
+                <collapsible>false</collapsible>
+            </settings>
+
+            <field name="is_frontend_download_allowed" sortOrder="10" formElement="checkbox">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="default" xsi:type="number">0</item>
+                        <item name="additionalInfo" xsi:type="string" translate="true">
+                            Adds file links to admin notification emails. Useful when you can not attach large files to email but need to be able to download them directly from the email program. Its recommended to turn it off for sensitive data.
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Allow Frontend File Downloads</label>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+        </fieldset>
+    </fieldset>
+
+    <fieldset name="data_cleanup_settings" sortOrder="90">
+        <settings>
+            <label translate="true">Data Cleanup Settings</label>
+            <collapsible>true</collapsible>
+            <opened>false</opened>
+        </settings>
+
+        <field name="is_submissions_not_stored" sortOrder="10" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        Do not store submissions in the database. Just email them.
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Do Not Store Submissions</label>
+                <scopeLabel>[GLOBAL]</scopeLabel>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+
+        <field name="is_cleanup_enabled" sortOrder="20" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        Automatically delete submissions. Requires Magento cron to be configured! Warning! Please be careful with this setting. The deleted data is not recoverable!
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Enable Periodic Cleanup</label>
+                <scopeLabel>[GLOBAL]</scopeLabel>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+
+        <field name="cleanup_period" sortOrder="30" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        Delete records older than specified period.
+                    </item>
+                    <item name="default" xsi:type="number">60</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Cleanup Period(days)</label>
+                <scopeLabel>[GLOBAL]</scopeLabel>
+            </settings>
+        </field>
+    </fieldset>
+</form>

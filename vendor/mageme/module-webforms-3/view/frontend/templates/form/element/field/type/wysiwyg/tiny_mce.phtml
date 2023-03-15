@@ -1,0 +1,39 @@
+<?php
+/** @var Magento\Framework\View\Element\Template $block */
+?>
+<script>
+    var requireTinymce = '<?= $block->getData('require_tinymce')?>';
+    if (requireTinymce === 'tinymce') {
+        require([requireTinymce], function () {
+            tinyMCE.init({
+                theme: "advanced",
+                theme_advanced_toolbar_location: "top",
+                theme_advanced_toolbar_align: "left",
+                theme_advanced_statusbar_location: "bottom",
+                theme_advanced_resizing: true,
+                theme_advanced_disable: "help,styleselect",
+                mode: "specific_textareas",
+                editor_selector: "mceEditor"
+            });
+        });
+    } else {
+        require([
+            'jquery',
+            requireTinymce
+        ], function ($) {
+            var wysiwyg = new wysiwygSetup(
+                '<?= $block->getData('field_uid') ?>',
+                {
+                    'height': '250px',
+                    'tinymce': {
+                        'content_css': ''
+                    },
+                    'tinymce4': {
+                        'toolbar': 'formatselect | bold italic underline | alignleft aligncenter alignright | bullist numlist | link table charmap',
+                        'plugins': 'advlist autolink lists link charmap media noneditable table contextmenu paste code help table'
+                    }
+                });
+            wysiwyg.setup('exact');
+        });
+    }
+</script>

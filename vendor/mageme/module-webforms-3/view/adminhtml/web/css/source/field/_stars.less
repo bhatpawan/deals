@@ -1,0 +1,27 @@
+/* Star rating */
+.stars-bar {
+  list-style: none;
+  margin: 0px !important;
+  padding: 0px !important;
+  height: 24px;
+  position: relative;
+  background: url(../images/stars.svg);
+  background-size: 24px;
+  background-position: 0 30%;
+
+  li {
+    padding: 0px;
+    margin: 0px;
+    float: left;
+  }
+
+  li.stars-value {
+    background: url(../images/stars.svg);
+    position: absolute;
+    height: 24px;
+    display: block;
+    z-index: 1;
+    background-size: 24px;
+    background-position: 0 64%;
+  }
+}

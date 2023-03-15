@@ -1,0 +1,140 @@
+/* jQuery steps */
+/*
+* Steps v1.0.2
+* https://github.com/oguzhanoya/jquery-steps
+*/
+.step-app {
+  > .step-steps {
+    margin: 0 0 30px 0;
+    padding: 0;
+    overflow: hidden;
+
+    > li {
+      list-style: none;
+      flex: 1;
+      margin-bottom: 10px;
+      position: relative;
+      display: inline-flex;
+
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 0;
+        border-top: 20px solid transparent;
+        border-bottom: 20px solid transparent;
+        border-left: 10px solid #ffffff;
+        z-index: 100;
+      }
+
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 0;
+        height: 0;
+        border-top: 20px solid #ffffff;
+        border-bottom: 20px solid #ffffff;
+        border-left: 10px solid transparent;
+        z-index: 100;
+      }
+
+      &:first-child {
+        &:before {
+          display: none;
+        }
+      }
+
+      &:last-child {
+        a {
+          border: none;
+        }
+
+        &:after {
+          display: none;
+        }
+      }
+
+      > a {
+        display: block;
+        padding: 10px 20px;
+        color: #333;
+        background-color: #f4f4f4;
+        text-decoration: none;
+        text-align: center;
+        border-radius: 3px;
+
+        > .number {
+          background: #fff;
+          padding: 0 8px;
+          display: inline-block;
+          text-align: center;
+          margin-right: 15px;
+          border-radius: 3px;
+          color: #333;
+        }
+
+        &:hover {
+          background-color: #ddd;
+        }
+      }
+    }
+
+    > li.active {
+      a {
+        background-color: #006bb4;
+        color: #fff;
+      }
+    }
+
+    > li.error {
+      a {
+        background-color: #e7505a;
+        color: #fff;
+      }
+    }
+
+    > li.done {
+      a {
+        background-color: #9dc8e2;
+        color: #fff;
+      }
+    }
+  }
+
+  > .step-content {
+    border-top: 0;
+
+    > .step-tab-panel {
+      display: none;
+    }
+
+    > .step-tab-panel.active {
+      display: block;
+    }
+  }
+
+  > .step-footer {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 100%;
+    border-top: 1px solid #d9d9d9;
+    padding-top: 15px;
+    overflow: auto;
+
+    .primary {
+      float: right;
+    }
+
+    .please-wait{
+      margin-right:15px;
+      margin-left:15px;
+      float:right;
+    }
+  }
+}

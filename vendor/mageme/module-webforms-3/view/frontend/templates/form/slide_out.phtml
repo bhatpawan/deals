@@ -1,0 +1,141 @@
+<?php
+
+/** @var MageMe\WebForms\Block\SlideOutForm $block */
+
+$_position = $block->getSliderPosition();
+$_uid      = $block->getUid();
+$_form     = $block->getForm();
+
+// Button
+$_buttonText             = $block->getButtonText();
+$_buttonColor            = $block->getButtonColor();
+$_buttonTextColor        = $block->getButtonTextColor();
+$_buttonWidth            = $block->getButtonWidth();;
+
+// Content
+$_background       = $block->getBackgroundColor();
+$_borderColor      = $block->getBorderColor();
+$_width            = $block->getFormWidth();
+$_formMarginBottom = $block->getFormMarginBottom();
+
+if (is_numeric($_width)) {
+    $_width .= 'px';
+}
+if (is_numeric($_formMarginBottom)) {
+    $_formMarginBottom .= 'px';
+}
+?>
+
+<style>
+    #webform-slide-out-<?= $_uid ?> {
+        background: <?= $_background ?>;
+        border-color: <?= $_borderColor ?>;
+        width: <?= $_width ?>;
+        margin-bottom: <?= $_formMarginBottom ?>;
+    }
+
+    #webform-slide-out-button-<?= $_uid ?> {
+        background: <?= $_buttonColor ?>;
+        color: <?= $_buttonTextColor ?>;
+        width: <?= $_buttonWidth?>px;
+    }
+
+    .webform-slide-out-left-<?= $_uid ?> {
+        left: -<?= $_width ?>;
+    }
+
+    .webform-slide-out-left-<?= $_uid ?> > .webform-slide-out-button {
+        right: -<?= $_buttonWidth ?>px;
+    }
+
+    .webform-slide-out-right-<?= $_uid ?> {
+        right: -<?= $_width ?>;
+    }
+
+    .webform-slide-out-right-<?= $_uid ?> > .webform-slide-out-button {
+        left: -<?= $_buttonWidth ?>px;
+
+    }
+
+    .webform-slide-out-left-<?= $_uid ?>.show {
+        left: 0;
+    }
+
+    .webform-slide-out-right-<?= $_uid ?>.show {
+        right: 0;
+    }
+</style>
+
+<!-- Sliding div starts here -->
+<div id="webform-slide-out-<?= $_uid ?>"
+     class="webform-slide-out-container webform-slide-out-<?= $_position ?> webform-slide-out-<?= $_position ?>-<?= $_uid ?>">
+    <div id="webform-slide-out-button-<?= $_uid ?>"
+         class="webform-slide-out-button"><?= $_buttonText ?></div>
+    <div id="webform-slide-out-content-<?= $_uid ?>" class="webform-slide-out-content">
+        <?php
+        if ($block->isAjax()) { ?>
+            <div id="webform_<?= $_uid ?>_success_text"
+                 class="std webforms-success-text webform-slide-out-success-text"
+                 style="display:none"></div>
+        <?php } ?>
+
+        <?php
+        if ($block->getSuccess()) {
+            ?>
+            <div class="webforms-success-text">
+                <?= $block->getSuccessText() ?>
+            </div>
+            <script>
+                <?= $block->getAfterSubmissionScript(); ?>
+            </script>
+            <?php
+        }
+        if (!$block->getSuccess() || $_form->getIsDisplayedAfterSubmission()) {
+            ?>
+            <?php if ($messages = $block->getErrorMessages()): ?>
+                <div class="message error">
+                    <div>
+                        <?php foreach ($messages as $message): ?>
+                            <?php /* @escapeNotVerified */
+                            echo $message ?><br/>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+            <div id="webform_<?= $_uid ?>_form"
+                 class="webforms webform-slide-out-form">
+
+                <?php if ($block->getDescription()) { ?>
+                    <div id="<?= $_uid ?>form_description" class="webforms-description-text">
+                        <?= $block->getDescription(); ?>
+                    </div>
+                <?php } ?>
+
+                <?= $block->getFormBlock()->toHtml() ?>
+
+                <?php if ($_form->getBelowText()) { ?>
+                    <div id="<?= $_uid ?>form_below_text" class="webforms-below-text">
+                        <?= $block->applyTranslation($_form->getBelowText()); ?>
+                    </div>
+                <?php } ?>
+
+            </div>
+
+            <?= $block->getScriptBlock()->toHtml() ?>
+
+            <?php
+        } // if(show_success)
+        ?>
+    </div>
+</div>
+<!-- Sliding div ends here -->
+
+<script>
+    require(['MageMe_WebForms/js/slide_out'], function (initSlideOut) {
+        initSlideOut({
+            uid: '<?= $block->getUid(); ?>',
+            isDisplayedAfterSubmission: <?php var_export($_form->getIsDisplayedAfterSubmission()); ?>
+        });
+    });
+</script>

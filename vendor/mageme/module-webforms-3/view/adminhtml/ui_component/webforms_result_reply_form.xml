@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">webforms_result_reply_form.webforms_result_reply_form_data_source</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="back"
+                    class="MageMe\WebForms\Block\Adminhtml\Result\Reply\Button\Back"/>
+            <button name="reset"
+                    class="MageMe\WebForms\Block\Adminhtml\Result\Reply\Button\Reset"/>
+            <button name="edit_result"
+                    class="MageMe\WebForms\Block\Adminhtml\Result\Reply\Button\EditResult"/>
+            <button name="save_reply"
+                    class="MageMe\WebForms\Block\Adminhtml\Result\Reply\Button\Save"/>
+            <button name="save_and_email"
+                    class="MageMe\WebForms\Block\Adminhtml\Result\Reply\Button\SaveAndEmail"/>
+        </buttons>
+        <namespace>webforms_result_reply_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>webforms_result_reply_form.webforms_result_reply_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="webforms_result_reply_form_data_source"
+                component="Magento_Ui/js/form/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">result_id</param>
+            </storageConfig>
+            <submitUrl path="webforms/message/save"/>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <dataProvider class="WebformsResultReplyFormDataProvider" name="webforms_result_reply_form_data_source">
+            <settings>
+                <requestFieldName>result_id</requestFieldName>
+                <primaryFieldName>result_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="reply_fieldset" sortOrder="10">
+        <settings>
+            <label/>
+        </settings>
+        <field name="result_id" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <container name="email_container" sortOrder="10">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">To</item>
+                    <item name="template" xsi:type="string">MageMe_WebForms/form/element/inline-field-container</item>
+                </item>
+            </argument>
+            <field name="email" sortOrder="10"
+                   formElement="input"
+                   template="MageMe_WebForms/form/element/inline-field">
+                <settings>
+                    <additionalClasses>
+                        <class name="admin__field-wide">true</class>
+                        <class name="webforms-flex-field-1">true</class>
+                    </additionalClasses>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <dataType>text</dataType>
+                </settings>
+            </field>
+            <button name="button_cc_bcc" sortOrder="20">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <!--                        <item name="buttonClasses" xsi:type="string">custom-button-class</item>-->
+                        <item name="actions" xsi:type="array">
+                            <item name="0" xsi:type="array">
+                                <item name="targetName" xsi:type="string">
+                                    webforms_result_reply_form.webforms_result_reply_form.reply_fieldset.cc
+                                </item>
+                                <item name="actionName" xsi:type="string">toggleVisibility</item>
+                            </item>
+                            <item name="1" xsi:type="array">
+                                <item name="targetName" xsi:type="string">
+                                    webforms_result_reply_form.webforms_result_reply_form.reply_fieldset.bcc
+                                </item>
+                                <item name="actionName" xsi:type="string">toggleVisibility</item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <displayAsLink>false</displayAsLink>
+                    <title translate="true">Cc / Bcc</title>
+                </settings>
+            </button>
+        </container>
+
+        <field name="cc" sortOrder="20"
+               formElement="input"
+               component="MageMe_WebForms/js/form/element/input-with-visibility-toggle">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="placeholder" xsi:type="string">Cc:</item>
+                </item>
+            </argument>
+            <settings>
+                <additionalClasses>
+                    <class name="admin__field-wide">true</class>
+                </additionalClasses>
+                <dataType>text</dataType>
+                <label translate="true">Cc:</label>
+                <visible>false</visible>
+                <labelVisible>false</labelVisible>
+            </settings>
+        </field>
+        <field name="bcc" sortOrder="30"
+               formElement="input"
+               component="MageMe_WebForms/js/form/element/input-with-visibility-toggle">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="placeholder" xsi:type="string">Bcc:</item>
+                </item>
+            </argument>
+            <settings>
+                <additionalClasses>
+                    <class name="admin__field-wide">true</class>
+                </additionalClasses>
+                <dataType>text</dataType>
+                <label translate="true">Bcc</label>
+                <notice translate="true">You can set multiple addresses comma-separated.
+                </notice>
+                <visible>false</visible>
+                <labelVisible>false</labelVisible>
+            </settings>
+        </field>
+        <container name="quick_response" sortOrder="40">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Quick response</item>
+                    <item name="template" xsi:type="string">MageMe_WebForms/form/element/inline-field-container</item>
+                </item>
+            </argument>
+            <field name="quick_response" sortOrder="10"
+                   formElement="select"
+                   component="MageMe_WebForms/js/form/element/quick-response-select">
+                <settings>
+                    <additionalClasses>
+                        <class name="admin__field-wide">true</class>
+                        <class name="webforms-flex-field-1">true</class>
+                    </additionalClasses>
+                    <dataType>text</dataType>
+                    <imports>
+                        <link name="url">${ $.provider }:data.quick_response_url</link>
+                    </imports>
+                </settings>
+                <formElements>
+                    <select>
+                        <settings>
+                            <options class="MageMe\WebForms\Config\Options\Quickresponse"/>
+                            <caption translate="true">-- Please Select --</caption>
+                        </settings>
+                    </select>
+                </formElements>
+            </field>
+            <button name="custom_button" sortOrder="20">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <!--                        <item name="buttonClasses" xsi:type="string">custom-button-class</item>-->
+                        <item name="actions" xsi:type="array">
+                            <item name="0" xsi:type="array">
+                                <item name="targetName" xsi:type="string">
+                                    webforms_result_reply_form.webforms_result_reply_form.reply_fieldset.quick_response.quick_response
+                                </item>
+                                <item name="actionName" xsi:type="string">getQuickresponse</item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <displayAsLink>false</displayAsLink>
+                    <title translate="true">Insert</title>
+                </settings>
+            </button>
+        </container>
+        <field name="message" sortOrder="50"
+               formElement="wysiwyg"
+               template="ui/form/field">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="wysiwygConfigData" xsi:type="array">
+                        <item name="height" xsi:type="string">150px</item>
+                        <item name="add_variables" xsi:type="boolean">true</item>
+                        <item name="add_widgets" xsi:type="boolean">false</item>
+                        <item name="add_images" xsi:type="boolean">true</item>
+                        <item name="add_directives" xsi:type="boolean">true</item>
+                        <item name="is_pagebuilder_enabled" xsi:type="boolean">false</item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <label/>
+                <dataScope>message</dataScope>
+                <additionalClasses>
+                    <class name="admin__field-wide">true</class>
+                </additionalClasses>
+            </settings>
+            <formElements>
+                <wysiwyg>
+                    <settings>
+                        <rows>8</rows>
+                        <wysiwyg>true</wysiwyg>
+                    </settings>
+                </wysiwyg>
+            </formElements>
+        </field>
+        <field name="attachment" sortOrder="60"
+               formElement="input"
+               component="MageMe_WebForms/js/form/element/dropzone">
+            <settings>
+                <elementTmpl>MageMe_WebForms/form/element/dropzone</elementTmpl>
+                <label translate="true">Add file or drop here</label>
+                <labelVisible>false</labelVisible>
+                <additionalClasses>
+                    <class name="admin__field-wide">true</class>
+                </additionalClasses>
+                <imports>
+                    <link name="url">${ $.provider }:data.dropzone_url</link>
+                    <link name="maxFiles">${ $.provider }:data.dropzone_max_files</link>
+                    <link name="dropzone_files_upload_limit">${ $.provider }:data.allowedSize</link>
+                    <link name="restrictedExtensions">${ $.provider }:data.dropzone_restricted_extensions</link>
+                </imports>
+            </settings>
+        </field>
+    </fieldset>
+</form>

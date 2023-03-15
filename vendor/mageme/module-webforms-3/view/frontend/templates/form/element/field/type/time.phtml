@@ -1,0 +1,80 @@
+<?php
+/**
+ * @var Time $block
+ */
+
+use MageMe\WebForms\Block\Form\Element\Field\Type\Time;
+
+$validationRules = $block->getValidationRules();
+$validationDescriptions = $block->getValidationDescriptions();
+$value = $block->getFieldValue();
+$vHour = $value ? $value[0] : false;
+$vMinute = $value ? $value[1] : false;
+?>
+<div class='<?= $block->getFieldClass() ?>'
+     style='<?= $block->getFieldStyle() ?>'
+     aria-label="<?php __("Time") ?>"
+     role="group">
+    <select id="<?= $block->getFieldId() ?>_hours"
+            class="hours"
+            aria-label="<?= __("Hours") ?>"
+        <?php if ($block->getIsRequired()) { ?>aria-required="true"<?php } ?>
+        <?= htmlspecialchars((string)$block->getCustomAttributes()) ?>
+    >
+        <option value=""></option>
+        <?php foreach ($block->getField()->getAvailableHours() as $hour) { ?>
+            <option value="<?= $hour ?>"
+            <?= ($vHour === $hour ? 'selected="selected"' : '') ?>><?= $hour ?></option>
+        <?php } ?>
+    </select> :
+    <select id="<?= $block->getFieldId() ?>_minutes"
+            class="minutes"
+            aria-label="<?= __("Minutes") ?>"
+        <?php if ($block->getIsRequired()) { ?>aria-required="true"<?php } ?>
+        <?= htmlspecialchars((string)$block->getCustomAttributes()) ?>
+    >
+        <option value=""></option>
+        <?php foreach ($block->getField()->getAvailableMinutes() as $minute) { ?>
+            <option value="<?= $minute ?>"
+            <?= ($vMinute === $minute ? 'selected="selected"' : '') ?>><?= $minute ?></option>
+        <?php } ?>
+    </select>
+    <input id='<?= $block->getFieldId() ?>'
+           name='<?= $block->getFieldName() ?>'
+           type="hidden"
+           class="validate-hidden"
+           style='display: none'
+        <?php if ($validationRules) { ?>
+            data-validate="{<?= implode(", ", $validationRules); ?>}"
+        <?php } ?>
+        <?php foreach ($validationDescriptions as $key => $data) {
+            echo $key . '=' . '"' . htmlspecialchars((string)$data) . '"';
+        }
+        ?>
+           data-uid="<?= $block->getFieldUid() ?>"
+        <?php if ($block->getIsLabelHidden()) { ?>aria-label="<?= $block->getFieldLabel() ?>"
+        <?php } else { ?> aria-labelledby="label_<?= $block->getFieldId() ?>" <?php } ?>
+        <?php if ($block->getIsRequired()) { ?>aria-required="true"<?php } ?>
+        <?= htmlspecialchars((string)$block->getCustomAttributes()) ?>
+    />
+
+    <script>
+        'use strict';
+        (() => {
+            const hours = document.getElementById("<?= $block->getFieldId() ?>_hours"),
+                minutes = document.getElementById("<?= $block->getFieldId() ?>_minutes"),
+                time = document.getElementById("<?= $block->getFieldId() ?>");
+
+            function setTime() {
+                const hourVal = hours.value,
+                    minuteVal = minutes.value,
+                    timeVal = hourVal + ':' + minuteVal;
+                time.value = timeVal.length === 1 ? '' : timeVal;
+            }
+
+            hours.onchange = setTime;
+            minutes.onchange = setTime;
+            setTime();
+        })();
+    </script>
+</div>

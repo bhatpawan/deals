@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="MageMe_WebForms::css/styles.css"/>
+    </head>
+    <body>
+        <referenceContainer name="after.body.start">
+            <block class="MageMe\WebForms\Block\SlideOutForm" name="webforms_slidedout_form"
+                   ifconfig="webforms/slideout/enable"/>
+        </referenceContainer>
+    </body>
+</page>
+

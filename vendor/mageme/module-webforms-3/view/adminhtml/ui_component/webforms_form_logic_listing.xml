@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">webforms_form_logic_listing.webforms_form_logic_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>logic_columns</spinner>
+        <deps>
+            <dep>webforms_form_logic_listing.webforms_form_logic_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="webforms_form_logic_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <filterUrlParams>
+                <param name="form_id">*</param>
+            </filterUrlParams>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">logic_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <dataProvider class="MageMe\WebForms\Ui\Component\Logic\Listing\DataProvider" name="webforms_form_logic_listing_data_source">
+            <settings>
+                <requestFieldName>logic_id</requestFieldName>
+                <primaryFieldName>logic_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <bookmark name="bookmarks" class="MageMe\WebForms\Ui\Component\Logic\Listing\Bookmark\FormBookmark"/>
+        <columnsControls name="columns_controls"/>
+        <filters name="listing_filters"/>
+        <massaction name="listing_massaction"
+                    class="MageMe\WebForms\Ui\Component\Logic\Listing\MassAction\MassAction"
+                    component="MageMe_WebForms/js/grid/ajax-massactions">
+            <action name="edit">
+                <settings>
+                    <callback>
+                        <target>editSelected</target>
+                        <provider>webforms_form_logic_listing.webforms_form_logic_listing.logic_columns_editor</provider>
+                    </callback>
+                    <type>edit</type>
+                    <label translate="true">Edit</label>
+                </settings>
+            </action>
+            <action name="massDelete">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="isAjax" xsi:type="boolean">true</item>
+                        <item name="isSourceReloaded" xsi:type="boolean">true</item>
+                    </item>
+                </argument>
+                <settings>
+                    <confirm>
+                        <title translate="true">Delete items</title>
+                        <message translate="true">Are you sure?</message>
+                    </confirm>
+                    <url path="webforms/logic/ajaxMassDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                </settings>
+            </action>
+        </massaction>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="logic_columns"
+             class="MageMe\WebForms\Ui\Component\Logic\Listing\Columns">
+        <settings>
+            <editorConfig>
+                <param name="clientConfig" xsi:type="array">
+                    <item name="saveUrl" xsi:type="url" path="webforms/logic/inlineEdit"/>
+                    <item name="validateBeforeSave" xsi:type="boolean">false</item>
+                </param>
+                <param name="indexField" xsi:type="string">logic_id</param>
+                <param name="enabled" xsi:type="boolean">true</param>
+                <param name="selectProvider" xsi:type="string">
+                    webforms_form_logic_listing.webforms_form_logic_listing.logic_columns.ids
+                </param>
+            </editorConfig>
+            <childDefaults>
+                <param name="fieldAction" xsi:type="array">
+                    <item name="provider" xsi:type="string">webforms_form_logic_listing.webforms_form_logic_listing.logic_columns_editor</item>
+                    <item name="target" xsi:type="string">startEdit</item>
+                    <item name="params" xsi:type="array">
+                        <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
+                        <item name="1" xsi:type="boolean">true</item>
+                    </item>
+                </param>
+            </childDefaults>
+        </settings>
+        <selectionsColumn name="ids" sortOrder="10">
+            <settings>
+                <indexField>logic_id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="logic_id" sortOrder="20">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <visible>true</visible>
+            </settings>
+        </column>
+        <column name="name" sortOrder="30">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Field</label>
+                <visible>true</visible>
+            </settings>
+        </column>
+        <column name="logic_condition" sortOrder="40"
+                component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <filter>select</filter>
+                <label translate="true">Condition</label>
+                <dataType>select</dataType>
+                <options class="MageMe\WebForms\Config\Options\Logic\Condition"/>
+                <editor>
+                    <editorType>select</editorType>
+                </editor>
+            </settings>
+        </column>
+        <column name="value" sortOrder="50"
+                class="MageMe\WebForms\Ui\Component\Logic\Listing\Column\Value">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Trigger Value(s)</label>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+            </settings>
+        </column>
+        <column name="action" sortOrder="60"
+                component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <filter>select</filter>
+                <label translate="true">Action</label>
+                <dataType>select</dataType>
+                <options class="MageMe\WebForms\Config\Options\Logic\Action"/>
+                <editor>
+                    <editorType>select</editorType>
+                </editor>
+            </settings>
+        </column>
+        <column name="target" sortOrder="70"
+                class="MageMe\WebForms\Ui\Component\Logic\Listing\Column\Target">
+            <settings>
+                <label translate="true">Target Element(s)</label>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+            </settings>
+        </column>
+        <column name="aggregation" sortOrder="80"
+                component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <filter>select</filter>
+                <label translate="true">Logic aggregation</label>
+                <dataType>select</dataType>
+                <options class="MageMe\WebForms\Config\Options\Logic\Aggregation"/>
+            </settings>
+        </column>
+        <column name="is_active" sortOrder="90"
+                component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <filter>select</filter>
+                <label translate="true">Status</label>
+                <dataType>select</dataType>
+                <options class="MageMe\WebForms\Config\Options\Status"/>
+                <editor>
+                    <editorType>select</editorType>
+                </editor>
+            </settings>
+        </column>
+        <actionsColumn name="actions" sortOrder="200"
+                       class="MageMe\WebForms\Ui\Component\Logic\Listing\Column\Actions">
+            <settings>
+                <indexField>logic_id</indexField>
+                <label translate="true">Actions</label>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <body>
+        <referenceBlock name="page.main.title">
+            <action method="setPageTitle">
+                <argument translate="true" name="title" xsi:type="string">Edit Account Information</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <block class="MageMe\WebForms\Block\Customer\Account" name="webforms.customer.account"
+                   template="customer/account.phtml" cacheable="false">
+                <block class="MageMe\WebForms\Block\Customer\Account\Results" name="webforms.customer.account.results"
+                       template="customer/account/results.phtml"/>
+                <block class="MageMe\WebForms\Block\Form" name="webforms.customer.account.form" cacheable="false"/>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

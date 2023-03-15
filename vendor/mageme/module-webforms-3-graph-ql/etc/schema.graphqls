@@ -1,0 +1,120 @@
+type Query {
+    webformsForm (
+        form_id: Int! @doc(description: "Id of the form.")
+    ): WebformsForm @resolver(class: "MageMe\\WebFormsGraphQl\\Model\\Resolver\\Form") @doc(description: "Get from data by id.")
+    webformsResults (
+        filter: WebformsResultAttributeFilterInput! @doc(description: "Identifies which result attributes to search for and return."),
+    ): WebformsResults @resolver(class: "MageMe\\WebFormsGraphQl\\Model\\Resolver\\Results") @doc(description: "")
+}
+
+type Mutation {
+    webformsSubmitForm (
+        form_id: Int!
+        formData: String!
+    ): WebformsFormOutput @resolver(class: "MageMe\\WebFormsGraphQl\\Model\\Resolver\\SubmitForm") @doc(description:"Submit form")
+    webformsUpload (
+        field_id: Int!
+        filename: String!
+        content: String!
+        mimeType: String
+    ): String @resolver(class: "MageMe\\WebFormsGraphQl\\Model\\Resolver\\Upload") @doc(description:"Upload file")
+    webformsRecaptcha: Boolean @resolver(class: "MageMe\\WebFormsGraphQl\\Model\\Resolver\\Recaptcha") @doc(description:"Verify reCaptcha")
+}
+
+type WebformsForm @doc(description: "The WebformsForm contains attributes that are common to all types of forms. Note that descriptions may not be available for custom attributes.") {
+    form_id: Int
+    name: String
+    code: String
+    redirect_url: String
+    description: String
+    success_text: String
+    is_survey: Boolean
+    files_upload_limit: Int
+    images_upload_limit: Int
+    is_active: Boolean
+    submit_button_text: String
+    is_url_parameters_accepted: Boolean
+    url_key: String
+    meta_keywords: String
+    meta_description: String
+    meta_title: String
+    below_text: String
+    fieldsets: [WebformsFieldset]
+}
+
+type WebformsFieldset @doc(description: "The WebformsFieldset contains attributes that are common to all types of fieldsets. Note that descriptions may not be available for custom attributes.") {
+    fieldset_id: Int
+    name: String
+    fields: [WebformsField]
+}
+
+type WebformsField @doc(description: "The WebformsField contains attributes that are common to all types of fields. Note that descriptions may not be available for custom attributes.") {
+    field_id: Int
+    form_id: Int
+    fieldset_id: Int
+    name: String
+    type: String
+    code: String
+    result_label: String
+    comment: String
+    type_attributes_serialized: String
+    is_required: Boolean
+    validation_required_message: String
+    position: Int
+    is_active: Boolean
+    is_label_hidden: Boolean
+    custom_attributes: String
+    width_proportion_lg: String
+    width_proportion_md: String
+    width_proportion_sm: String
+    is_displayed_in_new_row_lg: Boolean
+    is_displayed_in_new_row_md: Boolean
+    is_displayed_in_new_row_sm: Boolean
+    css_container_class: String
+    css_input_class: String
+    css_input_style: String
+    display_in_result: String
+    browser_autocomplete: String
+    is_unique: Boolean
+    unique_validation_message: String
+    min_length: Int
+    min_length_validation_message: String
+    max_length: Int
+    max_length_validation_message: String
+    regex_validation_pattern: String
+    regex_validation_message: String
+}
+
+type WebformsResults @doc(description: "The WebformsResults object is the top-level object returned in a result search.") {
+    items: [WebformsResult] @doc(description: "An array of results that match the specified search criteria.")
+}
+
+type WebformsResult @doc(description: "The WebformsResult contains attributes that are common to all types of results. Note that descriptions may not be available for custom attributes.") {
+    result_id: Int
+    form_id: Int
+    store_id: Int
+    customer_id: Int
+    approved: Int
+    created_at: String
+    updated_at: String
+    submitted_from_serialized: String
+    referrer_page: String
+    fields: [WebformsFieldValue]
+}
+
+type WebformsFieldValue @doc(description: "Contains basic information about a result field value.") {
+    field_id: Int
+    code: String
+    value: String
+}
+
+input WebformsResultAttributeFilterInput @doc(description: "WebformsResultAttributeFilterInput defines the filters to be used in the search.") {
+    result_id: Int @doc(description: "Filter result by the unique ID for a Result object.")
+    form_id: Int @doc(description: "Filter result by the unique ID for a Form object.")
+}
+
+type WebformsFormOutput {
+    success: Boolean
+    errors: String
+    result: String
+}

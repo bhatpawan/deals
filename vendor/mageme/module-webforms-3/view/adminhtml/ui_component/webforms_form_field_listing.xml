@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">webforms_form_field_listing.webforms_form_field_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>field_columns</spinner>
+        <deps>
+            <dep>webforms_form_field_listing.webforms_form_field_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="webforms_form_field_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <imports>
+                <link name="store">2</link>
+            </imports>
+            <filterUrlParams>
+                <param name="form_id">*</param>
+            </filterUrlParams>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">field_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <dataProvider class="MageMe\WebForms\Ui\Component\Field\Listing\DataProvider" name="webforms_form_field_listing_data_source">
+            <settings>
+                <requestFieldName>field_id</requestFieldName>
+                <primaryFieldName>field_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <bookmark name="bookmarks" class="MageMe\WebForms\Ui\Component\Field\Listing\Bookmark"/>
+        <columnsControls name="columns_controls"/>
+        <filters name="listing_filters"/>
+        <massaction name="listing_massaction"
+                    class="MageMe\WebForms\Ui\Component\Field\Listing\MassAction\MassAction"
+                    component="MageMe_WebForms/js/grid/ajax-massactions">
+            <action name="edit">
+                <settings>
+                    <callback>
+                        <target>editSelected</target>
+                        <provider>webforms_form_field_listing.webforms_form_field_listing.field_columns_editor</provider>
+                    </callback>
+                    <type>edit</type>
+                    <label translate="true">Edit</label>
+                </settings>
+            </action>
+            <action name="massDelete">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="isAjax" xsi:type="boolean">true</item>
+                        <item name="isSourceReloaded" xsi:type="boolean">true</item>
+                    </item>
+                </argument>
+                <settings>
+                    <confirm>
+                        <title translate="true">Delete items</title>
+                        <message translate="true">Are you sure?</message>
+                    </confirm>
+                    <url path="webforms/field/ajaxMassDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                </settings>
+            </action>
+            <action name="massDuplicate">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="isAjax" xsi:type="boolean">true</item>
+                        <item name="isSourceReloaded" xsi:type="boolean">true</item>
+                    </item>
+                </argument>
+                <settings>
+                    <confirm>
+                        <title translate="true">Duplicate items</title>
+                        <message translate="true">Are you sure?</message>
+                    </confirm>
+                    <url path="webforms/field/ajaxMassDuplicate"/>
+                    <type>duplicate</type>
+                    <label translate="true">Duplicate</label>
+                </settings>
+            </action>
+            <action name="massStatus"
+                    class="MageMe\WebForms\Ui\Component\Field\Listing\MassAction\SubAction\AjaxUpdateStatus">
+                <settings>
+                    <type>status</type>
+                    <label translate="true">Change Status</label>
+                </settings>
+            </action>
+            <action name="massRequired"
+                    class="MageMe\WebForms\Ui\Component\Field\Listing\MassAction\SubAction\AjaxUpdateRequired">
+                <settings>
+                    <type>required</type>
+                    <label translate="true">Required</label>
+                </settings>
+            </action>
+            <action name="massFieldset"
+                    class="MageMe\WebForms\Ui\Component\Field\Listing\MassAction\SubAction\AjaxUpdateFieldset">
+                <settings>
+                    <type>fieldset</type>
+                    <label translate="true">Set Fieldset</label>
+                </settings>
+            </action>
+            <action name="massWidthLg"
+                    class="MageMe\WebForms\Ui\Component\Field\Listing\MassAction\SubAction\AjaxUpdateWidthLg">
+                <settings>
+                    <type>widthLg</type>
+                    <label translate="true">Set Width (Large Screen)</label>
+                </settings>
+            </action>
+            <action name="massWidthMd"
+                    class="MageMe\WebForms\Ui\Component\Field\Listing\MassAction\SubAction\AjaxUpdateWidthMd">
+                <settings>
+                    <type>widthMd</type>
+                    <label translate="true">Set Width (Medium Screen)</label>
+                </settings>
+            </action>
+            <action name="massWidthSm"
+                    class="MageMe\WebForms\Ui\Component\Field\Listing\MassAction\SubAction\AjaxUpdateWidthSm">
+                <settings>
+                    <type>widthSm</type>
+                    <label translate="true">Set Width (Small Screen)</label>
+                </settings>
+            </action>
+        </massaction>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="field_columns"
+             class="MageMe\WebForms\Ui\Component\Field\Listing\Columns">
+        <settings>
+            <editorConfig>
+                <param name="clientConfig" xsi:type="array">
+                    <item name="saveUrl" xsi:type="url" path="webforms/field/inlineEdit"/>
+                    <item name="validateBeforeSave" xsi:type="boolean">false</item>
+                </param>
+                <param name="indexField" xsi:type="string">field_id</param>
+                <param name="enabled" xsi:type="boolean">true</param>
+                <param name="selectProvider" xsi:type="string">
+                    webforms_form_field_listing.webforms_form_field_listing.field_columns.ids
+                </param>
+            </editorConfig>
+            <childDefaults>
+                <param name="fieldAction" xsi:type="array">
+                    <item name="provider" xsi:type="string">webforms_form_field_listing.webforms_form_field_listing.field_columns_editor</item>
+                    <item name="target" xsi:type="string">startEdit</item>
+                    <item name="params" xsi:type="array">
+                        <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
+                        <item name="1" xsi:type="boolean">true</item>
+                    </item>
+                </param>
+            </childDefaults>
+        </settings>
+        <selectionsColumn name="ids" sortOrder="10">
+            <settings>
+                <indexField>field_id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="field_id" sortOrder="20">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <visible>true</visible>
+            </settings>
+        </column>
+        <column name="name" sortOrder="30">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Name</label>
+                <visible>true</visible>
+                <editor>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <editorType>text</editorType>
+                </editor>
+            </settings>
+        </column>
+        <column name="code" sortOrder="40">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Code</label>
+                <visible>true</visible>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+            </settings>
+        </column>
+        <column name="fieldset_id" sortOrder="50">
+            <settings>
+                <filter>select</filter>
+                <label translate="true">Field Set</label>
+                <dataType>select</dataType>
+                <options class="MageMe\WebForms\Config\Options\Field\Fieldset"/>
+                <editor>
+                    <editorType>select</editorType>
+                </editor>
+            </settings>
+        </column>
+        <column name="type" sortOrder="60"
+                component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <filter>select</filter>
+                <label translate="true">Type</label>
+                <dataType>select</dataType>
+                <options class="MageMe\WebForms\Config\Options\Field\TypeWithCategories"/>
+            </settings>
+        </column>
+        <column name="is_required" sortOrder="70"
+                component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <filter>select</filter>
+                <label translate="true">Required</label>
+                <dataType>select</dataType>
+                <options class="Magento\Config\Model\Config\Source\Yesno"/>
+                <editor>
+                    <editorType>select</editorType>
+                </editor>
+            </settings>
+        </column>
+        <column name="width_proportion_lg" sortOrder="80"
+                component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <filter>select</filter>
+                <label translate="true">Width (Large Screen)</label>
+                <dataType>select</dataType>
+                <options class="MageMe\WebForms\Config\Options\Field\ResponsiveSize"/>
+                <controlVisibility>false</controlVisibility>
+                <imports>
+                    <link name="visible">${ $.provider }:data.is_width_lg_showed</link>
+                </imports>
+                <editor>
+                    <editorType>select</editorType>
+                </editor>
+            </settings>
+        </column>
+        <column name="width_proportion_md" sortOrder="90"
+                component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <filter>select</filter>
+                <label translate="true">Width (Medium Screen)</label>
+                <dataType>select</dataType>
+                <options class="MageMe\WebForms\Config\Options\Field\ResponsiveSize"/>
+                <controlVisibility>false</controlVisibility>
+                <imports>
+                    <link name="visible">${ $.provider }:data.is_width_md_showed</link>
+                </imports>
+                <editor>
+                    <editorType>select</editorType>
+                </editor>
+            </settings>
+        </column>
+        <column name="width_proportion_sm" sortOrder="100"
+                component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <filter>select</filter>
+                <label translate="true">Width (Small Screen)</label>
+                <dataType>select</dataType>
+                <options class="MageMe\WebForms\Config\Options\Field\ResponsiveSize"/>
+                <controlVisibility>false</controlVisibility>
+                <imports>
+                    <link name="visible">${ $.provider }:data.is_width_sm_showed</link>
+                </imports>
+                <editor>
+                    <editorType>select</editorType>
+                </editor>
+            </settings>
+        </column>
+        <column name="is_active" sortOrder="110"
+                component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <filter>select</filter>
+                <label translate="true">Status</label>
+                <dataType>select</dataType>
+                <options class="MageMe\WebForms\Config\Options\Status"/>
+                <editor>
+                    <editorType>select</editorType>
+                </editor>
+            </settings>
+        </column>
+        <column name="position" sortOrder="120">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Position</label>
+                <sorting>asc</sorting>
+                <editor>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                        <rule name="validate-number" xsi:type="boolean">true</rule>
+                    </validation>
+                    <editorType>text</editorType>
+                </editor>
+            </settings>
+        </column>
+        <actionsColumn name="actions" sortOrder="200"
+                       class="MageMe\WebForms\Ui\Component\Field\Listing\Column\Actions">
+            <settings>
+                <indexField>field_id</indexField>
+                <label translate="true">Actions</label>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

@@ -1,0 +1,14 @@
+<div class="reply-message">
+    <div data-bind="html: message"></div>
+    <div class="reply-attachments" data-bind="html: attachments"></div>
+    <div class="reply-author" data-bind="html: signature"></div>
+    <div class="reply-email-status">
+        <span class="note-list-customer" data-bind="text: emailed_text"></span>
+        <span class="note-list-action">
+            <button class="action-additional"
+                    data-bind="click: $data.emailMessage.bind($data, index, value())">
+                <span data-bind="i18n: 'Send email'"></span>
+            </button>
+        </span>
+    </div>
+</div>

@@ -1,0 +1,104 @@
+<?php
+/** @var Info $block */
+
+use MageMe\WebForms\Block\Adminhtml\Result\Info;
+
+$_result = $block->getResult();
+
+$_resultDate = $block->formatDate(
+    $_result->getCreatedAt(),
+    IntlDateFormatter::MEDIUM,
+    true
+);
+
+$_customerUrl          = $block->getCustomerViewUrl();
+$_submittedFrom        = $_result->getSubmittedFrom();
+$_referrer             = $_result->getReferrerPage();
+$_customerIp           = $_result->getCustomerIp();
+$_customerEmail        = $_result->getCustomerEmail();
+$_form                 = $_result->getForm();
+$_extendedData         = $block->getExtendedData();
+$_linkDisplayLength    = 40;
+$_submittedFromUrlText = '';
+if (isset($_submittedFrom['url'])) {
+    $_submittedFromUrlText = strlen((string)$_submittedFrom['url']) > $_linkDisplayLength ? substr((string)$_submittedFrom['url'], 0,
+            $_linkDisplayLength) . '...' : $_submittedFrom['url'];
+}
+$_referrerUrlText = strlen((string)$_referrer) > $_linkDisplayLength ? substr((string)$_referrer, 0, $_linkDisplayLength) . '...' : $_referrer;
+?>
+<div class="admin__page-section-content">
+    <table class="admin__table-secondary">
+        <tr>
+            <th><?= $block->escapeHtml(__('Result Date')) ?></th>
+            <td><?= $block->escapeHtml($_resultDate) ?></td>
+        </tr>
+        <?php if ($block->isSingleStoreMode() == false) : ?>
+            <tr>
+                <th><?= $block->escapeHtml(__('Store')) ?></th>
+                <td><?= $block->escapeHtml($block->getOrderStoreName(), ['br']) ?></td>
+            </tr>
+        <?php endif; ?>
+        <?php if (isset($_submittedFrom['url'], $_submittedFrom['title'])) : ?>
+            <tr>
+                <th><?= $block->escapeHtml(__('Page')) ?></th>
+                <td><a href="<?= $_submittedFrom['url'] ?>"
+                       title="<?= $_submittedFrom['url'] ?>"><?= $block->escapeHtml(!empty($_submittedFrom['title']) ? $_submittedFrom['title'] : $_submittedFromUrlText) ?></a>
+                </td>
+            </tr>
+        <?php endif; ?>
+        <?php if (!empty($_referrer)) : ?>
+            <tr>
+                <th><?= $block->escapeHtml(__('Referrer Page')) ?></th>
+                <td><a href="<?= $_referrer ?>"
+                       title="<?= $_referrer ?>"><?= $_referrerUrlText ?></a>
+                </td>
+            </tr>
+        <?php endif; ?>
+        <tr>
+            <th><?= $block->escapeHtml(__('Customer Name')) ?></th>
+            <td>
+                <?php if ($_customerUrl) : ?>
+                    <a href="<?= $block->escapeUrl($_customerUrl) ?>" target="_blank">
+                        <span><?= $block->escapeHtml($_result->getCustomerName()) ?></span>
+                    </a>
+                <?php else : ?>
+                    <?= $block->escapeHtml($_result->getCustomerName()) ?>
+                <?php endif; ?>
+            </td>
+        </tr>
+        <?php if (isset($_customerEmail[0])) : ?>
+            <tr>
+                <th><?= $block->escapeHtml(__('Customer Email')) ?></th>
+                <td><?= $block->escapeHtml($_customerEmail[0]) ?></td>
+            </tr>
+        <?php endif; ?>
+        <?php if ($_groupName = $block->getCustomerGroupName()) : ?>
+            <tr>
+                <th><?= $block->escapeHtml(__('Customer Group')) ?></th>
+                <td><?= $block->escapeHtml($_groupName) ?></td>
+            </tr>
+        <?php endif; ?>
+        <?php if ($_customerIp && $block->shouldDisplayCustomerIp()) : ?>
+            <tr>
+                <th><?= $block->escapeHtml(__('Sent from IP')) ?></th>
+                <td><?= $block->escapeHtml($_customerIp) ?></td>
+            </tr>
+        <?php endif; ?>
+        <?php if ($_form->getIsApprovalControlsEnabled()) : ?>
+            <tr>
+                <th><?= $block->escapeHtml(__('Status')) ?></th>
+                <td><?= $_result->getStatusName() ?></td>
+            </tr>
+        <?php endif; ?>
+        <?php if ($_extendedData) {
+            foreach ($_extendedData as $_item) {
+                ?>
+                <tr>
+                    <td><?= $_item['label'] ?></td>
+                    <td><?= $_item['value'] ?></td>
+                </tr>
+                <?php
+            }
+        } ?>
+    </table>
+</div>

@@ -1,0 +1,185 @@
+<div class="gallery" data-bind="
+    css: { disabled: disabled },
+    attr: {
+        id: uid,
+        'data-parent-component': parentName,
+        'data-images': JSON.stringify(images),
+        'data-types': JSON.stringify(imageTypes),
+        'data-form-part': ns,
+        'data-field-name': inputName,
+        'data-action-remove-label': deleteButtonLabel,
+        'data-image-fade-label': imageFadeLabel,
+        'data-dialog-label': dialog.label,
+        'data-dialog-size-label': dialog.sizeLabel,
+        'data-dialog-resolution-label': dialog.resolutionLabel
+    }"
+>
+    <!-- ko ifnot: disabled -->
+    <div class="image image-placeholder">
+        <div class="uploader" data-bind="
+            attr: {
+                id: uid + '-uploader'
+            }"
+        >
+            <div class="fileinput-button form-buttons button">
+                <span translate="uploader.placeholder">Browse Files...</span>
+                <input id="fileupload" type="file" multiple="multiple" style="border: 75px solid transparent;" data-bind="
+                    attr: {
+                        name: uploader.fileField,
+                        'data-url': uploader.url
+                    }"
+                />
+            </div>
+            <div class="clear"></div>
+            <script type="text/x-magento-template" data-template="uploader" data-bind="
+                attr: {
+                    id: uid + '-uploader-template'
+                }"
+            >
+                <div id="<%- data.id %>" class="file-row">
+                    <span class="file-info"><%- data.name %> (<%- data.size %>)</span>
+                    <div class="progressbar-container">
+                        <div class="progressbar upload-progress" style="width: 0;"></div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </script>
+        </div>
+        <div class="product-image-wrapper">
+            <p class="image-placeholder-text" translate="imagePlaceholder">
+            </p>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko foreach: imageTypes -->
+    <input type="hidden"
+           data-bind="
+                attr: {
+                    name: name,
+                    value: value,
+                    class: 'image-' + code,
+                    'data-form-part': $parent.ns
+                }"/>
+    <!-- /ko -->
+
+    <script type="text/x-magento-template" afterRender="afterGalleryTemplateRendered" data-bind="
+        attr: {
+            id: uid + '-template'
+        }"
+    >
+        <div class="image item<% if (data.disabled == 1) { %> hidden-for-front<% } %>"
+             data-role="image">
+            <input type="hidden"
+                   name="<%- this.element.data('field-name') %>[<%- data.file_id %>][position]"
+                   value="<%- data.position %>"
+                   data-form-part="<%- this.element.data('form-part') %>"
+                   class="position"/>
+            <input type="hidden"
+                   name="<%- this.element.data('field-name') %>[<%- data.file_id %>][file]"
+                   data-form-part="<%- this.element.data('form-part') %>"
+                   value="<%- data.file %>"/>
+            <input type="hidden"
+                   name="<%- this.element.data('field-name') %>[<%- data.file_id %>][value_id]"
+                   data-form-part="<%- this.element.data('form-part') %>"
+                   value="<%- data.value_id %>"/>
+            <input type="hidden"
+                   name="<%- this.element.data('field-name') %>[<%- data.file_id %>][label]"
+                   data-form-part="<%- this.element.data('form-part') %>"
+                   value="<%- data.label %>"/>
+            <input type="hidden"
+                   name="<%- this.element.data('field-name') %>[<%- data.file_id %>][disabled]"
+                   data-form-part="<%- this.element.data('form-part') %>"
+                   value="<%- data.disabled %>"/>
+            <input type="hidden"
+                   name="<%- this.element.data('field-name') %>[<%- data.file_id %>][media_type]"
+                   data-form-part="<%- this.element.data('form-part') %>"
+                   value="image"/>
+            <input type="hidden"
+                   name="<%- this.element.data('field-name') %>[<%- data.file_id %>][removed]"
+                   data-form-part="<%- this.element.data('form-part') %>"
+                   value=""
+                   class="is-removed"/>
+            <input type="hidden"
+                   name="<%- this.element.data('field-name') %>[<%- data.file_id %>][hash]"
+                   data-form-part="<%- this.element.data('form-part') %>"
+                   value="<%- data.hash %>"/>
+
+            <div class="product-image-wrapper">
+                <img class="product-image"
+                     data-role="image-element"
+                     src="<%- data.url %>"
+                     alt="<%- data.label %>"/>
+
+                <div class="actions">
+                    <button type="button"
+                            class="action-remove"
+                            data-role="delete-button"
+                            title="<%- this.element.data('action-remove-label') %>">
+                        <span><%- this.element.data('action-remove-label') %></span>
+                    </button>
+                    <div class="draggable-handle"></div>
+                </div>
+                <div class="image-fade"><span><%- this.element.data('image-fade-label') %></span></div>
+            </div>
+
+            <div class="item-description">
+                <div class="item-title" data-role="img-title"><%- data.label %></div>
+                <div class="item-size">
+                    <span data-role="image-dimens"></span>, <span data-role="image-size"><%- data.sizeLabel %></span>
+                </div>
+            </div>
+            <ul class="item-roles" data-role="roles-labels">
+                <% _.each(this.options.types, function(item, key) { %>
+                <li data-role-code="<%- item.code %>"
+                    class="item-role item-role-<%- item.code %>">
+                    <%- item.label %>
+                </li>
+                <% }); %>
+            </ul>
+        </div>
+    </script>
+
+    <script data-role="img-dialog-container-tmpl" type="text/x-magento-template">
+        <div class="image-panel" data-role="dialog">
+        </div>
+    </script>
+
+    <script data-role="img-dialog-tmpl" type="text/x-magento-template">
+        <div class="image-panel-preview">
+            <img src="<%- data.url %>" alt="<%- data.label %>"/>
+        </div>
+        <div class="image-panel-controls">
+            <strong class="image-name"><%- data.label %></strong>
+
+            <fieldset class="admin__fieldset fieldset-image-panel">
+                <div class="admin__field field-image-description">
+                    <label class="admin__field-label" for="image-description">
+                        <span><%- this.element.data('dialog-label') %></span>
+                    </label>
+
+                    <div class="admin__field-control">
+                            <textarea data-role="image-description"
+                                      rows="3"
+                                      class="admin__control-textarea"
+                                      name="<%- this.element.data('field-name') %>[<%- data.file_id %>][label]"><%- data.label %></textarea>
+                    </div>
+                </div>
+
+                <div class="admin__field admin__field-inline field-image-size" data-role="size">
+                    <label class="admin__field-label">
+                        <span><%- this.element.data('dialog-size-label') %></span>
+                    </label>
+                    <div class="admin__field-value" data-message="{size}"></div>
+                </div>
+
+                <div class="admin__field admin__field-inline field-image-resolution" data-role="resolution">
+                    <label class="admin__field-label">
+                        <span><%- this.element.data('dialog-resolution-label') %></span>
+                    </label>
+                    <div class="admin__field-value"
+                         data-message="{width}^{height} px"></div>
+                </div>
+            </fieldset>
+        </div>
+    </script>
+</div>

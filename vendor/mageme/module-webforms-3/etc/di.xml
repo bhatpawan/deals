@@ -1,0 +1,527 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="MageMe\WebForms\Api\Utility\Field\FieldBlockInterface"
+                type="MageMe\WebForms\Block\Form\Element\Field\AbstractField"/>
+
+    <preference for="MageMe\WebForms\Api\Data\FieldInterface"
+                type="MageMe\WebForms\Model\Field\AbstractField"/>
+    <preference for="MageMe\WebForms\Api\FieldRepositoryInterface"
+                type="MageMe\WebForms\Model\Repository\FieldRepository"/>
+    <preference for="MageMe\WebForms\Api\FieldSearchResultInterface"
+                type="MageMe\WebForms\Model\SearchResult\FieldSearchResult"/>
+
+    <preference for="MageMe\WebForms\Api\Data\FieldsetInterface"
+                type="MageMe\WebForms\Model\Fieldset"/>
+    <preference for="MageMe\WebForms\Api\FieldsetRepositoryInterface"
+                type="MageMe\WebForms\Model\Repository\FieldsetRepository"/>
+    <preference for="MageMe\WebForms\Api\FieldsetSearchResultInterface"
+                type="MageMe\WebForms\Model\SearchResult\FieldsetSearchResult"/>
+
+    <preference for="MageMe\WebForms\Api\Data\FormInterface"
+                type="MageMe\WebForms\Model\Form"/>
+    <preference for="MageMe\WebForms\Api\FormRepositoryInterface"
+                type="MageMe\WebForms\Model\Repository\FormRepository"/>
+    <preference for="MageMe\WebForms\Api\FormSearchResultInterface"
+                type="MageMe\WebForms\Model\SearchResult\FormSearchResult"/>
+
+    <preference for="MageMe\WebForms\Api\Data\LogicInterface"
+                type="MageMe\WebForms\Model\Logic"/>
+    <preference for="MageMe\WebForms\Api\LogicRepositoryInterface"
+                type="MageMe\WebForms\Model\Repository\LogicRepository"/>
+    <preference for="MageMe\WebForms\Api\LogicSearchResultInterface"
+                type="MageMe\WebForms\Model\SearchResult\LogicSearchResult"/>
+
+    <preference for="MageMe\WebForms\Api\Data\ResultInterface"
+                type="MageMe\WebForms\Model\Result"/>
+    <preference for="MageMe\WebForms\Api\ResultRepositoryInterface"
+                type="MageMe\WebForms\Model\Repository\ResultRepository"/>
+    <preference for="MageMe\WebForms\Api\ResultSearchResultInterface"
+                type="MageMe\WebForms\Model\SearchResult\ResultSearchResult"/>
+
+    <preference for="MageMe\WebForms\Api\Data\ResultValueInterface"
+                type="MageMe\WebForms\Model\ResultValue"/>
+    <preference for="MageMe\WebForms\Api\ResultValueRepositoryInterface"
+                type="MageMe\WebForms\Model\Repository\ResultValueRepository"/>
+    <preference for="MageMe\WebForms\Api\ResultValueSearchResultInterface"
+                type="MageMe\WebForms\Model\SearchResult\ResultValueSearchResult"/>
+
+    <preference for="MageMe\WebForms\Api\Data\MessageInterface"
+                type="MageMe\WebForms\Model\Message"/>
+    <preference for="MageMe\WebForms\Api\MessageRepositoryInterface"
+                type="MageMe\WebForms\Model\Repository\MessageRepository"/>
+    <preference for="MageMe\WebForms\Api\MessageSearchResultInterface"
+                type="MageMe\WebForms\Model\SearchResult\MessageSearchResult"/>
+
+    <preference for="MageMe\WebForms\Api\Data\QuickresponseInterface"
+                type="MageMe\WebForms\Model\Quickresponse"/>
+    <preference for="MageMe\WebForms\Api\QuickresponseRepositoryInterface"
+                type="MageMe\WebForms\Model\Repository\QuickresponseRepository"/>
+    <preference for="MageMe\WebForms\Api\QuickresponseSearchResultInterface"
+                type="MageMe\WebForms\Model\SearchResult\QuickresponseSearchResult"/>
+
+    <preference for="MageMe\WebForms\Api\Data\QuickresponseCategoryInterface"
+                type="MageMe\WebForms\Model\QuickresponseCategory"/>
+    <preference for="MageMe\WebForms\Api\QuickresponseCategoryRepositoryInterface"
+                type="MageMe\WebForms\Model\Repository\QuickresponseCategoryRepository"/>
+    <preference for="MageMe\WebForms\Api\QuickresponseCategorySearchResultInterface"
+                type="MageMe\WebForms\Model\SearchResult\QuickresponseCategorySearchResult"/>
+
+    <preference for="MageMe\WebForms\Api\Data\TmpFileDropzoneInterface"
+                type="MageMe\WebForms\Model\TmpFileDropzone"/>
+    <preference for="MageMe\WebForms\Api\TmpFileDropzoneRepositoryInterface"
+                type="MageMe\WebForms\Model\Repository\TmpFileDropzoneRepository"/>
+    <preference for="MageMe\WebForms\Api\TmpFileDropzoneSearchResultInterface"
+                type="MageMe\WebForms\Model\SearchResult\TmpFileDropzoneSearchResult"/>
+
+    <preference for="MageMe\WebForms\Api\Data\TmpFileGalleryInterface"
+                type="MageMe\WebForms\Model\TmpFileGallery"/>
+    <preference for="MageMe\WebForms\Api\TmpFileGalleryRepositoryInterface"
+                type="MageMe\WebForms\Model\Repository\TmpFileGalleryRepository"/>
+    <preference for="MageMe\WebForms\Api\TmpFileGallerySearchResultInterface"
+                type="MageMe\WebForms\Model\SearchResult\TmpFileGallerySearchResult"/>
+
+    <preference for="MageMe\WebForms\Api\Data\TmpFileMessageInterface"
+                type="MageMe\WebForms\Model\TmpFileMessage"/>
+    <preference for="MageMe\WebForms\Api\TmpFileMessageRepositoryInterface"
+                type="MageMe\WebForms\Model\Repository\TmpFileMessageRepository"/>
+    <preference for="MageMe\WebForms\Api\TmpFileMessageSearchResultInterface"
+                type="MageMe\WebForms\Model\SearchResult\TmpFileMessageSearchResult"/>
+
+    <preference for="MageMe\WebForms\Api\Data\TmpFileCustomerNotificationInterface"
+                type="MageMe\WebForms\Model\TmpFileCustomerNotification"/>
+    <preference for="MageMe\WebForms\Api\TmpFileCustomerNotificationRepositoryInterface"
+                type="MageMe\WebForms\Model\Repository\TmpFileCustomerNotificationRepository"/>
+    <preference for="MageMe\WebForms\Api\TmpFileCustomerNotificationSearchResultInterface"
+                type="MageMe\WebForms\Model\SearchResult\TmpFileCustomerNotificationSearchResult"/>
+
+    <preference for="MageMe\WebForms\Api\Data\FileDropzoneInterface"
+                type="MageMe\WebForms\Model\FileDropzone"/>
+    <preference for="MageMe\WebForms\Api\FileDropzoneRepositoryInterface"
+                type="MageMe\WebForms\Model\Repository\FileDropzoneRepository"/>
+    <preference for="MageMe\WebForms\Api\FileDropzoneSearchResultInterface"
+                type="MageMe\WebForms\Model\SearchResult\FileDropzoneSearchResult"/>
+
+    <preference for="MageMe\WebForms\Api\Data\FileGalleryInterface"
+                type="MageMe\WebForms\Model\FileGallery"/>
+    <preference for="MageMe\WebForms\Api\FileGalleryRepositoryInterface"
+                type="MageMe\WebForms\Model\Repository\FileGalleryRepository"/>
+    <preference for="MageMe\WebForms\Api\FileGallerySearchResultInterface"
+                type="MageMe\WebForms\Model\SearchResult\FileGallerySearchResult"/>
+
+    <preference for="MageMe\WebForms\Api\Data\FileMessageInterface"
+                type="MageMe\WebForms\Model\FileMessage"/>
+    <preference for="MageMe\WebForms\Api\FileMessageRepositoryInterface"
+                type="MageMe\WebForms\Model\Repository\FileMessageRepository"/>
+    <preference for="MageMe\WebForms\Api\FileMessageSearchResultInterface"
+                type="MageMe\WebForms\Model\SearchResult\FileMessageSearchResult"/>
+
+    <preference for="MageMe\WebForms\Api\Data\FileCustomerNotificationInterface"
+                type="MageMe\WebForms\Model\FileCustomerNotification"/>
+    <preference for="MageMe\WebForms\Api\FileCustomerNotificationRepositoryInterface"
+                type="MageMe\WebForms\Model\Repository\FileCustomerNotificationRepository"/>
+    <preference for="MageMe\WebForms\Api\FileCustomerNotificationSearchResultInterface"
+                type="MageMe\WebForms\Model\SearchResult\FileCustomerNotificationSearchResult"/>
+
+    <preference for="MageMe\WebForms\Api\Data\StoreInterface"
+                type="MageMe\WebForms\Model\Store"/>
+    <preference for="MageMe\WebForms\Api\StoreRepositoryInterface"
+                type="MageMe\WebForms\Model\Repository\StoreRepository"/>
+    <preference for="MageMe\WebForms\Api\StoreSearchResultInterface"
+                type="MageMe\WebForms\Model\SearchResult\StoreSearchResult"/>
+
+    <preference for="MageMe\WebForms\Api\Utility\DropzoneApiUploaderInterface"
+                type="MageMe\WebForms\File\DropzoneApiUploader"/>
+
+    <preference for="MageMe\WebForms\Api\Ui\FieldUiInterface" type="MageMe\WebForms\Ui\Field\Type\Text"/>
+
+    <type name="MageMe\WebForms\Model\Field\AbstractField">
+        <arguments>
+            <argument name="fieldBlock" xsi:type="object">MageMe\WebForms\Block\Form\Element\Field\AbstractField</argument>
+        </arguments>
+    </type>
+    <type name="MageMe\WebForms\Model\Field\Type\Text">
+        <arguments>
+            <argument name="fieldUi" xsi:type="object">MageMe\WebForms\Ui\Field\Type\Text</argument>
+            <argument name="fieldBlock" xsi:type="object">MageMe\WebForms\Block\Form\Element\Field\Type\Text</argument>
+        </arguments>
+    </type>
+    <type name="MageMe\WebForms\Model\Field\Type\Email">
+        <arguments>
+            <argument name="fieldUi" xsi:type="object">MageMe\WebForms\Ui\Field\Type\Email</argument>
+            <argument name="fieldBlock" xsi:type="object">MageMe\WebForms\Block\Form\Element\Field\Type\Email</argument>
+        </arguments>
+    </type>
+    <type name="MageMe\WebForms\Model\Field\Type\Url">
+        <arguments>
+            <argument name="fieldUi" xsi:type="object">MageMe\WebForms\Ui\Field\Type\Url</argument>
+            <argument name="fieldBlock" xsi:type="object">MageMe\WebForms\Block\Form\Element\Field\Type\Url</argument>
+        </arguments>
+    </type>
+    <type name="MageMe\WebForms\Model\Field\Type\Autocomplete">
+        <arguments>
+            <argument name="fieldUi" xsi:type="object">MageMe\WebForms\Ui\Field\Type\Autocomplete</argument>
+            <argument name="fieldBlock" xsi:type="object">MageMe\WebForms\Block\Form\Element\Field\Type\Autocomplete</argument>
+        </arguments>
+    </type>
+    <type name="MageMe\WebForms\Model\Field\Type\Password">
+        <arguments>
+            <argument name="fieldUi" xsi:type="object">MageMe\WebForms\Ui\Field\Type\Password</argument>
+            <argument name="fieldBlock" xsi:type="object">MageMe\WebForms\Block\Form\Element\Field\Type\Password</argument>
+        </arguments>
+    </type>
+    <type name="MageMe\WebForms\Model\Field\Type\Number">
+        <arguments>
+            <argument name="fieldUi" xsi:type="object">MageMe\WebForms\Ui\Field\Type\Number</argument>
+            <argument name="fieldBlock" xsi:type="object">MageMe\WebForms\Block\Form\Element\Field\Type\Number</argument>
+        </arguments>
+    </type>
+    <type name="MageMe\WebForms\Model\Field\Type\Textarea">
+        <arguments>
+            <argument name="fieldUi" xsi:type="object">MageMe\WebForms\Ui\Field\Type\Textarea</argument>
+            <argument name="fieldBlock" xsi:type="object">MageMe\WebForms\Block\Form\Element\Field\Type\Textarea</argument>
+        </arguments>
+    </type>
+    <type name="MageMe\WebForms\Model\Field\Type\Wysiwyg">
+        <arguments>
+            <argument name="fieldUi" xsi:type="object">MageMe\WebForms\Ui\Field\Type\Wysiwyg</argument>
+            <argument name="fieldBlock" xsi:type="object">MageMe\WebForms\Block\Form\Element\Field\Type\Wysiwyg</argument>
+        </arguments>
+    </type>
+    <type name="MageMe\WebForms\Model\Field\Type\Select">
+        <arguments>
+            <argument name="fieldUi" xsi:type="object">MageMe\WebForms\Ui\Field\Type\Select</argument>
+            <argument name="fieldBlock" xsi:type="object">MageMe\WebForms\Block\Form\Element\Field\Type\Select</argument>
+        </arguments>
+    </type>
+    <type name="MageMe\WebForms\Model\Field\Type\SelectRadio">
+        <arguments>
+            <argument name="fieldUi" xsi:type="object">MageMe\WebForms\Ui\Field\Type\SelectRadio</argument>
+            <argument name="fieldBlock" xsi:type="object">MageMe\WebForms\Block\Form\Element\Field\Type\SelectRadio</argument>
+        </arguments>
+    </type>
+    <type name="MageMe\WebForms\Model\Field\Type\SelectCheckbox">
+        <arguments>
+            <argument name="fieldUi" xsi:type="object">MageMe\WebForms\Ui\Field\Type\SelectCheckbox</argument>
+            <argument name="fieldBlock" xsi:type="object">MageMe\WebForms\Block\Form\Element\Field\Type\SelectCheckbox</argument>
+        </arguments>
+    </type>
+    <type name="MageMe\WebForms\Model\Field\Type\SelectContact">
+        <arguments>
+            <argument name="fieldUi" xsi:type="object">MageMe\WebForms\Ui\Field\Type\SelectContact</argument>
+            <argument name="fieldBlock" xsi:type="object">MageMe\WebForms\Block\Form\Element\Field\Type\SelectContact</argument>
+        </arguments>
+    </type>
+    <type name="MageMe\WebForms\Model\Field\Type\Country">
+        <arguments>
+            <argument name="fieldUi" xsi:type="object">MageMe\WebForms\Ui\Field\Type\Country</argument>
+            <argument name="fieldBlock" xsi:type="object">MageMe\WebForms\Block\Form\Element\Field\Type\Country</argument>
+        </arguments>
+    </type>
+    <type name="MageMe\WebForms\Model\Field\Type\Region">
+        <arguments>
+            <argument name="fieldUi" xsi:type="object">MageMe\WebForms\Ui\Field\Type\Region</argument>
+            <argument name="fieldBlock" xsi:type="object">MageMe\WebForms\Block\Form\Element\Field\Type\Region</argument>
+        </arguments>
+    </type>
+    <type name="MageMe\WebForms\Model\Field\Type\Subscribe">
+        <arguments>
+            <argument name="fieldUi" xsi:type="object">MageMe\WebForms\Ui\Field\Type\Subscribe</argument>
+            <argument name="fieldBlock" xsi:type="object">MageMe\WebForms\Block\Form\Element\Field\Type\Subscribe</argument>
+        </arguments>
+    </type>
+    <type name="MageMe\WebForms\Model\Field\Type\Stars">
+        <arguments>
+            <argument name="fieldUi" xsi:type="object">MageMe\WebForms\Ui\Field\Type\Stars</argument>
+            <argument name="fieldBlock" xsi:type="object">MageMe\WebForms\Block\Form\Element\Field\Type\Stars</argument>
+        </arguments>
+    </type>
+    <type name="MageMe\WebForms\Model\Field\Type\File">
+        <arguments>
+            <argument name="fieldUi" xsi:type="object">MageMe\WebForms\Ui\Field\Type\File</argument>
+            <argument name="fieldBlock" xsi:type="object">MageMe\WebForms\Block\Form\Element\Field\Type\File</argument>
+        </arguments>
+    </type>
+    <type name="MageMe\WebForms\Model\Field\Type\Image">
+        <arguments>
+            <argument name="fieldUi" xsi:type="object">MageMe\WebForms\Ui\Field\Type\Image</argument>
+            <argument name="fieldBlock" xsi:type="object">MageMe\WebForms\Block\Form\Element\Field\Type\Image</argument>
+        </arguments>
+    </type>
+    <type name="MageMe\WebForms\Model\Field\Type\Date">
+        <arguments>
+            <argument name="fieldUi" xsi:type="object">MageMe\WebForms\Ui\Field\Type\Date</argument>
+            <argument name="fieldBlock" xsi:type="object">MageMe\WebForms\Block\Form\Element\Field\Type\Date</argument>
+        </arguments>
+    </type>
+    <type name="MageMe\WebForms\Model\Field\Type\Time">
+        <arguments>
+            <argument name="fieldUi" xsi:type="object">MageMe\WebForms\Ui\Field\Type\Time</argument>
+            <argument name="fieldBlock" xsi:type="object">MageMe\WebForms\Block\Form\Element\Field\Type\Time</argument>
+        </arguments>
+    </type>
+    <type name="MageMe\WebForms\Model\Field\Type\Dob">
+        <arguments>
+            <argument name="fieldUi" xsi:type="object">MageMe\WebForms\Ui\Field\Type\Dob</argument>
+            <argument name="fieldBlock" xsi:type="object">MageMe\WebForms\Block\Form\Element\Field\Type\Dob</argument>
+        </arguments>
+    </type>
+    <type name="MageMe\WebForms\Model\Field\Type\Html">
+        <arguments>
+            <argument name="fieldUi" xsi:type="object">MageMe\WebForms\Ui\Field\Type\Html</argument>
+            <argument name="fieldBlock" xsi:type="object">MageMe\WebForms\Block\Form\Element\Field\Type\Html</argument>
+        </arguments>
+    </type>
+    <type name="MageMe\WebForms\Model\Field\Type\Hidden">
+        <arguments>
+            <argument name="fieldUi" xsi:type="object">MageMe\WebForms\Ui\Field\Type\Hidden</argument>
+            <argument name="fieldBlock" xsi:type="object">MageMe\WebForms\Block\Form\Element\Field\Type\Hidden</argument>
+        </arguments>
+    </type>
+    <type name="MageMe\WebForms\Model\Field\Type\Gallery">
+        <arguments>
+            <argument name="fieldUi" xsi:type="object">MageMe\WebForms\Ui\Field\Type\Gallery</argument>
+            <argument name="fieldBlock" xsi:type="object">MageMe\WebForms\Block\Form\Element\Field\Type\Gallery</argument>
+        </arguments>
+    </type>
+    <type name="MageMe\WebForms\Model\Field\Type\Colorpicker">
+        <arguments>
+            <argument name="fieldUi" xsi:type="object">MageMe\WebForms\Ui\Field\Type\Colorpicker</argument>
+            <argument name="fieldBlock" xsi:type="object">MageMe\WebForms\Block\Form\Element\Field\Type\Colorpicker</argument>
+        </arguments>
+    </type>
+    <type name="MageMe\WebForms\Model\Field\Type\PhoneNumber">
+        <arguments>
+            <argument name="fieldUi" xsi:type="object">MageMe\WebForms\Ui\Field\Type\PhoneNumber</argument>
+            <argument name="fieldBlock" xsi:type="object">MageMe\WebForms\Block\Form\Element\Field\Type\PhoneNumber</argument>
+        </arguments>
+    </type>
+    <type name="MageMe\WebForms\Model\Field\Type\GoogleMap">
+        <arguments>
+            <argument name="fieldUi" xsi:type="object">MageMe\WebForms\Ui\Field\Type\GoogleMap</argument>
+            <argument name="fieldBlock" xsi:type="object">MageMe\WebForms\Block\Form\Element\Field\Type\GoogleMap</argument>
+        </arguments>
+    </type>
+
+    <type name="MageMe\WebForms\Config\Reader">
+        <arguments>
+            <argument name="fileName" xsi:type="string">webforms.xml</argument>
+            <argument name="converter" xsi:type="object">MageMe\WebForms\Config\Converter</argument>
+            <argument name="schemaLocator" xsi:type="object">MageMe\WebForms\Config\SchemaLocator</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="MageMe\WebForms\Config\Data" type="Magento\Framework\Config\Data">
+        <arguments>
+            <argument name="reader" xsi:type="object">MageMe\WebForms\Config\Reader</argument>
+            <argument name="cacheId" xsi:type="string">webforms_config</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="MageMe\WebForms\Config\Config">
+        <arguments>
+            <argument name="dataStorage" xsi:type="object">MageMe\WebForms\Config\Data</argument>
+        </arguments>
+    </type>
+
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="webforms_form_fieldset_listing_data_source" xsi:type="string">
+                    MageMe\WebForms\Model\ResourceModel\Fieldset\Collection
+                </item>
+                <item name="webforms_form_field_listing_data_source" xsi:type="string">
+                    MageMe\WebForms\Model\ResourceModel\Field\Collection
+                </item>
+                <item name="webforms_form_logic_listing_data_source" xsi:type="string">
+                    MageMe\WebForms\Model\ResourceModel\Logic\Collection
+                </item>
+                <item name="webforms_result_listing_data_source" xsi:type="string">
+                    MageMe\WebForms\Model\ResourceModel\Result\Grid\Collection
+                </item>
+                <item name="webforms_customer_result_listing_data_source" xsi:type="string">
+                    MageMe\WebForms\Model\ResourceModel\Result\Customer\Collection
+                </item>
+                <item name="webforms_field_logic_listing_data_source" xsi:type="string">
+                    MageMe\WebForms\Model\ResourceModel\Logic\Collection
+                </item>
+                <item name="webforms_form_listing_data_source" xsi:type="string">
+                    MageMe\WebForms\Model\ResourceModel\Form\Collection
+                </item>
+                <item name="webforms_quickresponse_listing_data_source" xsi:type="string">
+                    MageMe\WebForms\Model\ResourceModel\Quickresponse\Collection
+                </item>
+                <item name="webforms_quickresponsecategory_listing_data_source" xsi:type="string">
+                    MageMe\WebForms\Model\ResourceModel\QuickresponseCategory\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="MageMe\WebForms\Model\ResourceModel\Result\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mm_webforms_result</argument>
+            <argument name="eventPrefix" xsi:type="string">webforms_result_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">result_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">MageMe\WebForms\Model\ResourceModel\Result</argument>
+        </arguments>
+    </type>
+    <type name="MageMe\WebForms\Model\ResourceModel\Result\Customer\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mm_webforms_result</argument>
+            <argument name="resourceModel" xsi:type="string">MageMe\WebForms\Model\ResourceModel\Result</argument>
+        </arguments>
+    </type>
+    <type name="MageMe\WebForms\Model\ResourceModel\Logic\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mm_webforms_logic</argument>
+            <argument name="resourceModel" xsi:type="string">MageMe\WebForms\Model\ResourceModel\Logic</argument>
+        </arguments>
+    </type>
+    <type name="MageMe\WebForms\Model\ResourceModel\Form\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mm_webforms_form</argument>
+            <argument name="resourceModel" xsi:type="string">MageMe\WebForms\Model\ResourceModel\Form</argument>
+        </arguments>
+    </type>
+    <type name="MageMe\WebForms\Model\ResourceModel\Fieldset\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mm_webforms_fieldset</argument>
+            <argument name="resourceModel" xsi:type="string">MageMe\WebForms\Model\ResourceModel\Fieldset</argument>
+        </arguments>
+    </type>
+    <type name="MageMe\WebForms\Model\ResourceModel\Field\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mm_webforms_field</argument>
+            <argument name="resourceModel" xsi:type="string">MageMe\WebForms\Model\ResourceModel\Field</argument>
+        </arguments>
+    </type>
+    <type name="MageMe\WebForms\Model\ResourceModel\Quickresponse\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mm_webforms_quickresponse</argument>
+            <argument name="resourceModel" xsi:type="string">MageMe\WebForms\Model\ResourceModel\Quickresponse</argument>
+        </arguments>
+    </type>
+    <type name="MageMe\WebForms\Model\ResourceModel\QuickresponseCategory\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mm_webforms_quickresponse_category</argument>
+            <argument name="resourceModel" xsi:type="string">MageMe\WebForms\Model\ResourceModel\QuickresponseCategory</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\Mail\EmailMessage">
+        <arguments>
+            <argument name="encoding" xsi:type="string">utf-8</argument>
+        </arguments>
+    </type>
+
+    <!-- For \Magento\Cms\Model\Wysiwyg\Config -->
+    <type name="Magento\Cms\Model\Wysiwyg\CompositeConfigProvider">
+        <arguments>
+            <argument name="variablePluginConfigProvider" xsi:type="array">
+                <item name="default" xsi:type="string">Magento\Variable\Model\Variable\ConfigProvider</item>
+            </argument>
+            <argument name="widgetPluginConfigProvider" xsi:type="array">
+                <item name="default" xsi:type="string">Magento\Widget\Model\Widget\Config</item>
+            </argument>
+            <argument name="wysiwygConfigPostProcessor" xsi:type="array">
+                <item name="default" xsi:type="string">Magento\Cms\Model\Wysiwyg\DefaultConfigProvider</item>
+            </argument>
+            <argument name="galleryConfigProvider" xsi:type="array">
+                <item name="default" xsi:type="string">Magento\Cms\Model\Wysiwyg\Gallery\DefaultConfigProvider</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="MageMe\WebForms\Ui\Component\Common\Form\AbstractStoreDataProvider">
+        <arguments>
+            <argument name="uiConfigFactory" xsi:type="object">uiComponentConfigFactory</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="WebformsResultListingDataProvider"
+                 type="MageMe\WebForms\Ui\Component\Result\Listing\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">
+                MageMe\WebForms\Model\ResourceModel\Result\Collection
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="WebformsQuickresponseListingDataProvider"
+                 type="MageMe\WebForms\Ui\Component\Quickresponse\Listing\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">
+                MageMe\WebForms\Model\ResourceModel\Quickresponse\Collection
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="WebformsQuickresponseCategoryListingDataProvider"
+                 type="MageMe\WebForms\Ui\Component\QuickresponseCategory\Listing\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">
+                MageMe\WebForms\Model\ResourceModel\QuickresponseCategory\Collection
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="WebformsFormFormDataProvider" type="MageMe\WebForms\Ui\Component\Form\Form\DataProvider">
+    </virtualType>
+    <virtualType name="WebformsFieldsetFormDataProvider" type="MageMe\WebForms\Ui\Component\Fieldset\Form\DataProvider">
+    </virtualType>
+    <virtualType name="WebformsFieldFormDataProvider" type="MageMe\WebForms\Ui\Component\Field\Form\DataProvider">
+    </virtualType>
+    <virtualType name="WebformsLogicFormDataProvider" type="MageMe\WebForms\Ui\Component\Logic\Form\DataProvider">
+    </virtualType>
+
+    <virtualType name="WebformsResultReplyFormDataProvider"
+                 type="MageMe\WebForms\Ui\Component\Result\Reply\Form\DataProvider">
+    </virtualType>
+    <virtualType name="WebformsResultInfoFormDataProvider"
+                 type="MageMe\WebForms\Ui\Component\Result\Info\Form\DataProvider">
+    </virtualType>
+
+    <virtualType name="VladimirPopov\WebForms\Block\Widget\Form" type="MageMe\WebForms\Block\Widget\Form">
+    </virtualType>
+    <virtualType name="VladimirPopov\WebForms\Block\Widget\Button" type="MageMe\WebForms\Block\Widget\Button">
+    </virtualType>
+    <virtualType name="VladimirPopov\WebForms\Block\Widget\Result" type="MageMe\WebForms\Block\Widget\Result">
+    </virtualType>
+    <virtualType name="VladimirPopov\WebForms\Block\Widget\SlideOutForm"
+                 type="MageMe\WebForms\Block\Widget\SlideOutForm">
+    </virtualType>
+
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="webformsMigrate" xsi:type="object">MageMe\WebForms\Console\Command\Migrate</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <preference for="MageMe\WebForms\Api\Mail\NotificationInterface" type="MageMe\WebForms\Mail\AbstractNotification"/>
+
+    <type name="MageMe\WebForms\Mail\AdminNotification">
+        <arguments>
+            <argument name="template" xsi:type="string">webforms_notification</argument>
+        </arguments>
+    </type>
+
+    <type name="MageMe\WebForms\Mail\CustomerNotification">
+        <arguments>
+            <argument name="template" xsi:type="string">webforms_notification</argument>
+        </arguments>
+    </type>
+
+    <type name="MageMe\WebForms\Mail\ApprovalNotification">
+        <arguments>
+            <argument name="template" xsi:type="string">webforms_result_approval</argument>
+        </arguments>
+    </type>
+
+    <type name="MageMe\WebForms\Helper\SurveyHelper">
+        <arguments>
+            <argument name="sessionManager" xsi:type="object">Magento\Framework\Session\SessionManagerInterface\Proxy</argument>
+        </arguments>
+    </type>
+</config>

@@ -1,0 +1,24 @@
+{
+  "name": "mageme/module-webforms-3",
+  "description": "WebForms Pro 3 - Custom Form Builder for Magento 2",
+  "type": "magento2-module",
+  "version": "3.0.18",
+  "license": "https://mageme.com/license/",
+  "require": {
+    "ext-json": "*",
+    "ext-curl": "*",
+    "ext-fileinfo": "*",
+    "ext-intl": "*",
+    "ext-zip": "*",
+    "ext-dom": "*",
+    "ext-mbstring": "*"
+  },
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "MageMe\\WebForms\\": ""
+    }
+  }
+}

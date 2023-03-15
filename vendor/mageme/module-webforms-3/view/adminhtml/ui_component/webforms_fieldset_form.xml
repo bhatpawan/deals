@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">webforms_fieldset_form.webforms_fieldset_form_data_source</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="back"
+                    class="MageMe\WebForms\Block\Adminhtml\Fieldset\Edit\Button\Back"/>
+            <button name="reset"
+                    class="MageMe\WebForms\Block\Adminhtml\Fieldset\Edit\Button\Reset"/>
+            <button name="save"
+                    class="MageMe\WebForms\Block\Adminhtml\Fieldset\Edit\Button\Save"/>
+        </buttons>
+        <namespace>webforms_fieldset_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>webforms_fieldset_form.webforms_fieldset_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="webforms_fieldset_form_data_source"
+                component="Magento_Ui/js/form/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">fieldset_id</param>
+            </storageConfig>
+            <submitUrl path="webforms/fieldset/save"/>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <dataProvider class="WebformsFieldsetFormDataProvider" name="webforms_fieldset_form_data_source">
+            <settings>
+                <requestFieldName>fieldset_id</requestFieldName>
+                <primaryFieldName>fieldset_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="information" sortOrder="10">
+        <settings>
+            <label translate="true">Information</label>
+            <collapsible>true</collapsible>
+            <opened>true</opened>
+        </settings>
+        <field name="fieldset_id" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="form_id" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="store" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="is_active" sortOrder="1" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                    <item name="toggleLabels" xsi:type="array">
+                        <item name="on" xsi:type="string">Yes</item>
+                        <item name="off" xsi:type="string">No</item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Enable Fieldset</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="name" sortOrder="10" formElement="input">
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Name</label>
+            </settings>
+        </field>
+        <field name="position" sortOrder="20" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="additionalInfo" xsi:type="string" translate="true">Fieldset position in the form</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="validate-digits" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Position</label>
+            </settings>
+        </field>
+    </fieldset>
+    <fieldset name="design" sortOrder="20">
+        <settings>
+            <label translate="true">Design</label>
+            <collapsible>true</collapsible>
+            <opened>false</opened>
+        </settings>
+        <field name="is_label_hidden" sortOrder="10" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Hide Label</label>
+                <dataScope>is_label_hidden</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="width_proportion_lg" sortOrder="20" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        Proportion of the form width for large size screen devices such as PC, Macbook, iMac etc.
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Large Screen Width</label>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="MageMe\WebForms\Config\Options\Fieldset\ResponsiveSize"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="width_proportion_md" sortOrder="30" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        Proportion of the form width for medium size screen devices such as iPad, Galaxy Tab, Surface etc.
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Medium Screen Width</label>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="MageMe\WebForms\Config\Options\Fieldset\ResponsiveSize"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="width_proportion_sm" sortOrder="40" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        Proportion of the form width for small size screen devices such as iPhone, Galaxy, Pixel etc.
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Small Screen Width</label>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="MageMe\WebForms\Config\Options\Field\ResponsiveSize"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="is_displayed_in_new_row_lg" sortOrder="50" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        Display the element in a new row. Use it to fix unwanted automatic element placement
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Large Screen Start New Row</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="is_displayed_in_new_row_md" sortOrder="60" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        Display the element in a new row. Use it to fix unwanted automatic element placement
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Medium Screen Start New Row</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="is_displayed_in_new_row_sm" sortOrder="70" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        Display the element in a new row. Use it to fix unwanted automatic element placement
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Small Screen Start New Row</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+    </fieldset>
+    <fieldset name="css" sortOrder="30">
+        <settings>
+            <label translate="true">CSS</label>
+            <collapsible>true</collapsible>
+            <opened>false</opened>
+        </settings>
+        <field name="css_class" sortOrder="10" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        Add custom CSS classes to the fieldset container
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">CSS Classes</label>
+            </settings>
+        </field>
+        <field name="css_style" sortOrder="20" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        Set custom CSS style of the fieldset container
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">CSS Style</label>
+            </settings>
+        </field>
+    </fieldset>
+    <fieldset name="result" sortOrder="40">
+        <settings>
+            <label translate="true">Results / Notifications Settings</label>
+            <collapsible>true</collapsible>
+            <opened>false</opened>
+        </settings>
+        <field name="is_name_displayed_in_result" sortOrder="10" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        Display fieldset name in result / notification messages
+                    </item>
+                    <item name="default" xsi:type="number">0</item>
+                    <item name="toggleLabels" xsi:type="array">
+                        <item name="on" xsi:type="string">On</item>
+                        <item name="off" xsi:type="string">Off</item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Display Fieldset Name in Results Overview and Notifications</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+    </fieldset>
+</form>

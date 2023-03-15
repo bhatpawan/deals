@@ -1,0 +1,793 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">webforms_field_form.webforms_field_form_data_source</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="back"
+                    class="MageMe\WebForms\Block\Adminhtml\Field\Edit\Button\Back"/>
+            <button name="reset"
+                    class="MageMe\WebForms\Block\Adminhtml\Field\Edit\Button\Reset"/>
+            <button name="add_logic"
+                    class="MageMe\WebForms\Block\Adminhtml\Field\Edit\Button\AddLogic"/>
+            <button name="save"
+                    class="MageMe\WebForms\Block\Adminhtml\Field\Edit\Button\Save"/>
+        </buttons>
+        <namespace>webforms_field_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>webforms_field_form.webforms_field_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="webforms_field_form_data_source"
+                component="Magento_Ui/js/form/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">field_id</param>
+            </storageConfig>
+            <submitUrl path="webforms/field/save"/>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <dataProvider class="WebformsFieldFormDataProvider" name="webforms_field_form_data_source">
+            <settings>
+                <requestFieldName>field_id</requestFieldName>
+                <primaryFieldName>field_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+
+    <fieldset name="information" sortOrder="10">
+        <settings>
+            <label translate="true">Information</label>
+            <collapsible>true</collapsible>
+            <opened>true</opened>
+        </settings>
+        <field name="field_id" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">field</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>field_id</dataScope>
+            </settings>
+        </field>
+        <field name="form_id" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">field</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>form_id</dataScope>
+            </settings>
+        </field>
+        <field name="store" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">field</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>store</dataScope>
+            </settings>
+        </field>
+        <field name="is_active" sortOrder="1" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">field</item>
+                    <item name="default" xsi:type="number">0</item>
+                    <item name="additionalInfo" xsi:type="string" translate="true">If assigned fieldset is not active
+                        the field won't be displayed
+                    </item>
+                    <item name="toggleLabels" xsi:type="array">
+                        <item name="on" xsi:type="string">Yes</item>
+                        <item name="off" xsi:type="string">No</item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Enable Field</label>
+                <dataScope>is_active</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="name" sortOrder="10" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">field</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Name</label>
+                <dataScope>name</dataScope>
+            </settings>
+        </field>
+        <field name="type" sortOrder="20" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">field</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Type</label>
+                <dataScope>type</dataScope>
+                <scopeLabel>[GLOBAL]</scopeLabel>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="MageMe\WebForms\Config\Options\Field\TypeWithCategories"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="code" sortOrder="30" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">field</item>
+                    <item name="additionalInfo" xsi:type="string" translate="true">Code is used to help identify this
+                        field in scripts
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Code</label>
+                <dataScope>code</dataScope>
+                <scopeLabel>[GLOBAL]</scopeLabel>
+            </settings>
+        </field>
+        <field name="fieldset_id" sortOrder="35" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">field</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Fieldset</label>
+                <dataScope>fieldset_id</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="MageMe\WebForms\Config\Options\Field\Fieldset"/>
+                        <caption translate="true">...</caption>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="result_label" sortOrder="40" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">field</item>
+                    <item name="additionalInfo" xsi:type="string" translate="true">Result label will be used on results
+                        page. Use it to shorten long question fields
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Result Label</label>
+                <dataScope>result_label</dataScope>
+            </settings>
+        </field>
+        <textarea name="comment" sortOrder="50">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">field</item>
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        <![CDATA[This text will appear under the input field.<br>Use <i>{{tooltip}}text{{/tooltip}}</i> to add tooltip to field name.<br>Use <i>{{tooltip val=&quot;Option&quot;}}text{{/tooltip}}</i> to add tooltip to checkbox or radio label.]]></item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Comment</label>
+                <dataScope>comment</dataScope>
+                <rows>5</rows>
+            </settings>
+        </textarea>
+
+        <field name="is_email_subject" sortOrder="80" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">field</item>
+                    <item name="default" xsi:type="number">0</item>
+                    <item name="additionalInfo" xsi:type="string" translate="true">This field value will be used as a
+                        subject in notification e-mail
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Use Field Value as Email Subject</label>
+                <dataScope>is_email_subject</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="is_required" sortOrder="90" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">field</item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Required</label>
+                <dataScope>is_required</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="validation_required_message" sortOrder="100" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">field</item>
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        <![CDATA[Set custom text for the validation error message. If empty <b>&quot;This is a required field.&quot;</b> will be used]]></item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Custom Validation Advice</label>
+                <dataScope>validation_required_message</dataScope>
+            </settings>
+        </field>
+        <field name="position" sortOrder="110" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">field</item>
+                    <item name="additionalInfo" xsi:type="string" translate="true">Field position in the form relative
+                        to field set
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="validate-digits" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Position</label>
+                <dataScope>position</dataScope>
+                <scopeLabel>[GLOBAL]</scopeLabel>
+            </settings>
+        </field>
+
+    </fieldset>
+    <fieldset name="design" sortOrder="20">
+        <settings>
+            <label translate="true">Design</label>
+            <collapsible>true</collapsible>
+            <opened>false</opened>
+        </settings>
+        <fieldset name="general" sortOrder="10">
+            <settings>
+                <label translate="true">General</label>
+                <collapsible>false</collapsible>
+            </settings>
+            <field name="is_label_hidden" sortOrder="10" formElement="checkbox">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">field</item>
+                        <item name="default" xsi:type="number">0</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Hide Field Label</label>
+                    <dataScope>is_label_hidden</dataScope>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+            <field name="custom_attributes" sortOrder="20" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">field</item>
+                        <item name="additionalInfo" xsi:type="string" translate="true">
+                            <![CDATA[Specify custom input attributes here such as <i>readonly</i> or <i>disabled</i>]]></item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Custom Attributes</label>
+                    <dataScope>custom_attributes</dataScope>
+                </settings>
+            </field>
+        </fieldset>
+        <fieldset name="responsive" sortOrder="20">
+            <settings>
+                <label translate="true">Responsive Design</label>
+                <collapsible>false</collapsible>
+            </settings>
+            <field name="width_proportion_lg" sortOrder="10" formElement="select">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">field</item>
+                        <item name="additionalInfo" xsi:type="string" translate="true">Proportion of the fieldset width
+                            for large size screen devices such as PC, Macbook, iMac etc.
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Large Screen Width</label>
+                    <dataScope>width_proportion_lg</dataScope>
+                </settings>
+                <formElements>
+                    <select>
+                        <settings>
+                            <options class="MageMe\WebForms\Config\Options\Field\ResponsiveSize"/>
+                        </settings>
+                    </select>
+                </formElements>
+            </field>
+            <field name="width_proportion_md" sortOrder="20" formElement="select">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">field</item>
+                        <item name="additionalInfo" xsi:type="string" translate="true">Proportion of the fieldset width
+                            for medium size screen devices such as iPad, Galaxy Tab, Surface etc.
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Medium Screen Width</label>
+                    <dataScope>width_proportion_md</dataScope>
+                </settings>
+                <formElements>
+                    <select>
+                        <settings>
+                            <options class="MageMe\WebForms\Config\Options\Field\ResponsiveSize"/>
+                        </settings>
+                    </select>
+                </formElements>
+            </field>
+            <field name="width_proportion_sm" sortOrder="30" formElement="select">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">field</item>
+                        <item name="additionalInfo" xsi:type="string" translate="true">Proportion of the fieldset width
+                            for small size screen devices such as iPhone, Galaxy, Pixel etc.
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Small Screen Width</label>
+                    <dataScope>width_proportion_sm</dataScope>
+                </settings>
+                <formElements>
+                    <select>
+                        <settings>
+                            <options class="MageMe\WebForms\Config\Options\Field\ResponsiveSize"/>
+                        </settings>
+                    </select>
+                </formElements>
+            </field>
+            <field name="is_displayed_in_new_row_lg" sortOrder="40" formElement="checkbox">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">field</item>
+                        <item name="default" xsi:type="number">0</item>
+                        <item name="additionalInfo" xsi:type="string" translate="true">Display the element in a new row.
+                            Use it to fix unwanted automatic element placement
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Large Screen Start New Row</label>
+                    <dataScope>is_displayed_in_new_row_lg</dataScope>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+            <field name="is_displayed_in_new_row_md" sortOrder="50" formElement="checkbox">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">field</item>
+                        <item name="default" xsi:type="number">0</item>
+                        <item name="additionalInfo" xsi:type="string" translate="true">Display the element in a new row.
+                            Use it to fix unwanted automatic element placement
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Medium Screen Start New Row</label>
+                    <dataScope>is_displayed_in_new_row_md</dataScope>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+            <field name="is_displayed_in_new_row_sm" sortOrder="60" formElement="checkbox">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">field</item>
+                        <item name="default" xsi:type="number">0</item>
+                        <item name="additionalInfo" xsi:type="string" translate="true">Display the element in a new row.
+                            Use it to fix unwanted automatic element placement
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Small Screen Start New Row</label>
+                    <dataScope>is_displayed_in_new_row_sm</dataScope>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+        </fieldset>
+        <fieldset name="css" sortOrder="30">
+            <settings>
+                <label translate="true">CSS</label>
+                <collapsible>false</collapsible>
+            </settings>
+            <field name="css_container_class" sortOrder="10" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">field</item>
+                        <item name="additionalInfo" xsi:type="string" translate="true">Set CSS classes for the container
+                            element that holds Label and Input elements
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">CSS Classes for the Container Element</label>
+                    <dataScope>css_container_class</dataScope>
+                </settings>
+            </field>
+            <field name="css_input_class" sortOrder="20" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">field</item>
+                        <item name="additionalInfo" xsi:type="string" translate="true">You can use it for additional
+                            field validation (see Prototype validation classes)
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">CSS Classes for the Input Element</label>
+                    <dataScope>css_input_class</dataScope>
+                </settings>
+            </field>
+            <field name="css_input_style" sortOrder="30" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">field</item>
+                        <item name="additionalInfo" xsi:type="string" translate="true">Add custom stylization to the
+                            input element
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Additional CSS Style for the Input Element</label>
+                    <dataScope>css_input_style</dataScope>
+                </settings>
+            </field>
+        </fieldset>
+        <fieldset name="result" sortOrder="40">
+            <settings>
+                <label translate="true">Results / Notifications</label>
+                <collapsible>false</collapsible>
+            </settings>
+            <field name="display_in_result" sortOrder="10" formElement="select">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">field</item>
+                        <item name="additionalInfo" xsi:type="string" translate="true">Display field in result /
+                            notification messages
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Display field</label>
+                    <dataScope>display_in_result</dataScope>
+                </settings>
+                <formElements>
+                    <select>
+                        <settings>
+                            <options class="MageMe\WebForms\Config\Options\Field\DisplayOption"/>
+                        </settings>
+                    </select>
+                </formElements>
+            </field>
+        </fieldset>
+        <fieldset name="browser" sortOrder="50">
+            <settings>
+                <label translate="true">Browser</label>
+                <collapsible>false</collapsible>
+            </settings>
+            <field name="browser_autocomplete" sortOrder="10" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">field</item>
+                        <item name="additionalInfo" xsi:type="string" translate="true">This attribute can be used across
+                            web-sites to pre-fill field with commonly used data such as name, email, telephone etc. This
+                            feature engages when user starts typing.
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Browser Autocomplete</label>
+                    <dataScope>browser_autocomplete</dataScope>
+                </settings>
+            </field>
+        </fieldset>
+    </fieldset>
+    <fieldset name="validation" sortOrder="30">
+        <settings>
+            <label translate="true">Validation</label>
+            <collapsible>true</collapsible>
+            <opened>false</opened>
+        </settings>
+        <fieldset name="webforms_unique" sortOrder="10">
+            <settings>
+                <label translate="true">Unique Value</label>
+                <collapsible>false</collapsible>
+            </settings>
+            <field name="is_unique" sortOrder="10" formElement="checkbox">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">field</item>
+                        <item name="default" xsi:type="number">0</item>
+                        <item name="additionalInfo" xsi:type="string" translate="true">Validate input value against
+                            previously submitted data
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Unique Value</label>
+                    <dataScope>is_unique</dataScope>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+            <textarea name="unique_validation_message" sortOrder="20">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">field</item>
+                        <item name="additionalInfo" xsi:type="string" translate="true">Displayed error message text if
+                            unique value validation fails
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <label translate="true">Unique Field Validation Message</label>
+                    <dataScope>unique_validation_message</dataScope>
+                    <rows>5</rows>
+                </settings>
+            </textarea>
+        </fieldset>
+        <fieldset name="webforms_length" sortOrder="20">
+            <settings>
+                <label translate="true">Length</label>
+                <collapsible>false</collapsible>
+            </settings>
+            <field name="min_length" sortOrder="10" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">field</item>
+                    </item>
+                </argument>
+                <settings>
+                    <validation>
+                        <rule name="validate-digits" xsi:type="boolean">true</rule>
+                    </validation>
+                    <dataType>text</dataType>
+                    <label translate="true">Minimum Length</label>
+                    <dataScope>min_length</dataScope>
+                </settings>
+            </field>
+            <textarea name="min_length_validation_message" sortOrder="20">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">field</item>
+                    </item>
+                </argument>
+                <settings>
+                    <label translate="true">Minimum Length Error Message</label>
+                    <dataScope>min_length_validation_message</dataScope>
+                    <rows>5</rows>
+                </settings>
+            </textarea>
+            <field name="max_length" sortOrder="30" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">field</item>
+                    </item>
+                </argument>
+                <settings>
+                    <validation>
+                        <rule name="validate-digits" xsi:type="boolean">true</rule>
+                    </validation>
+                    <dataType>text</dataType>
+                    <label translate="true">Maximum Length</label>
+                    <dataScope>max_length</dataScope>
+                </settings>
+            </field>
+            <textarea name="max_length_validation_message" sortOrder="40">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">field</item>
+                    </item>
+                </argument>
+                <settings>
+                    <label translate="true">Maximum length error message</label>
+                    <dataScope>max_length_validation_message</dataScope>
+                    <rows>5</rows>
+                </settings>
+            </textarea>
+        </fieldset>
+        <fieldset name="webforms_regex" sortOrder="30">
+            <settings>
+                <label translate="true">Regular Expression</label>
+                <collapsible>false</collapsible>
+            </settings>
+            <textarea name="regex_validation_pattern" sortOrder="10">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">field</item>
+                        <item name="additionalInfo" xsi:type="string" translate="true">Validate with custom regular expression</item>
+                    </item>
+                </argument>
+                <settings>
+                    <label translate="true">Validation RegEx</label>
+                    <dataScope>regex_validation_pattern</dataScope>
+                    <rows>3</rows>
+                </settings>
+            </textarea>
+            <textarea name="regex_validation_message" sortOrder="20">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">field</item>
+                        <item name="additionalInfo" xsi:type="string" translate="true">Displayed error message text if regex validation fails</item>
+                    </item>
+                </argument>
+                <settings>
+                    <label translate="true">Validation Error Message</label>
+                    <dataScope>regex_validation_message</dataScope>
+                    <rows>5</rows>
+                </settings>
+            </textarea>
+        </fieldset>
+    </fieldset>
+    <fieldset name="logic" sortOrder="40"
+              component="MageMe_WebForms/js/form/components/logic-fieldset">
+        <settings>
+            <label translate="true">Logic</label>
+            <collapsible>true</collapsible>
+            <opened>false</opened>
+            <visible>false</visible>
+            <listens>
+                <link name="${ $.provider }:data.type">checkVisibility</link>
+            </listens>
+            <imports>
+                <link name="field_id">${ $.provider }:data.field_id</link>
+                <link name="field_type">${ $.provider }:data.type</link>
+                <link name="logic_types">${ $.provider }:data.logic_types</link>
+            </imports>
+        </settings>
+        <insertListing name="webforms_field_logic_listing">
+            <settings>
+                <autoRender>true</autoRender>
+                <ns>webforms_field_logic_listing</ns>
+                <externalProvider>webforms_field_logic_listing.webforms_field_logic_listing_data_source</externalProvider>
+                <exports>
+                    <link name="field_id">${ $.externalProvider }:params.field_id</link>
+                    <link name="is_multiselect">${ $.externalProvider }:params.is_multiselect</link>
+                </exports>
+                <imports>
+                    <link name="field_id">${ $.provider }:data.field_id</link>
+                    <link name="is_multiselect">${ $.provider }:data.is_multiselect</link>
+                </imports>
+            </settings>
+        </insertListing>
+    </fieldset>
+
+</form>

@@ -1,0 +1,19 @@
+{
+    "name": "mageme/module-webforms-3-page-builder",
+    "description": "Page Builder add-on for WebForms Pro 3",
+    "type": "magento2-module",
+    "version": "3.0.1",
+    "license": "https://mageme.com/license/",
+    "require": {
+        "mageme/module-webforms-3": ">=3.0.0",
+        "magento/module-page-builder": "*"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "MageMe\\WebFormsPageBuilder\\": ""
+        }
+    }
+}

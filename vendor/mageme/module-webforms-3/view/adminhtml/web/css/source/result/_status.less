@@ -1,0 +1,87 @@
+/* Status */
+.reject, .approve, .complete {
+  margin: 5px 10px;
+}
+
+.grid-status {
+  font-size: 12px;
+  border-radius: 2px;
+  padding: 2px 15px;
+  font-weight: bold;
+  white-space: nowrap;
+  color: white;
+  text-align: center;
+}
+
+.notapproved, .reject:hover {
+  background: #ff0000;
+  color: white;
+}
+
+.approved, .completed {
+  background: #718e2d;
+}
+
+.pending {
+  background: #ffa500;
+}
+
+.approve:hover, .complete:hover {
+  border-color: #5b8116;
+  background: #5b8116;
+}
+
+.inline-buttons {
+  width: 150px;
+  margin: auto;
+}
+
+.inline-action {
+  float: left;
+  display: inline;
+}
+
+.data-grid-cell-content {
+  .webforms-subject {
+    .grid-status {
+      float: left;
+      margin-right: 1rem;
+    }
+  }
+}
+
+.result-id-status {
+  position: relative;
+  padding-left: 15px;
+
+  .unread {
+    &:before {
+      content: '';
+      position: absolute;
+      left: .3rem;
+      top: .5rem;
+      width: .8rem;
+      height: .8rem;
+      background-color: #FFA500;
+      border-radius: 50%;
+    }
+  }
+
+  .replied {
+    @_webforms__replied-icon-size: 12px;
+
+    &:before {
+      content: "";
+      background-image: url(../images/replied.svg);
+      background-size: @_webforms__replied-icon-size @_webforms__replied-icon-size;
+      background-repeat: no-repeat;
+      display: block;
+      width: @_webforms__replied-icon-size;
+      height: @_webforms__replied-icon-size;
+      position: absolute;
+      left: 0;
+      top: 2px;
+    }
+  }
+}
+

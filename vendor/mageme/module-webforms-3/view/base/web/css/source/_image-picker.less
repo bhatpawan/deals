@@ -1,0 +1,50 @@
+/* Image picker */
+ul.thumbnails.image_picker_selector {
+  overflow: auto;
+  list-style-image: none;
+  list-style-position: outside;
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+
+  ul {
+    overflow: auto;
+    list-style-image: none;
+    list-style-position: outside;
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+  }
+
+  li.group_title {
+    float: none;
+  }
+
+  li {
+    margin: 0px 12px 12px 0px;
+    float: left;
+
+    .thumbnail {
+      line-height: 1px;
+      padding: 5px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      border-radius: 5px;
+
+      img {
+        -webkit-user-drag: none;
+      }
+
+      p {
+        margin: 10px;
+        text-align: center;
+      }
+    }
+
+    .thumbnail.selected {
+      border: 5px solid #08C;
+      padding: 0;
+    }
+  }
+}

@@ -1,0 +1,53 @@
+<?php
+/**
+ * @var Colorpicker $block
+ */
+
+use MageMe\WebForms\Block\Form\Element\Field\Type\Colorpicker;
+
+$validationRules = $block->getValidationRules();
+$validationDescriptions = $block->getValidationDescriptions();
+?>
+<input id='<?= $block->getFieldId() ?>'
+       name='<?= $block->getFieldName() ?>'
+       type='text'
+       class='<?= $block->getFieldClass() ?>'
+       style='<?= $block->getFieldStyle() ?>'
+       value="<?= htmlspecialchars((string)$block->getFieldValue()); ?>"
+       placeholder="<?= $block->getPlaceholder() ?>"
+       <?php if ($validationRules) { ?>
+           data-validate="{<?= implode(", ", $validationRules); ?>}"
+       <?php } ?>
+       <?php foreach ($validationDescriptions as $key => $data) {
+           echo $key . '=' . '"' . htmlspecialchars((string)$data) . '"';
+       }
+       ?>
+       <?php if ($block->getIsLabelHidden()) { ?>aria-label="<?= $block->getFieldLabel() ?>"
+       <?php } else { ?> aria-labelledby="label_<?= $block->getFieldId() ?>" <?php } ?>
+       <?php if ($block->getIsRequired()) { ?>aria-required="true"<?php } ?>
+       <?php if ($block->getAutocomplete()) { ?>autocomplete="<?= $block->getAutocomplete() ?>" <?php } ?>
+       <?= htmlspecialchars((string)$block->getCustomAttributes()) ?>
+/>
+
+<script>
+    require(["jquery", "colpick"], function ($) {
+        $(document).ready(function (e) {
+            var input = $("#<?= $block->getFieldId() ?>");
+            var backgroundColor = "<?= htmlspecialchars((string)$block->getFieldValue()) ? htmlspecialchars((string)$block->getFieldValue()) : '#ffffff'; ?>";
+            input.css("background-color", backgroundColor);
+            input.css("color", $.colpick.contrastColor(backgroundColor));
+            input.colpick({
+                layout: "hex",
+                submit: 0,
+                color: backgroundColor,
+                onChange: function (hsb, hex, rgb, el, bySetColor) {
+                    $(el).css("background-color", "#" + hex);
+                    $(el).css("color", $.colpick.contrastColor(hex));
+                    if (!bySetColor) $(el).val("#" + hex);
+                }
+            }).keyup(function () {
+                $(this).colpickSetColor(this.value);
+            });
+        });
+    });
+</script>

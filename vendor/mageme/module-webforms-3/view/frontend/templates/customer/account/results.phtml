@@ -1,0 +1,94 @@
+<?php /** @var Results $block */
+
+use MageMe\WebForms\Block\Customer\Account\Results;
+use MageMe\WebForms\Config\Options\Result\Permission;use MageMe\WebForms\Model\Result;
+
+?>
+
+<?php if ($block->getCollection()->getSize()): ?>
+    <div class="table-wrapper webforms-results-table">
+        <table class="data table" id="webform-customer-account-results" cellspacing="0">
+            <thead>
+            <tr>
+                <th scope="col" class="col id"><?= __('ID') ?></th>
+                <th scope="col" class="col subject"><?= __('Subject') ?></th>
+                <th scope="col" class="col date"><?= __('Date') ?></th>
+                <?php if ($block->getForm()->getIsApprovalControlsEnabled()): ?>
+                    <th><?= __('Status') ?></th>
+                <?php endif; ?>
+                <?php if ($block->getPermissions()) { ?>
+                    <th scope="col" class="col action"><?= __('Action') ?></th>
+                <?php } ?>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($block->getCollection() as $result): ?>
+                <?php /** @var Result $result */ ?>
+                <tr>
+                    <td class="col id" style="white-space:nowrap;"><?= $result->getId() ?></td>
+                    <td class="col subject" title="<?= $block->escapeHtml($result->getSubject()); ?>"><a
+                                href="<?= $block->getUrlResultView($result) ?>"><?= $result->getSubject() ?></a>
+                    </td>
+                    <td class="col date"><?= $block->formatDate($result->getCreatedAt(),
+                            IntlDateFormatter::MEDIUM, true); ?></td>
+                    <?php if ($block->getForm()->getIsApprovalControlsEnabled()): ?>
+                        <td class="col status"><?= $result->getStatusName() ?></td>
+                    <?php endif; ?>
+                    <?php if ($block->getPermissions()) { ?>
+                        <td class="col action">
+                            <?php foreach ($block->getActions($result) as $action) { ?>
+                                <a class="webforms-result-action <?= $action['class'] ?>"
+                                   href="<?= $action['href'] ?>"
+                                   <?php if (!empty($action['onclick'])) { ?>
+                                   onclick="<?= $action['onclick'] ?>"
+                                   <?php } ?>
+                                ><?= $action['label'] ?></a>
+                            <?php } ?>
+                        </td>
+                    <?php } ?>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <div class="toolbar bottom">
+        <?= $block->getChildHtml('toolbar') ?>
+    </div>
+    <?php if ($block->getPermission(Permission::ADD)) { ?>
+    <div class="actions-toolbar">
+        <div class="primary">
+            <button type="button" class="action primary"
+                    id="webforms-show-form"
+                    title="<?= __('Show Form') ?>">
+                <span><?= __('Show Form') ?></span>
+            </button>
+            <button type="button" class="action primary"
+                    id="webforms-hide-form"
+                    style="display: none"
+                    title="<?= __('Hide Form') ?>">
+                <span><?= __('Hide Form') ?></span>
+            </button>
+        </div>
+        <div class="secondary">
+            <a class="action back" href="javascript:window.history.back()">
+               <span><?= __('Back') ?></span>
+            </a>
+        </div>
+        <script type="text/javascript">
+            require(['jquery'], function ($) {
+                $('#webforms-customer-account-form').fadeOut(10);
+                $('#webforms-show-form').click(function () {
+                    $('#webforms-show-form').hide();
+                    $('#webforms-hide-form').show();
+                    $('#webforms-customer-account-form').fadeIn(500);
+                });
+                $('#webforms-hide-form').click(function () {
+                    $('#webforms-hide-form').hide();
+                    $('#webforms-show-form').show();
+                    $('#webforms-customer-account-form').fadeOut(500);
+                });
+            });
+        </script>
+    </div>
+    <?php } ?>
+<?php endif; ?>

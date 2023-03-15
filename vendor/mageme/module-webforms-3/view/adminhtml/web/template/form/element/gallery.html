@@ -1,0 +1,50 @@
+<!-- ko if: multiple -->
+<select multiple class="admin__control-multiselect" afterRender="onElementRender" data-bind="
+    attr: {
+        name: inputName,
+        id: uid,
+        disabled: disabled,
+        'aria-describedby': noticeId,
+        placeholder: placeholder
+    },
+    hasFocus: focused,
+    selectedOptions: value,
+    foreach: options"
+>
+    <option data-bind="
+        value: value,
+        text: label,
+        attr: {
+            'data-img-src': url,
+            'data-img-alt': label,
+            'data-img-width': $parent.imagesWidth,
+            'data-img-height': $parent.imagesHeight
+        }"
+    ></option>
+</select>
+<!-- /ko -->
+<!-- ko ifnot: multiple -->
+<select class="admin__control-multiselect" afterRender="onElementRender" data-bind="
+    attr: {
+        name: inputName,
+        id: uid,
+        disabled: disabled,
+        'aria-describedby': noticeId,
+        placeholder: placeholder
+    },
+    hasFocus: focused,
+    selectedOptions: value,
+    foreach: options"
+>
+    <option data-bind="
+        value: value,
+        text: label,
+        attr: {
+            'data-img-src': url,
+            'data-img-alt': label,
+            'data-img-width': $parent.imagesWidth,
+            'data-img-height': $parent.imagesHeight
+        }"
+    ></option>
+</select>
+<!-- /ko -->

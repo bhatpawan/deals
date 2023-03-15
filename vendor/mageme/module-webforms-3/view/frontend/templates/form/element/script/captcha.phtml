@@ -1,0 +1,24 @@
+<?php
+/** @var MageMe\WebForms\Block\Form\Element\Script\Captcha $block */
+?>
+<?php
+$_captcha = $block->getForm()->getCaptcha();
+?>
+<script type="text/x-magento-init">
+{
+    "#recaptcha-container-<?= /* @noEscape */ $block->getUid() ?>": {
+        "Magento_Ui/js/core/app": {
+            "components": {
+                "<?= $block->getUid() ?>": {
+                    "component": "webformsReCaptcha",
+                    "version": "<?= $_captcha->getVersion() ?>",
+                    "publicKey": "<?= $_captcha->getPublicKey() ?>",
+                    "position": "<?= $_captcha->getPosition() ?>",
+                    "theme": "<?= $_captcha->getTheme() ?>",
+                    "languageCode": "<?= $block->getLocale() ?>"
+                }
+            }
+        }
+    }
+}
+</script>

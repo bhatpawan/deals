@@ -1,0 +1,37 @@
+<?php
+/** @var \MageMe\WebForms\Block\Widget\Result $block */
+
+use MageMe\WebForms\Model\Result;
+
+?>
+
+
+<?php
+$_results = $block->getResultsCollection();
+if (count($_results)) {
+    ?>
+    <div class="webforms-results">
+        <?= $block->getChildHtml('rating'); ?>
+
+        <?php
+        /** @var Result $result */
+        foreach ($_results as $result) {
+            ?>
+            <div class="webforms-results-block">
+                <h2><?= $block->formatDate($result->getCreatedAt()) ?></h2>
+                <?= $result->toHtml(['template' => 'result/view.phtml', 'header' => false ,
+                    'data' => [
+                            'image_width' => $block->getImageWidth(),
+                            'image_height' => $block->getImageHeight(),
+                            'image_link' => $block->getImageLink(),
+                    ]
+                ]); ?>
+            </div>
+            <?php
+        } // foreach results
+        ?>
+        <div class="toolbar bottom">
+            <?= $block->getChildHtml('toolbar') ?>
+        </div>
+    </div>
+<?php } ?>

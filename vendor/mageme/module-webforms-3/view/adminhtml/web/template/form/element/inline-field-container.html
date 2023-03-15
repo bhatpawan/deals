@@ -1,0 +1,14 @@
+<fieldset class="admin__field admin__field-wide"
+          attr="'data-index': index">
+
+
+    <div class="admin__field admin__field-control admin__control-grouped webforms-flex-container" css="$data.additionalClasses">
+        <legend class="admin__field-label">
+            <span translate="label" attr="'data-config-scope': $data.scopeLabel"/>
+        </legend>
+        <each args="elems">
+            <render/>
+        </each>
+    </div>
+
+</fieldset>

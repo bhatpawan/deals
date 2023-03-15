@@ -1,0 +1,48 @@
+<?php
+/**
+ * @var Gallery $block
+ */
+
+use MageMe\WebForms\Block\Form\Element\Field\Type\Gallery;
+
+$validationRules = $block->getValidationRules();
+$validationDescriptions = $block->getValidationDescriptions();
+$images = $block->getFieldValue();
+$width = $block->getImagesWidth();
+$height = $block->getImagesHeight();
+?>
+<select id='<?= $block->getFieldId() ?>'
+        name='<?= $block->getFieldName() ?>'
+        class='<?= $block->getFieldClass() ?>'
+    <?php if ($block->getIsMultiselect()) echo 'multiple' ?>
+    <?php if ($validationRules) { ?>
+        data-validate="{<?= implode(", ", $validationRules); ?>}"
+    <?php } ?>
+    <?php foreach ($validationDescriptions as $key => $data) {
+        echo $key . '=' . '"' . htmlspecialchars((string)$data) . '"';
+    }
+    ?>
+        data-uid="<?= $block->getFieldUid() ?>"
+>
+    <option value=""></option>
+    <?php foreach ($images as $image) { ?>
+        <?php if (!$image['disabled']) { ?>
+            <option data-img-src="<?= $image['url'] ?>"
+                    data-img-alt="<?= $image['label'] ?>"
+                    data-img-width="<?= $width ?>"
+                    data-img-height="<?= $height ?>"
+                    value="<?= $image['value_id'] ?>"
+                    <?php if (isset($image['selected']) && $image['selected']) echo 'selected' ?>
+            ><?= $block->applyTranslation($image['label']); ?></option>
+        <?php } ?>
+    <?php } ?>
+</select>
+
+<script>
+    require(['jquery', 'imagePicker'], function ($) {
+        $("#" + "<?= $block->getFieldId() ?>").imagepicker({
+            hide_select: true,
+            show_label: <?= json_encode((bool)$block->getIsLabeled()) ?>
+        });
+    });
+</script>

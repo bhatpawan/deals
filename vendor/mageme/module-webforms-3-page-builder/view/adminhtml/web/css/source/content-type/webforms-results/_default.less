@@ -1,0 +1,49 @@
+//
+//  Default appearance styles
+//  _____________________________________________
+
+[data-content-type='webforms-results'],
+.pagebuilder-webforms-results {
+    .rendered-content a,
+    .rendered-content button {
+        pointer-events: none;
+    }
+
+    .rendered-content {
+        align-items: center;
+        background-color: @color-gray98;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+
+        .placeholder-text {
+            color: black;
+            font-size: 30px;
+            font-weight: lighter;
+            margin-top: 20px;
+        }
+
+        .placeholder-svg {
+            background: url(MageMe_WebFormsPageBuilder::images/pagebuilder_webforms_results_form.svg);
+            background-repeat: no-repeat;
+            background-size: auto;
+            background-position: center;
+            min-height: 300px;
+            width: 100%;
+        }
+    }
+
+    .pagebuilder-webforms-results-placeholder {
+        align-items: center;
+        background-color: @color-gray98;
+        display: flex;
+        justify-content: center;
+        min-height: 300px;
+
+        .placeholder-text {
+            color: @color-gray65-lighten;
+            font-size: 20px;
+            font-weight: lighter;
+        }
+    }
+}

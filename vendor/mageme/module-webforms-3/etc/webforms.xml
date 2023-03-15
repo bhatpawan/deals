@@ -1,0 +1,334 @@
+<?xml version="1.0"?>
+<webforms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="urn:magento:module:MageMe_WebForms:etc/webforms.xsd">
+    <field_types>
+        <type id="text"
+              order="0">
+            <label>Text</label>
+            <model>MageMe\WebForms\Model\Field\Type\Text</model>
+            <category>Text</category>
+            <value>text</value>
+            <attributes>
+                <attribute name="placeholder"/>
+                <attribute name="text"/>
+                <attribute name="customer_data"/>
+                <attribute name="mask"/>
+                <attribute name="case_transform"/>
+            </attributes>
+        </type>
+        <type id="email"
+              order="10">
+            <label>Email</label>
+            <model>MageMe\WebForms\Model\Field\Type\Email</model>
+            <category>Text</category>
+            <attributes>
+                <attribute name="placeholder"/>
+                <attribute name="mask"/>
+                <attribute name="is_filled_by_customer_email"/>
+                <attribute name="is_assigned_customer_id_by_email"/>
+                <attribute name="email_match_value_field_id"/>
+                <attribute name="case_transform"/>
+            </attributes>
+        </type>
+        <type id="number"
+              order="20">
+            <label>Number</label>
+            <model>MageMe\WebForms\Model\Field\Type\Number</model>
+            <category>Text</category>
+            <attributes>
+                <attribute name="placeholder"/>
+                <attribute name="min"/>
+                <attribute name="max"/>
+            </attributes>
+        </type>
+        <type id="url"
+              order="30">
+            <label>URL</label>
+            <model>MageMe\WebForms\Model\Field\Type\Url</model>
+            <category>Text</category>
+            <value>text</value>
+            <attributes>
+                <attribute name="placeholder"/>
+                <attribute name="text"/>
+                <attribute name="mask"/>
+                <attribute name="case_transform"/>
+            </attributes>
+        </type>
+        <type id="password"
+              order="40">
+            <label>Password</label>
+            <model>MageMe\WebForms\Model\Field\Type\Password</model>
+            <category>Text</category>
+            <attributes>
+                <attribute name="placeholder"/>
+                <attribute name="is_encrypt"/>
+                <attribute name="is_complexity_enabled"/>
+                <attribute name="min_password_length"/>
+                <attribute name="complexity_symbols_count"/>
+                <attribute name="password_match_value_field_id"/>
+            </attributes>
+        </type>
+        <type id="autocomplete"
+              order="50">
+            <label>Auto-complete</label>
+            <model>MageMe\WebForms\Model\Field\Type\Autocomplete</model>
+            <category>Text</category>
+            <value>text</value>
+            <attributes>
+                <attribute name="placeholder"/>
+                <attribute name="text"/>
+                <attribute name="mask"/>
+                <attribute name="case_transform"/>
+            </attributes>
+        </type>
+        <type id="textarea"
+              order="60">
+            <label>Textarea</label>
+            <model>MageMe\WebForms\Model\Field\Type\Textarea</model>
+            <category>Text</category>
+            <value>text</value>
+            <attributes>
+                <attribute name="placeholder"/>
+                <attribute name="text"/>
+                <attribute name="customer_data"/>
+                <attribute name="mask"/>
+                <attribute name="rows"/>
+                <attribute name="case_transform"/>
+            </attributes>
+        </type>
+        <type id="wysiwyg"
+              order="70">
+            <label>WYSIWYG Editor</label>
+            <model>MageMe\WebForms\Model\Field\Type\Wysiwyg</model>
+            <category>HTML</category>
+        </type>
+        <type id="select"
+              order="80">
+            <label>Select</label>
+            <model>MageMe\WebForms\Model\Field\Type\Select</model>
+            <category>Select</category>
+            <value>options</value>
+            <logic>true</logic>
+            <attributes>
+                <attribute name="options"/>
+                <attribute name="is_multiselect"/>
+            </attributes>
+        </type>
+        <type id="select_radio"
+              order="90">
+            <label>Radio Group</label>
+            <model>MageMe\WebForms\Model\Field\Type\SelectRadio</model>
+            <category>Select</category>
+            <value>options</value>
+            <logic>true</logic>
+            <attributes>
+                <attribute name="options"/>
+                <attribute name="is_internal_elements_inline"/>
+            </attributes>
+        </type>
+        <type id="select_checkbox"
+              order="100">
+            <label>Checkbox Group</label>
+            <model>MageMe\WebForms\Model\Field\Type\SelectCheckbox</model>
+            <category>Select</category>
+            <value>options</value>
+            <logic>true</logic>
+            <attributes>
+                <attribute name="options"/>
+                <attribute name="min_options"/>
+                <attribute name="max_options"/>
+                <attribute name="min_options_error_text"/>
+                <attribute name="max_options_error_text"/>
+                <attribute name="is_internal_elements_inline"/>
+            </attributes>
+        </type>
+        <type id="select_contact"
+              order="110">
+            <label>Select Contact</label>
+            <model>MageMe\WebForms\Model\Field\Type\SelectContact</model>
+            <category>Select</category>
+            <value>options</value>
+            <logic>true</logic>
+            <attributes>
+                <attribute name="options"/>
+            </attributes>
+        </type>
+        <type id="country"
+              order="120">
+            <label>Country</label>
+            <model>MageMe\WebForms\Model\Field\Type\Country</model>
+            <category>Select</category>
+            <value>default_country</value>
+            <attributes>
+                <attribute name="default_country"/>
+            </attributes>
+        </type>
+        <type id="region"
+              order="121">
+            <label>State / Province</label>
+            <model>MageMe\WebForms\Model\Field\Type\Region</model>
+            <category>Select</category>
+            <attributes>
+                <attribute name="country_field_id"/>
+            </attributes>
+        </type>
+        <type id="subscribe"
+              order="130">
+            <label>Subscription Checkbox</label>
+            <model>MageMe\WebForms\Model\Field\Type\Subscribe</model>
+            <category>Newsletter</category>
+            <attributes>
+                <attribute name="text"/>
+            </attributes>
+        </type>
+        <type id="date"
+              order="140">
+            <label>Date</label>
+            <model>MageMe\WebForms\Model\Field\Type\Date</model>
+            <category>Date</category>
+            <attributes>
+                <attribute name="placeholder"/>
+                <attribute name="is_past_disabled"/>
+                <attribute name="is_future_disabled"/>
+                <attribute name="is_today_disabled"/>
+                <attribute name="past_offset"/>
+                <attribute name="future_offset"/>
+                <attribute name="disabled_week_days"/>
+                <attribute name="disabled_custom_dates"/>
+            </attributes>
+        </type>
+        <type id="time"
+              order="150">
+            <label>Time</label>
+            <model>MageMe\WebForms\Model\Field\Type\Time</model>
+            <category>Date</category>
+            <attributes>
+                <attribute name="available_hours"/>
+                <attribute name="available_minutes"/>
+            </attributes>
+        </type>
+        <type id="date_dob"
+              order="160">
+            <label>Date of Birth</label>
+            <model>MageMe\WebForms\Model\Field\Type\Dob</model>
+            <category>Date</category>
+            <attributes>
+                <attribute name="placeholder"/>
+                <attribute name="is_filled_by_customer_dob"/>
+            </attributes>
+        </type>
+        <type id="stars"
+              order="170">
+            <label>Star Rating</label>
+            <model>MageMe\WebForms\Model\Field\Type\Stars</model>
+            <category>Rating</category>
+            <value>init_stars</value>
+            <attributes>
+                <attribute name="init_stars"/>
+                <attribute name="max_stars"/>
+            </attributes>
+        </type>
+        <type id="file"
+              order="180">
+            <label>File Upload</label>
+            <model>MageMe\WebForms\Model\Field\Type\File</model>
+            <category>File</category>
+            <attributes>
+                <attribute name="is_dropzone"/>
+                <attribute name="dropzone_text"/>
+                <attribute name="dropzone_max_files"/>
+                <attribute name="allowed_extensions"/>
+                <attribute name="allowed_size"/>
+            </attributes>
+        </type>
+        <type id="image"
+              order="190">
+            <label>Image Upload</label>
+            <model>MageMe\WebForms\Model\Field\Type\Image</model>
+            <category>File</category>
+            <attributes>
+                <attribute name="is_dropzone"/>
+                <attribute name="dropzone_text"/>
+                <attribute name="dropzone_max_files"/>
+                <attribute name="is_resized"/>
+                <attribute name="resize_width"/>
+                <attribute name="resize_height"/>
+                <attribute name="allowed_size"/>
+            </attributes>
+        </type>
+        <type id="html"
+              order="200">
+            <label>HTML Block</label>
+            <model>MageMe\WebForms\Model\Field\Type\Html</model>
+            <category>HTML</category>
+            <value>html</value>
+            <attributes>
+                <attribute name="html"/>
+            </attributes>
+        </type>
+        <type id="hidden"
+              order="210">
+            <label>Hidden</label>
+            <model>MageMe\WebForms\Model\Field\Type\Hidden</model>
+            <category>Hidden</category>
+            <value>text</value>
+            <attributes>
+                <attribute name="text"/>
+            </attributes>
+        </type>
+        <type id="gallery"
+              order="220">
+            <label>Gallery / Select Image</label>
+            <model>MageMe\WebForms\Model\Field\Type\Gallery</model>
+            <category>Select</category>
+            <value>images</value>
+            <logic>true</logic>
+            <attributes>
+                <attribute name="images"/>
+                <attribute name="image_width"/>
+                <attribute name="image_height"/>
+                <attribute name="is_multiselect"/>
+                <attribute name="is_labeled"/>
+            </attributes>
+        </type>
+        <type id="colorpicker"
+              order="230">
+            <label>Color Picker</label>
+            <model>MageMe\WebForms\Model\Field\Type\Colorpicker</model>
+            <category>Text</category>
+            <value>text</value>
+            <attributes>
+                <attribute name="placeholder"/>
+                <attribute name="text"/>
+            </attributes>
+        </type>
+        <type id="phone_number"
+              order="240">
+            <label>Phone Number</label>
+            <model>MageMe\WebForms\Model\Field\Type\PhoneNumber</model>
+            <category>Text</category>
+            <value>text</value>
+            <attributes>
+                <attribute name="placeholder"/>
+                <attribute name="text"/>
+                <attribute name="customer_data"/>
+                <attribute name="preferred_countries"/>
+                <attribute name="only_countries"/>
+                <attribute name="initial_country"/>
+            </attributes>
+        </type>
+        <type id="google_map"
+              order="250">
+            <label>Google map</label>
+            <model>MageMe\WebForms\Model\Field\Type\GoogleMap</model>
+            <category>Map</category>
+            <value>address</value>
+            <attributes>
+                <attribute name="address"/>
+                <attribute name="lat"/>
+                <attribute name="lng"/>
+                <attribute name="zoom"/>
+            </attributes>
+        </type>
+    </field_types>
+</webforms>

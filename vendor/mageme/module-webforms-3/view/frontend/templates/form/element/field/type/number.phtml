@@ -1,0 +1,30 @@
+<?php
+/**
+ * @var Number $block
+ */
+
+use MageMe\WebForms\Block\Form\Element\Field\Type\Number;
+
+$validationRules = $block->getValidationRules();
+$validationDescriptions = $block->getValidationDescriptions();
+?>
+<input id='<?= $block->getFieldId() ?>'
+       name='<?= $block->getFieldName() ?>'
+       type='number'
+       class='<?= $block->getFieldClass() ?>'
+       style='<?= $block->getFieldStyle() ?>'
+       value="<?= htmlspecialchars((string)$block->getFieldValue()); ?>"
+       placeholder="<?= $block->getPlaceholder() ?>"
+       <?php if ($validationRules) { ?>
+           data-validate="{<?= implode(", ", $validationRules); ?>}"
+       <?php } ?>
+       <?php foreach ($validationDescriptions as $key => $data) {
+           echo $key . '=' . '"' . htmlspecialchars((string)$data) . '"';
+       }
+       ?>
+       <?php if ($block->getIsLabelHidden()) { ?>aria-label="<?= $block->getFieldLabel() ?>"
+       <?php } else { ?> aria-labelledby="label_<?= $block->getFieldId() ?>" <?php } ?>
+       <?php if ($block->getIsRequired()) { ?>aria-required="true"<?php } ?>
+       <?php if ($block->getAutocomplete()) { ?>autocomplete="<?= $block->getAutocomplete() ?>" <?php } ?>
+       <?= htmlspecialchars((string)$block->getCustomAttributes()) ?>
+/>

@@ -1,0 +1,57 @@
+/* Slide out */
+.webform-slide-out-container {
+  z-index: 90;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  background: white;
+  border-color: darkgray;
+  width: 350px;
+  margin-bottom: 0;
+  height: 60%;
+  bottom: 0;
+  display: flex;
+  border-width: 1px;
+  border-style: solid;
+  max-width: 90%;
+  position: fixed;
+  -webkit-transition: all 0.6s ease;
+  -moz-transition: all 0.6s ease;
+  -o-transition: all 0.6s ease;
+  transition: all 0.6s ease;
+
+  @media (max-height: 768px) {
+    height: 100%;
+  }
+
+  .webform-slide-out-button {
+    z-index: 90;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background: #1979c3;
+    color: white;
+    position: absolute;
+    padding: 15px 3px;
+    white-space: nowrap;
+    cursor: pointer;
+    writing-mode: vertical-lr;
+    transform: scale(-1, -1);
+    border-radius: 0 .4rem .4rem 0;
+    top:-1px;
+    @media (max-height: 768px) {
+      top: 45%;
+    }
+  }
+
+  .webform-slide-out-content {
+    flex: 1;
+    width: 100%;
+    overflow: auto;
+    padding: 10px 20px;
+  }
+}
+.webform-slide-out-left{
+  .webform-slide-out-button
+  {
+    border-radius: .4rem 0 0 .4rem;
+  }
+}

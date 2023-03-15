@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">webforms_logic_form.webforms_logic_form_data_source</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="back"
+                    class="MageMe\WebForms\Block\Adminhtml\Logic\Edit\Button\Back"/>
+            <button name="reset"
+                    class="MageMe\WebForms\Block\Adminhtml\Logic\Edit\Button\Reset"/>
+            <button name="save"
+                    class="MageMe\WebForms\Block\Adminhtml\Logic\Edit\Button\Save"/>
+        </buttons>
+        <namespace>webforms_logic_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>webforms_logic_form.webforms_logic_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="webforms_logic_form_data_source"
+                component="Magento_Ui/js/form/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">logic_id</param>
+            </storageConfig>
+            <submitUrl path="webforms/logic/save"/>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <dataProvider class="WebformsLogicFormDataProvider" name="webforms_logic_form_data_source">
+            <settings>
+                <requestFieldName>logic_id</requestFieldName>
+                <primaryFieldName>logic_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="logic_rule" sortOrder="10">
+        <settings>
+            <label translate="true">Logic Rule</label>
+            <collapsible>false</collapsible>
+        </settings>
+        <field name="logic_id" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="field_id" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="store" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="is_active" sortOrder="1" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                    <item name="toggleLabels" xsi:type="array">
+                        <item name="on" xsi:type="string">Enabled</item>
+                        <item name="off" xsi:type="string">Disabled</item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Enable Logic</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="logic_condition" sortOrder="10" formElement="select">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Condition</label>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="MageMe\WebForms\Config\Options\Logic\Condition"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="action" sortOrder="30" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        Action to perform with target elements
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Action</label>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="MageMe\WebForms\Config\Options\Logic\Action"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+    </fieldset>
+</form>

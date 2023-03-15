@@ -1,0 +1,9 @@
+<div class="data-grid-cell-content">
+    <div data-bind="css: $col.getCurrentStatusClass($row()), visible: $row().loading() == 0, text: $row().labelText(), "></div>
+    <span class="grid-button-action request-progress" data-bind="visible: $row().loading() == 1"><span data-bind="text: $col.getSendingMsg()"></span></span>
+    <!-- ko if: isActionsAllowed -->
+    <a href="javascript:void(0)" class="grid-button-action approve" data-bind="visible: $row().approved() < 1 && $row().approved() != 2 && $row().loading() == 0, click: function(data, event){event.stopPropagation(); $col.setStatus($row(), 1)}"><span data-bind="text:$col.getApproveLabel()"></span></a>
+    <a href="javascript:void(0)" class="grid-button-action complete" data-bind="visible: $row().approved() == 1 && $row().loading() == 0, click: function(data, event){event.stopPropagation(); $col.setStatus($row(), 2)}"><span data-bind="text:$col.getCompleteLabel()"></span></a>
+    <a href="javascript:void(0)" class="grid-button-action reject" data-bind="visible: $row().approved() == 0 && $row().loading() == 0, click: function(data, event){event.stopPropagation(); $col.setStatus($row(), -1)}"><span data-bind="text:$col.getRejectLabel()"></span></a>
+    <!-- /ko -->
+</div>

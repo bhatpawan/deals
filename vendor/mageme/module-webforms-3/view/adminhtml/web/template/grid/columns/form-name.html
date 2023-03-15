@@ -1,0 +1,8 @@
+<div class="data-grid-cell-content result-id-status">
+    <div class="webforms-label">
+        <span data-bind="text: $col.getLabel($row())"></span>
+        <!-- ko with: $row() -->
+        <span class="notifications-counter" data-bind="visible: unreadCount > 0, text: unreadCount"></span>
+        <!-- /ko -->
+    </div>
+</div>

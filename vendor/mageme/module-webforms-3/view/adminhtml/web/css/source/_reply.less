@@ -1,0 +1,106 @@
+/* Reply */
+.result-reply-left-column {
+  float: left;
+  width: 50%;
+  padding-right: 1rem;
+}
+
+.result-reply-right-column {
+  float: right;
+  width: 50%;
+  border-left: 1px solid #adadad;
+  padding-left: 2rem;
+}
+
+.result-left-column {
+  float: left;
+  width: 50%;
+}
+
+.result-right-column {
+  float: right;
+  width: 50%;
+}
+
+[class*='admin__control-grouped'] > button:nth-child(n + 2) {
+  margin-left: 4px;
+}
+
+.webforms-result-multiselect {
+  .admin__field-control {
+    span {
+      white-space: pre-wrap;
+    }
+  }
+}
+
+.webforms-result-file-link {
+  border-radius: 5px;
+  float: left;
+  margin-right: 10px;
+  height: auto;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.6);
+  background: #f5f5f5;
+  text-transform: none;
+
+  > a {
+    > span {
+      white-space: nowrap;
+    }
+  }
+}
+
+.webforms-reply-author {
+  font-style: italic;
+  margin: 5px;
+}
+
+.webforms-result-reply-tabs-content {
+  border-top: 1px solid #adadad;
+  margin-top: -1px;
+  margin-right: 2rem;
+  padding-top: 2rem;
+}
+
+.webforms-result-messages-block {
+  .admin__control-table {
+    td {
+      background: none;
+      padding-bottom: 2rem;
+    }
+
+    td:first-child {
+      padding-left: 0;
+    }
+  }
+
+  .reply-message {
+    border-left: 2px solid #b3d75d;
+    float: left;
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .reply-author {
+    font-style: italic;
+    margin-top: 10px;
+    font-size: 1rem;
+    float: left;
+  }
+
+  .reply-email-status {
+    float: right;
+    margin-top: 10px;
+    font-size: 1rem;
+
+    .action-additional {
+      font-size: 1rem;
+    }
+  }
+
+  .reply-attachments {
+    float: left;
+    width: 100%;
+    margin-top: 5px;
+  }
+}

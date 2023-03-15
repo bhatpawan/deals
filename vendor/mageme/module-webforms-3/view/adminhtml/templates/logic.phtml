@@ -1,0 +1,67 @@
+<?php
+$result = false;
+if ($this->getResult()) {
+    if ($this->getResult()->getId()) {
+        $result = $this->getResult()->addFieldArray();
+    }
+}
+$webform = $this->getForm();
+$logic_rules = $webform->getLogic();
+$fields_to_fieldsets = $webform->getFieldsToFieldsets();
+$targets = $webform->_getLogicTarget();
+$prefix = $this->getPrefix();
+
+// create field map
+$field_map = array();
+foreach ($fields_to_fieldsets as $fieldset_id => $fieldset) {
+    foreach ($fieldset["fields"] as $field) {
+        $field_map['fieldset_' . $fieldset_id][] = $field->getId();
+    }
+}
+if (empty($field_map['fieldset_0'])) {
+    $field_map['fieldset_0'] = array();
+}
+$field_map['fieldset_0'][] = 'submit';
+
+if (!$prefix) {
+    $prefix = 'result';
+}
+?>
+<script type="text/javascript">
+    require(['jquery', 'webformsLogic'], function ($, JSWebFormsLogic) {
+        var logicRules_<?= $webform->getId()?> = [];
+        var targets_<?= $webform->getId()?> = <?= json_encode($targets)?>;
+        var fieldMap_<?= $webform->getId()?> = <?= json_encode($field_map)?>;
+
+        <?php
+        foreach ($targets as $target) {
+        $field_array = array();
+        if ($result) {
+            $field_array = $result->getData('field');
+        }
+        if ($target["id"] != 'field_' && !$webform->getLogicTargetVisibility($target, $logic_rules, $field_array)) {
+        ?>
+        if ($('#<?= $target["id"]?>_container')) $('#<?= $target["id"]?>_container').hide();
+
+        <?php
+        }
+        }
+
+        foreach ($logic_rules as $logic) {
+        if ($logic->getIsActive()) {
+        ?>
+        logicRules_<?= $webform->getId()?>.push({
+            'field_id': '<?= $logic->getFieldId()?>',
+            'action': '<?= $logic->getAction()?>',
+            'logic_condition': '<?= $logic->getLogicCondition()?>',
+            'aggregation': '<?= $logic->getAggregation()?>',
+            'value':<?= json_encode($logic->getValue())?>,
+            'target':<?= json_encode($logic->getTarget())?>
+        });
+        <?php
+        }
+        }
+        ?>
+        JSWebFormsLogic(targets_<?= $webform->getId()?>, logicRules_<?= $webform->getId()?>, fieldMap_<?= $webform->getId()?>, '<?= $prefix?>', true);
+    })
+</script>

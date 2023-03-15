@@ -1,0 +1,24 @@
+<?php
+/**
+ * @var Wysiwyg $block
+ */
+
+use MageMe\WebForms\Block\Form\Element\Field\Type\Wysiwyg;
+
+$validationRules = $block->getValidationRules();
+$validationDescriptions = $block->getValidationDescriptions();
+?>
+<textarea id='field<?= $block->getFieldUid() ?>'
+          name='<?= $block->getFieldName() ?>'
+          class='<?= $block->getFieldClass() ?>'
+          style='<?= $block->getFieldStyle() ?>'
+          <?php if ($validationRules) { ?>
+              data-validate="{<?= implode(", ", $validationRules); ?>}"
+          <?php } ?>
+          <?php foreach ($validationDescriptions as $key => $data) {
+              echo $key . '=' . '"' . htmlspecialchars((string)$data) . '"';
+          }
+          ?>
+          data-uid="<?= $block->getFieldUid() ?>"
+          <?= htmlspecialchars((string)$block->getCustomAttributes()) ?>
+><?= $block->getFieldValue(); ?></textarea>

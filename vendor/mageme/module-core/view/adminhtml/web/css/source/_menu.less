@@ -1,0 +1,20 @@
+/* Menu */
+li[data-ui-id*="menu-mageme-"] {
+  &.level-1 {
+    strong > span {
+      @mageme-emblem-size: 20px;
+      &:before {
+        content: "";
+        background-image: url(../images/mageme.svg);
+        background-size: @mageme-emblem-size @mageme-emblem-size;
+        background-repeat: no-repeat;
+        display: inline-block;
+        width: @mageme-emblem-size;
+        height: @mageme-emblem-size;
+        margin-right: 7px;
+        margin-left: -.2rem;
+        float:left;
+      }
+    }
+  }
+}

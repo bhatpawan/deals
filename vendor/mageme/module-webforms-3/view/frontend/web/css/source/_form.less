@@ -1,0 +1,95 @@
+/* Form */
+.webforms {
+  margin-bottom: 1.5rem;
+
+  .field {
+    box-sizing: border-box;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .fieldset {
+    box-sizing: border-box;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .captcha-container {
+    box-sizing: border-box;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    clear: both;
+  }
+
+  .actions-toolbar {
+    box-sizing: border-box;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    clear: both;
+    @media (min-width: 768px) {
+      display: table;
+      &.submit-right {
+        margin-left: auto;
+        padding-right: 0;
+      }
+
+      &.submit-center {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    .primary {
+      button {
+        &.sbtn-l {
+          line-height: 2.2rem;
+          font-size: 1.8rem;
+        }
+
+        &.sbtn-xl {
+          line-height: 2.8rem;
+          font-size: 2.2rem;
+        }
+      }
+    }
+  }
+
+  .inline-elements {
+    .choice {
+      display: inline-flex;
+    }
+  }
+}
+
+.webforms-success-text {
+  margin-bottom: 2rem;
+}
+
+.webforms-below-text {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.webforms-description-text {
+  margin-bottom: 4rem;
+}
+
+.webforms-fields-comment {
+  font-size: 90%;
+  clear: both;
+  margin-top: 1rem;
+}
+
+.please-wait {
+  padding-top: 0.5rem;
+
+  .loading-indicator {
+    background: #fff url(../images/ajax-loader-big.gif) no-repeat;
+    background-size: 1.8rem;
+    display: inline-block;
+    width: 1.8rem;
+    height: 1.8rem;
+    vertical-align: bottom;
+    margin-bottom: 0.2rem;
+  }
+}

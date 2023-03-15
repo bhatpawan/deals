@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd"
+         class="MageMe\WebForms\Ui\Component\Result\Listing">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">webforms_result_listing.webforms_result_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>result_columns</spinner>
+        <deps>
+            <dep>webforms_result_listing.webforms_result_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="webforms_result_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <filterUrlParams>
+                <param name="form_id">*</param>
+            </filterUrlParams>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">result_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <dataProvider name="webforms_result_listing_data_source"
+                      class="WebformsResultListingDataProvider">
+            <settings>
+                <requestFieldName>result_id</requestFieldName>
+                <primaryFieldName>result_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <bookmark name="bookmarks" class="MageMe\WebForms\Ui\Component\Result\Bookmark"/>
+        <columnsControls name="columns_controls"/>
+        <exportButton name="export_button" class="Magento\Ui\Component\ExportButton">
+            <settings>
+                <additionalParams>
+                    <param xsi:type="string" active="true" name="form_id">*</param>
+                </additionalParams>
+                <selectProvider>webforms_result_listing.webforms_result_listing.result_columns.ids</selectProvider>
+                <options>
+                    <option name="csv" xsi:type="array">
+                        <item name="value" xsi:type="string">csv</item>
+                        <item name="label" xsi:type="string" translate="true">CSV</item>
+                        <item name="url" xsi:type="string">webforms/export/resultGridToCsv</item>
+                    </option>
+                    <option name="xml" xsi:type="array">
+                        <item name="value" xsi:type="string">xml</item>
+                        <item name="label" xsi:type="string" translate="true">Excel XML</item>
+                        <item name="url" xsi:type="string">webforms/export/resultGridToXml</item>
+                    </option>
+                </options>
+            </settings>
+        </exportButton>
+        <filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="columnsProvider" xsi:type="string">webforms_result_listing.webforms_result_listing.result_columns</item>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="provider" xsi:type="string">webforms_result_listing.webforms_result_listing.listing_top.bookmarks
+                        </item>
+                        <item name="namespace" xsi:type="string">current.filters</item>
+                    </item>
+                    <item name="templates" xsi:type="array">
+                        <item name="filters" xsi:type="array">
+                            <item name="select" xsi:type="array">
+                                <item name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</item>
+                                <item name="template" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                            </item>
+                        </item>
+                    </item>
+                    <item name="childDefaults" xsi:type="array">
+                        <item name="provider" xsi:type="string">
+                            webforms_result_listing.webforms_result_listing.listing_top.listing_filters
+                        </item>
+                        <item name="imports" xsi:type="array">
+                            <item name="visible" xsi:type="string">
+                                webforms_result_listing.webforms_result_listing.result_columns.${ $.index }:visible
+                            </item>
+                        </item>
+                    </item>
+                </item>
+                <item name="observers" xsi:type="array">
+                    <item name="column" xsi:type="string">column</item>
+                </item>
+            </argument>
+            <filterSelect name="store_id">
+                <argument name="optionsProvider" xsi:type="configurableObject">
+                    <argument name="class" xsi:type="string">Magento\Cms\Ui\Component\Listing\Column\Cms\Options
+                    </argument>
+                </argument>
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="provider" xsi:type="string">${ $.parentName }</item>
+                        <item name="dataScope" xsi:type="string">store_id</item>
+                        <item name="label" xsi:type="string" translate="true">Store View</item>
+                        <item name="captionValue" xsi:type="string">0</item>
+                        <item name="searchUrl" xsi:type="boolean">true</item>
+                    </item>
+                </argument>
+            </filterSelect>
+        </filters>
+        <massaction name="listing_massaction"
+                    class="MageMe\WebForms\Ui\Component\Result\Listing\MassAction">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="selectProvider" xsi:type="string">webforms_result_listing.webforms_result_listing.result_columns.ids
+                    </item>
+                    <item name="component" xsi:type="string">MageMe_WebForms/js/grid/ajax-massactions</item>
+                    <item name="indexField" xsi:type="string">result_id</item>
+                </item>
+            </argument>
+            <action name="massDelete">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">delete</item>
+                        <item name="label" xsi:type="string" translate="true">Delete</item>
+                        <item name="url" xsi:type="url" path="webforms/result/massDelete">
+                            <param name="_current">true</param>
+                        </item>
+                        <item name="confirm" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">Delete items</item>
+                            <item name="message" xsi:type="string" translate="true">Are you sure to delete selected
+                                results?
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+            <action name="massEmail">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">email</item>
+                        <item name="label" xsi:type="string" translate="true">Send By Email</item>
+                        <item name="confirm" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">Email items</item>
+                            <item name="message" xsi:type="string" translate="true">Send selected results to
+                                notification e-mail address?
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+                <argument name="actions" xsi:type="array">
+                    <item name="0" xsi:type="array">
+                        <item name="type" xsi:type="string">input</item>
+                        <item name="label" xsi:type="string" translate="true">Email Address:</item>
+                        <item name="url" xsi:type="url" path="webforms/result/massEmail">
+                            <param name="_current">true</param>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+            <action name="massIsRead"
+                    class="MageMe\WebForms\Ui\Component\Result\Listing\MassActions\SubActions\AjaxIsRead">
+                <settings>
+                    <type>is_read</type>
+                    <label translate="true">Mark As Read</label>
+                </settings>
+            </action>
+            <action name="massIsReplied"
+                    class="MageMe\WebForms\Ui\Component\Result\Listing\MassActions\SubActions\AjaxIsReplied">
+                <settings>
+                    <type>is_replied</type>
+                    <label translate="true">Mark As Replied</label>
+                </settings>
+            </action>
+        </massaction>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="result_columns" class="MageMe\WebForms\Ui\Component\Result\Listing\Columns">
+        <settings>
+            <childDefaults>
+                <param name="fieldAction" xsi:type="array">
+                    <item name="provider" xsi:type="string">webforms_result_listing.webforms_result_listing.result_columns.actions</item>
+                    <item name="target" xsi:type="string">applyAction</item>
+                    <item name="params" xsi:type="array">
+                        <item name="0" xsi:type="string">reply</item>
+                        <item name="1" xsi:type="string">${ $.$data.rowIndex }</item>
+                    </item>
+                </param>
+            </childDefaults>
+        </settings>
+        <selectionsColumn name="ids" sortOrder="10">
+            <settings>
+                <indexField>result_id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="result_id" sortOrder="20" component="MageMe_WebForms/js/grid/columns/result_id">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <visible>true</visible>
+            </settings>
+        </column>
+        <column name="is_read" sortOrder="25"
+                component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <filter>select</filter>
+                <label translate="true">Is Read</label>
+                <dataType>select</dataType>
+                <options class="MageMe\WebForms\Config\Options\YesNo"/>
+                <visible>false</visible>
+            </settings>
+        </column>
+        <column name="is_replied" sortOrder="30"
+                component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <filter>select</filter>
+                <label translate="true">Is Replied</label>
+                <dataType>select</dataType>
+                <options class="MageMe\WebForms\Config\Options\YesNo"/>
+                <visible>false</visible>
+            </settings>
+        </column>
+        <column name="customer" sortOrder="900"
+                class="MageMe\WebForms\Ui\Component\Result\Listing\Column\Customer">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Customer</label>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+                <visible>true</visible>
+                <sortable>false</sortable>
+                <disableAction>true</disableAction>
+            </settings>
+        </column>
+        <column name="submitted_from" sortOrder="910"
+                class="MageMe\WebForms\Ui\Component\Result\Listing\Column\SubmittedFrom">
+            <settings>
+                <label translate="true">Submitted From</label>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+                <visible>true</visible>
+                <sortable>false</sortable>
+                <disableAction>true</disableAction>
+            </settings>
+        </column>
+        <column name="referrer_page" sortOrder="920"
+                class="MageMe\WebForms\Ui\Component\Result\Listing\Column\Referrer">
+            <settings>
+                <label translate="true">Referrer Page</label>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+                <visible>true</visible>
+                <sortable>false</sortable>
+                <disableAction>true</disableAction>
+            </settings>
+        </column>
+        <column name="store_id" sortOrder="930"
+                class="MageMe\WebForms\Ui\Component\Result\Listing\Column\Store">
+            <settings>
+                <label translate="true">Store View</label>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+                <visible>true</visible>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="created_at" sortOrder="940"
+                class="Magento\Ui\Component\Listing\Columns\Date"
+                component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <filter>dateRange</filter>
+                <label translate="true">Created</label>
+                <dataType>date</dataType>
+            </settings>
+        </column>
+        <column name="customer_ip" sortOrder="950">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Sent from IP</label>
+                <visible>false</visible>
+            </settings>
+        </column>
+        <actionsColumn name="actions" sortOrder="1000"
+                       class="MageMe\WebForms\Ui\Component\Result\Listing\Column\Action">
+            <settings>
+                <indexField>result_id</indexField>
+                <label translate="true">Actions</label>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

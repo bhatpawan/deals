@@ -1,0 +1,48 @@
+<div class="dashboard">
+    <?php
+    /** @var View $block */
+
+    use MageMe\WebForms\Api\Data\MessageInterface;
+    use MageMe\WebForms\Block\Customer\Account\Result\View;
+
+    $result = $block->getResult();
+
+    /** @var array|MessageInterface[] $messages */
+    $messages = $block->getMessages();
+    if ($result->getId()) {
+        ?>
+        <?php foreach ($messages as $message): ?>
+            <div class="box-account webforms-customer-account-message">
+                <div class="block">
+                    <div class="block-title">
+                        <strong><?= __('Replied by %1 on %2', $message->getAuthor(),
+                                $block->formatDate($message->getCreatedAt(), IntlDateFormatter::MEDIUM)) ?></strong>
+                    </div>
+                    <div class="block-content">
+                        <?= $message->getMessage() ?>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+
+        <div class="block-account webforms-customer-account-result-view">
+            <div class="block">
+                <div class="block-title">
+                    <h3><?= __('You submitted:') ?></h3>
+                </div>
+                <div class="block-content">
+                    <div class="webforms-results">
+                        <div class="webforms-results-block">
+                            <?= $result->toHtml(['template' => 'result/view.phtml','header' => false]); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="actions-toolbar">
+            <div class="secondary"><a class="action back"
+                                      href="javascript:window.history.back()"><span><?= __('Back') ?></span></a>
+            </div>
+        </div>
+    <?php } ?>
+</div>

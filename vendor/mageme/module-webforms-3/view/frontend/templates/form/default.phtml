@@ -1,0 +1,65 @@
+<?php
+
+/** @var MageMe\WebForms\Block\Form $block */
+
+$_uid     = $block->getUid();
+$_form    = $block->getForm();
+?>
+
+<?php if($_form->getTitle()){ ?>
+<h1><?= $block->applyTranslation($_form->getTitle()); ?></h1>
+<?php } ?>
+
+<?php if ($block->isAjax()) { ?>
+    <div id="webform_<?= $_uid ?>_success_text" class="std webforms-success-text"
+         style="display:none"></div>
+<?php } ?>
+
+<?php
+if ($block->getSuccess()) {
+    ?>
+    <div class="webforms-success-text">
+        <?= $block->getSuccessText() ?>
+    </div>
+    <script>
+        <?= $block->getAfterSubmissionScript(); ?>
+    </script>
+    <?php
+}
+if (!$block->getSuccess() || $_form->getIsDisplayedAfterSubmission()) {
+    ?>
+    <?php if ($messages = $block->getErrorMessages()): ?>
+        <div class="message error">
+            <div>
+                <?php foreach ($messages as $message): ?>
+                    <?php /* @escapeNotVerified */
+                    echo $message ?><br/>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <div id="webform_<?= $_uid ?>_form" class="webforms">
+
+        <?php if ($block->getDescription()) { ?>
+            <div id="<?= $_uid ?>form_description" class="webforms-description-text">
+                <?= $block->getDescription(); ?>
+            </div>
+        <?php } ?>
+
+        <?= $block->getFormBlock()->toHtml() ?>
+
+        <?php if ($_form->getBelowText()) { ?>
+            <div id="<?= $_uid ?>form_below_text" class="webforms-below-text">
+                <?= $block->applyTranslation($_form->getBelowText()); ?>
+            </div>
+        <?php } ?>
+
+    </div>
+
+    <?= $block->getScriptBlock()->toHtml() ?>
+
+    <?php
+} // if(show_success)
+
+

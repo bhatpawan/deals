@@ -1,0 +1,76 @@
+<?php
+
+use MageMe\WebForms\Api\Data\FieldInterface;
+use MageMe\WebForms\Api\Data\FieldsetInterface;
+use MageMe\WebForms\Block\Result\View;
+use MageMe\WebForms\Config\Options\Field\DisplayOption;
+use MageMe\WebForms\Model\Field\AbstractField;
+
+/**
+ * @var View $block
+ */
+
+$_result  = $block->getResult();
+$_form    = $block->getForm();
+$_options = $block->getOptions();
+
+$_html              = "";
+$_logicRules        = $_form->getLogic(false);
+$_fieldsToFieldsets = $_form->getFieldsToFieldsets(true);
+
+foreach ($_fieldsToFieldsets as $fieldsetId => $fieldset) {
+    $k         = false;
+    $fieldHtml = '';
+
+    $targetFieldset     = [
+        'id' => 'fieldset_' . $fieldsetId,
+        'logic_visibility' => $fieldset['logic_visibility']
+    ];
+    $fieldsetVisibility = $_form->getTargetVisibility($targetFieldset, $_logicRules,
+        $_result->getData('field'));
+
+    if ($fieldsetVisibility) {
+
+        /** @var FieldInterface|AbstractField $field */
+        foreach ($fieldset['fields'] as $field) {
+            $targetField = [
+                'id' => 'field_' . $field->getId(),
+                'logic_visibility' => $field->getData('logic_visibility')
+            ];
+            if ($field->hasData('visible')) {
+                $fieldVisibility = $field->getData('visible');
+            } else {
+                $fieldVisibility = $_form->getTargetVisibility($targetField, $_logicRules,
+                    $_result->getData('field'));
+            }
+            $value = $field->getValueForResultDefaultTemplate(
+                trim((string)$_result->getData('field_' . $field->getId())),
+                [
+                    'result_id' => $_result->getId(),
+                    'image_width' => $block->getImageWidth(),
+                    'image_height' => $block->getImageHeight(),
+                    'image_link' => $block->getImageLink()
+                ]);
+            if (!empty($value) &&
+                $fieldVisibility &&
+                !in_array($field->getType(), $_options['skip_fields']) &&
+                $field->getDisplayInResult() != DisplayOption::OPTION_OFF
+            ) {
+                $k             = true;
+                $fieldName     = $field->getName();
+                $fieldNameHtml = '';
+                if (strlen(trim((string)$field->getResultLabel())) > 0) {
+                    $fieldName = $field->getResultLabel();
+                }
+                if ($field->getDisplayInResult() != DisplayOption::OPTION_VALUE) {
+                    $fieldNameHtml = sprintf('<div class="webforms-results-label">%s</div>', $fieldName);
+                }
+                $fieldHtml .= sprintf('<div class="webforms-results-field">%s<div class="webforms-results-value">%s</div></div>', $fieldNameHtml, $value);
+            }
+        }
+    }
+    if (!empty($fieldset[FieldsetInterface::NAME]) && $k && $fieldset[FieldsetInterface::IS_NAME_DISPLAYED_IN_RESULT]) {
+        $fieldHtml = sprintf('<div class="webforms-results-fieldset"><h3>%s</h3>%s</div>', $fieldset[FieldsetInterface::NAME], $fieldHtml);
+    }
+    echo $fieldHtml;
+}

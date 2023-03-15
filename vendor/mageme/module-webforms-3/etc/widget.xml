@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="webforms_form_v2" class="VladimirPopov\WebForms\Block\Widget\Form">
+        <label>WebForms: Form</label>
+        <description><![CDATA[Compatibility patch.]]></description>
+    </widget>
+    <widget id="webforms_result_v2" class="VladimirPopov\WebForms\Block\Widget\Result">
+        <label>WebForms: Results</label>
+        <description><![CDATA[Compatibility patch.]]></description>
+    </widget>
+    <widget id="webforms_button_v2" class="VladimirPopov\WebForms\Block\Widget\Button">
+        <label>WebForms: Button With Popup</label>
+        <description><![CDATA[Compatibility patch.]]></description>
+    </widget>
+
+    <widget id="webforms_form" class="MageMe\WebForms\Block\Widget\Form">
+        <label>WebForms: Form</label>
+        <description>
+            <![CDATA[Add form to a page.]]></description>
+        <parameters>
+            <parameter name="form_id" xsi:type="select" visible="true"
+                       source_model="MageMe\WebForms\Config\Options\Form">
+                <label>Form</label>
+            </parameter>
+        </parameters>
+    </widget>
+    <widget id="webforms_result" class="MageMe\WebForms\Block\Widget\Result">
+        <label>WebForms: Results</label>
+        <description>Adds form collected results to a page</description>
+        <parameters>
+            <parameter name="form_id" xsi:type="select" visible="true"
+                       source_model="MageMe\WebForms\Config\Options\Form">
+                <label>Form</label>
+            </parameter>
+            <parameter name="page_size" xsi:type="text" visible="true" required="true">
+                <label>Results per page</label>
+                <value>10</value>
+            </parameter>
+            <parameter name="image_width" xsi:type="text" visible="true">
+                <label>Image width (maximum)</label>
+                <value>200</value>
+            </parameter>
+            <parameter name="image_height" xsi:type="text" visible="true">
+                <label>Image height (maximum)</label>
+                <value>200</value>
+            </parameter>
+            <parameter name="image_link" xsi:type="select" visible="true">
+                <label>Image link</label>
+                <description>You need to enable "Allow frontend file downloads" in Access Settings of the form
+                </description>
+                <options>
+                    <option name="yes" value="1">
+                        <label>Yes</label>
+                    </option>
+                    <option name="no" value="0" selected="true">
+                        <label>No</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="store_id" xsi:type="multiselect" visible="true"
+                       source_model="Magento\Config\Model\Config\Source\Store">
+                <label>Store View</label>
+            </parameter>
+            <parameter name="template" xsi:type="select" visible="true">
+                <label>Template</label>
+                <options>
+                    <option name="default" value="result/default.phtml" selected="true">
+                        <label translate="true">Default</label>
+                    </option>
+                </options>
+            </parameter>
+        </parameters>
+    </widget>
+    <widget id="webforms_button" class="MageMe\WebForms\Block\Widget\Button">
+        <label>WebForms: Button With Popup</label>
+        <description>
+            <![CDATA[Adds button which opens popup with the form.]]></description>
+        <parameters>
+            <parameter name="form_id" xsi:type="select" visible="true"
+                       source_model="MageMe\WebForms\Config\Options\Form">
+                <label>Form</label>
+            </parameter>
+            <parameter name="template" xsi:type="select" visible="true">
+                <label>Button template</label>
+                <options>
+                    <option name="default" value="button/default.phtml" selected="true">
+                        <label translate="true">Default</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="button_text" xsi:type="text" visible="true" required="true">
+                <label>Button text</label>
+            </parameter>
+            <parameter name="popup_title" xsi:type="text" visible="true">
+                <label>Popup title</label>
+            </parameter>
+            <parameter name="button_css_class" xsi:type="text" visible="true">
+                <label>Custom button CSS classes</label>
+                <description>Custom CSS classes for button</description>
+            </parameter>
+            <parameter name="popup_css_class" xsi:type="text" visible="true">
+                <label>Custom popup CSS classes</label>
+                <description>Custom CSS classes for popup</description>
+            </parameter>
+        </parameters>
+    </widget>
+    <widget id="webforms_slide_out_form" class="MageMe\WebForms\Block\Widget\SlideOutForm">
+        <label>WebForms: Slide-out Form</label>
+        <description>
+            <![CDATA[Add slide-out form to a page.]]></description>
+        <parameters>
+            <parameter name="form_id" xsi:type="select" visible="true"
+                       source_model="MageMe\WebForms\Config\Options\Form">
+                <label>Form</label>
+            </parameter>
+            <parameter name="template" xsi:type="select" visible="false">
+                <label>Template</label>
+                <options>
+                    <option name="default" value="form/slide_out.phtml" selected="true">
+                        <label translate="true">Default</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="slider_position" xsi:type="select" visible="true">
+                <label>Position</label>
+                <options>
+                    <option name="right" value="right" selected="true">
+                        <label translate="true">Right</label>
+                    </option>
+                    <option name="left" value="left">
+                        <label translate="true">Left</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="button_text" xsi:type="text" visible="true">
+                <label>Button text</label>
+                <value>Contact us</value>
+            </parameter>
+            <parameter name="button_color" xsi:type="block" visible="true">
+                <label>Button color</label>
+                <block class="MageMe\WebForms\Block\Adminhtml\Widget\Color">
+                    <data>
+                        <item name="value" xsi:type="string">#1979c3</item>
+                    </data>
+                </block>
+            </parameter>
+            <parameter name="button_text_color" xsi:type="block" visible="true">
+                <label>Button text color</label>
+                <block class="MageMe\WebForms\Block\Adminhtml\Widget\Color">
+                    <data>
+                        <item name="value" xsi:type="string">#ffffff</item>
+                    </data>
+                </block>
+            </parameter>
+            <parameter name="background_color" xsi:type="block" visible="true">
+                <label>Form background color</label>
+                <block class="MageMe\WebForms\Block\Adminhtml\Widget\Color">
+                    <data>
+                        <item name="value" xsi:type="string">#ffffff</item>
+                    </data>
+                </block>
+            </parameter>
+            <parameter name="button_width" xsi:type="text" visible="true">
+                <label>Button width (px)</label>
+                <value>25</value>
+            </parameter>
+            <parameter name="border_color" xsi:type="block" visible="true">
+                <label>Form border color</label>
+                <block class="MageMe\WebForms\Block\Adminhtml\Widget\Color">
+                    <data>
+                        <item name="value" xsi:type="string">#c6c6c6</item>
+                    </data>
+                </block>
+            </parameter>
+            <parameter name="form_width" xsi:type="text" visible="true">
+                <label>Form width (px)</label>
+                <value>350</value>
+            </parameter>
+            <parameter name="form_margin_bottom" xsi:type="text" visible="true">
+                <label>Form bottom margin (px)</label>
+                <value>0</value>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

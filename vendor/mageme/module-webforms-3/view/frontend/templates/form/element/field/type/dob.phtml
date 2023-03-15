@@ -1,0 +1,88 @@
+<?php
+/**
+ * @var Dob $block
+ */
+
+use MageMe\WebForms\Block\Form\Element\Field\Type\Dob;
+
+$validationRules = $block->getValidationRules();
+$validationDescriptions = $block->getValidationDescriptions();
+?>
+<div class="input-box customer-dob customer-dob<?= $block->getFieldId() ?>"
+     role="group"
+     <?php if ($block->getIsLabelHidden()) { ?>aria-label="<?= $block->getFieldLabel() ?>"
+    <?php } else { ?> aria-labelledby="label_<?= $block->getFieldId() ?>" <?php } ?>
+>
+    <div class="webforms-datepicker">
+        <?php
+        $block->setDateInput('d',
+            '<div class="dob-day">
+             <input id="day' . $block->getFieldId() . '"
+                    name="day' . $block->getFieldId() . '"
+                    type="text"
+                    class="input-text dob-dd"
+                    title="' . __('Day') . '"
+                    value="' . $block->getDay() . '"
+                    data-validate="{\'validate-dobd\':true}"
+                    ' . htmlspecialchars((string)$block->getCustomAttributes()) . '
+             />
+             <label for="day' . $block->getFieldId() . '">' . __('DD') . '</label>
+         </div>'
+        );
+
+        $block->setDateInput('m',
+            '<div class="dob-month">
+             <input id="month' . $block->getFieldId() . '"
+                    name="month' . $block->getFieldId() . '"
+                    type="text"
+                    class="input-text dob-mm"
+                    title="' . __('Month') . '"
+                    value="' . $block->getMonth() . '"
+                    data-validate="{\'validate-dobm\':true}"
+                    ' . htmlspecialchars((string)$block->getField()->getCustomAttributes()) . '
+             />
+             <label for="month' . $block->getFieldId() . '">' . __('MM') . '</label>
+         </div>'
+        );
+
+        $block->setDateInput('y',
+            '<div class="dob-year">
+             <input id="year' . $block->getFieldId() . '"
+                    name="year' . $block->getFieldId() . '"
+                    type="text"
+                    class="input-text dob-yyyy"
+                    title="' . __('Year') . '"
+                    value="' . $block->getYear() . '"
+                    data-validate="{\'validate-doby\':true}"
+                    ' . htmlspecialchars((string)$block->getField()->getCustomAttributes()) . '
+             />
+             <label for="year' . $block->getFieldId() . '">' . __('YYYY') . '</label>
+         </div>'
+        );
+        ?>
+        <?= $block->getSortedDateInputs() ?>
+        <div class="dob-full"
+             style="display:none;">
+            <input id='<?= $block->getFieldId() ?>'
+                   name='<?= $block->getFieldName() ?>'
+                   type="hidden"
+                   <?= htmlspecialchars((string)$block->getCustomAttributes()) ?>
+            />
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    //<![CDATA[
+    require([
+            'MageMe_WebForms/js/dob'
+        ], function (dob) {
+            dob({
+                id: <?php var_export($block->getFieldId()) ?>,
+                isRequired: <?php var_export($block->getIsRequired()) ?>,
+                validationMessage: <?php var_export($block->applyTranslation($block->getField()->getValidationRequiredMessage())); ?>,
+                dateFormat: <?php var_export($block->getDateFormat()) ?>
+            });
+        }
+    );
+    //]]>
+</script>

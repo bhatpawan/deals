@@ -1,0 +1,17 @@
+<?php
+
+use MageMe\WebForms\Block\Widget\Button;
+
+/** @var Button $block */
+?>
+
+<button class="primary <?= $block->escapeHtml($block->getButtonCssClass()) ?>"
+        data-mage-init='{
+            "MageMe_WebForms/js/popup": {
+                "url": "<?= $block->escapeUrl($block->getAjaxUrl()) ?>",
+                "containerId": "<?= str_replace('"', '\"', (string)$block->getContainerId()) ?>"
+            }
+        }'
+        type="button" title="<?= $block->escapeHtml($block->getButtonText()) ?>">
+    <span><?= $block->escapeHtml(__($block->getButtonText())) ?></span>
+</button>

@@ -1,0 +1,101 @@
+<?php
+/**
+ * @var File $block
+ */
+
+use MageMe\WebForms\Api\Data\FileDropzoneInterface;
+use MageMe\WebForms\Block\Form\Element\Field\Type\File;
+
+$files = $block->getFieldValue();
+$validationRules = $block->getValidationRules();
+$validationDescriptions = $block->getValidationDescriptions();
+$validateMessage = $block->applyTranslation($block->getField()->getValidationRequiredMessage()
+    ? $block->getField()->getValidationRequiredMessage()
+    : 'This is a required field.');
+?>
+
+<?php
+/* Files */
+if (count($files)) { ?>
+<div id="<?= $block->getFieldUid() . 'filepool' ?>" class="webforms-file-pool">
+    <?php
+    /* Select all */
+    if (count($files) > 1) { ?>
+    <script>
+        function checkAll(elem) {
+            elem.up().up().select("input[type=checkbox]").invoke("writeAttribute", "checked", elem.checked);
+        }
+    </script>
+    <div class="webforms-file-pool-selectall">
+        <input id="<?= $block->getSelectAllId()?>" type="checkbox" class="webforms-file-delete-checkbox" onchange="checkAll(this)"/>
+        <label for="<?= $block->getSelectAllId()?>"><?= $block->getSelectAllLabel()?></label>
+    </div>
+    <?php } ?>
+    <?php
+    /* Checkboxes */
+    /** @var FileDropzoneInterface $file */
+    foreach ($files as $file) { ?>
+    <div class="webforms-file-cell">
+        <?php if (file_exists($file->getFullPath())) {
+            echo $block->getFilePreviewHtml($file);
+        } ?>
+        <p>
+            <input type="checkbox"
+                   class="webforms-file-delete-checkbox"
+                   id="<?= $block->getCheckboxId($file->getId())?>"
+                   name="<?= $block->getCheckboxName()?>"
+                   value="<?= $file->getLinkHash()?>">
+            <label for="<?= $block->getCheckboxId($file->getId())?>"><?= $block->getCheckboxLabel()?></label>
+        </p>
+    </div>
+    <?php } ?>
+</div>
+<?php } ?>
+<input id='<?= $block->getFieldId() ?>'
+       name='<?= $block->getFieldName() ?>'
+       type='file'
+       class='<?= $block->getFieldClass() ?>'
+       style='<?= $block->getFieldStyle() ?>'
+    <?php if ($validationRules) { ?>
+        data-validate="{<?= implode(", ", $validationRules); ?>}"
+    <?php } ?>
+    <?php foreach ($validationDescriptions as $key => $data) {
+        echo $key . '=' . '"' . htmlspecialchars((string)$data) . '"';
+    }
+    ?>
+       data-uid="<?= $block->getFieldUid() ?>"
+    <?= htmlspecialchars((string)$block->getCustomAttributes()) ?>
+/>
+
+<script>
+    if (typeof DROPZONE === 'undefined') {
+        var DROPZONE = {};
+    }
+    if (typeof DROPZONE._<?= $block->getFieldUid()?> === "undefined") {
+        DROPZONE._<?= $block->getFieldUid()?> = [];
+    }
+    require(['MageMe_WebForms/js/dropzone'], function (JsWebFormsDropzone) {
+        DROPZONE._<?= $block->getFieldUid()?>.push(new JsWebFormsDropzone({
+            uid: '<?= $block->getFieldUid() ?>',
+            url: '<?= $block->getUrl('webforms/file/dropzoneUpload', ["_secure" => true]) ?>',
+            fieldId: '<?= $block->getFieldId()?>',
+            fieldName: '<?= $block->getDropzoneName()?>',
+            dropZone: <?php var_export($block->getIsDropzone())?>,
+            dropZoneText: '<?= $block->getDropzoneText()?>',
+            maxFiles: <?php var_export($block->getDropzoneMaxFiles())?>,
+            allowedSize: <?php var_export($block->getUploadLimit())?>,
+            allowedExtensions: <?= json_encode($block->getAllowedExtensions(), true)?>,
+            restrictedExtensions: <?= json_encode($block->getRestrictedExtensions(), true)?>,
+            validationCssClass: '<?= $block->getIsRequired() ? 'required-entry' : ''?>',
+            required: <?php var_export($block->getIsRequired())?>,
+            errorMsgDropzone: <?= json_encode(__('This field has incorrect files'))?>,
+            errorMsgRequired: <?= json_encode($validateMessage) ?>,
+            errorMsgMaxFiles: <?= json_encode(__('Maximum %1 files in dropzone. Please remove upload or select some files to delete', $block->getDropzoneMaxFiles())) ?>,
+            errorMsgAllowedExtensions: <?= json_encode(__('Selected file has none of allowed extensions: %s'))?>,
+            errorMsgRestrictedExtensions: <?= json_encode(__('Uploading of potentially dangerous files is not allowed.'))?>,
+            errorMsgAllowedSize: <?= json_encode(__('Selected file exceeds allowed size: %s kB'))?>,
+            errorMsgUploading: <?= json_encode(__('Error uploading file'))?>,
+            errorMsgNotReady: <?= json_encode(__('Please wait... the upload is in progress.'))?>
+        }));
+    });
+</script>

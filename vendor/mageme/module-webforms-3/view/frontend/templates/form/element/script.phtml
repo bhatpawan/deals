@@ -1,0 +1,47 @@
+<?php
+/** @var MageMe\WebForms\Block\Form\Element\Script $block */
+?>
+<?php
+$_form = $block->getForm();
+$_uid  = $block->getUid();
+?>
+<?= $block->getSubmitScript()->toHtml() ?>
+<?= $block->getLogicScript()->toHtml() ?>
+
+<?= $_form->useCaptcha() ? $block->getCaptchaScript()->toHtml() : '' ?>
+
+<script>
+    require(["jquery"], function ($) {
+        // prevent from accidental submit by hitting enter button
+        $('form input').keydown(function (e) {
+            if (e.keyCode === 13) {
+                var inputs = $(this).parents("form").eq(0).find(":input");
+                if (inputs[inputs.index(this) + 1] != null) {
+                    inputs[inputs.index(this) + 1].focus();
+                }
+                e.preventDefault();
+                return false;
+            }
+        });
+    });
+
+    <?php if ($_form->getOnLoadScript()) { ?>
+    <?php if ($_form->getIsAsyncLoaded()) { ?>
+    window.addEventListener("webformsAsyncLoad", function () {
+        eval(`<?php echo $block->getFormOnLoadScript(); ?>`);
+    });
+    <?php } else { ?>
+    window.addEventListener("load", () => {
+        eval(`<?php echo $block->getFormOnLoadScript(); ?>`);
+    });
+    <?php } ?>
+    <?php } ?>
+</script>
+
+<script defer>
+    (() => {
+        var evt = document.createEvent("Event");
+        evt.initEvent("mm_webform_loaded<?= $_uid; ?>", false, false);
+        window.dispatchEvent(evt);
+    })();
+</script>

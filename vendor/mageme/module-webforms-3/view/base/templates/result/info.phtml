@@ -1,0 +1,34 @@
+<?php
+/**
+ * @var Info $block
+ */
+
+use MageMe\WebForms\Block\Result\Info;
+
+$options       = $block->getOptions();
+$result        = $block->getResult();
+$storeGroup    = $block->getStore()->getFrontendName();
+$storeName     = $block->getStore()->getName();
+$customerInfo  = $result->getCustomerName();
+$customer      = $result->getCustomer();
+$submittedFrom = $result->getSubmittedFrom();
+$referrer      = $result->getReferrerPage();
+
+if ($customer) {
+    $customerInfo = $customer->getName() . ' &lt;' . $customer->getEmail() . '&gt;';
+} ?>
+<?= __('Store group') ?>: <?= $storeGroup ?> <br>
+<?= __('Store name') ?>: <?= $storeName ?> <br>
+<?= __('Customer') ?>: <?= $customerInfo ?> <br>
+<?php if (!empty($submittedFrom['title'])) { ?>
+<?= __('Page title') ?>: <?= $submittedFrom['title'] ?> <br>
+<?php } ?>
+<?php if (!empty($submittedFrom['url'])) { ?>
+<?= __('Page url') ?>: <a href="<?= $submittedFrom['url'] ?>" target="_blank"><?= $submittedFrom['url'] ?></a><br>
+<?php } ?>
+<?php if (!empty($referrer)) { ?>
+<?= __('Referrer') ?>: <a href="<?= $referrer ?>" target="_blank"><?= $referrer ?></a><br>
+<?php } ?>
+<?= __('Date') ?>: <?= $block->getFormattedDate() ?>
+<br>
+<br>

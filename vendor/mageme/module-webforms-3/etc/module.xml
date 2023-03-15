@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="MageMe_WebForms" setup_version="3.0.18">
+        <sequence>
+            <module name="MageMe_Core"/>
+            <module name="Magento_Customer"/>
+            <module name="Magento_Catalog"/>
+            <module name="Magento_Contact"/>
+            <module name="Magento_Store"/>
+            <module name="Magento_CMS"/>
+            <module name="Magento_Widget"/>
+        </sequence>
+    </module>
+</config>

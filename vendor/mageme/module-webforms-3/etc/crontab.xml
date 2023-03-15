@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="webforms_message_files_purge" instance="MageMe\WebForms\Cron\MessageFilesPurge" method="execute">
+            <schedule>*/30 * * * *</schedule>
+        </job>
+        <job name="webforms_gallery_files_purge" instance="MageMe\WebForms\Cron\GalleryFilesPurge" method="execute">
+            <schedule>*/30 * * * *</schedule>
+        </job>
+        <job name="webforms_uploader_cleanup" instance="MageMe\WebForms\Cron\UploaderCleanup" method="execute">
+            <schedule>*/30 * * * *</schedule>
+        </job>
+        <job name="webforms_data_cleanup" instance="MageMe\WebForms\Cron\DataCleanup" method="execute">
+            <schedule>*/30 * * * *</schedule>
+        </job>
+        <job name="webforms_unread_count" instance="MageMe\WebForms\Cron\UnreadCount" method="execute">
+            <schedule>*/15 * * * *</schedule>
+        </job>
+    </group>
+</config>

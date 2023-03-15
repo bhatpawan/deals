@@ -1,0 +1,119 @@
+/* Date picker button */
+.webforms-datepicker {
+  ._has-datepicker ~ .ui-datepicker-trigger {
+    background: none;
+    -moz-box-sizing: content-box;
+    border: 0;
+    box-shadow: none;
+    line-height: inherit;
+    margin: 0;
+    padding: 0;
+    text-shadow: none;
+    font-weight: 400;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: -4px;
+    vertical-align: middle;
+
+    &:focus {
+      background: none;
+      border: none;
+      box-shadow: none;
+      outline: 0;
+    }
+
+    &:active {
+      background: none;
+      border: none;
+    }
+
+    &:hover {
+      background: none;
+      border: none;
+    }
+
+    > span {
+      border: 0;
+      clip: rect(0, 0, 0, 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+
+    &:before {
+      @_webforms__date-icon-size: 20px;
+
+      background-image: url(../images/calendar.svg);
+      background-size: @_webforms__date-icon-size @_webforms__date-icon-size;
+      width: @_webforms__date-icon-size;
+      height: @_webforms__date-icon-size;
+      background-repeat: no-repeat;
+      vertical-align: middle;
+      display: inline-block;
+      content: ' ';
+      speak: none;
+    }
+  }
+
+  ._has-datepicker ~ .ui-datepicker-trigger.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  ._has-datepicker ~ .ui-datepicker-trigger[disabled] {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
+
+fieldset[disabled] {
+  .webforms-datepicker {
+    ._has-datepicker ~ .ui-datepicker-trigger {
+      cursor: not-allowed;
+      pointer-events: none;
+      opacity: 0.5;
+    }
+  }
+
+}
+
+/* Calendar */
+.webforms-calendar {
+  position: relative;
+  width: 100%;
+  display: inline-block;
+  margin-right: .5rem;
+  margin-bottom: .5rem;
+
+  .ui-datepicker-trigger {
+    margin-left: -3.2rem;
+    height: 2.8rem;
+    position: absolute;
+    top: .4rem;
+    right: .5rem;
+  }
+}
+
+.webforms-time {
+  display: inline-block;
+
+  .hours {
+    display: inline;
+    width: 6rem;
+  }
+
+  .minutes {
+    display: inline;
+    width: 6rem;
+  }
+}
+
+.multiselect {
+  height: auto;
+  background-image: none;
+}

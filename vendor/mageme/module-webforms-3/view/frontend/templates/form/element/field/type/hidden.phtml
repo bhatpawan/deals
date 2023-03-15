@@ -1,0 +1,13 @@
+<?php
+/**
+ * @var Hidden $block
+ */
+
+use MageMe\WebForms\Block\Form\Element\Field\Type\Hidden;
+
+?>
+<input name='<?= $block->getFieldName() ?>'
+       type='hidden'
+       value='<?= $block->getFieldValue() ?>'
+    <?= htmlspecialchars((string)$block->getCustomAttributes()) ?>
+/>

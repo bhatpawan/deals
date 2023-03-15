@@ -1,0 +1,42 @@
+<?php
+/** @var License $block */
+
+use MageMe\Core\Block\Adminhtml\Config\License;
+
+?>
+<span data-bind="scope: '<?php echo $block->getModuleId(); ?>_license'">
+    <button
+        id="<?php echo $block->getModuleId() ?>_license_button"
+        type="button"
+        class="action-default"
+        data-bind="title: title, click: click">
+        <span data-bind="text: text">Activate License</span>
+    </button>
+</span>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "<?php echo $block->getModuleId(); ?>_license": {
+                        "component": "MageMe_Core/js/license",
+                        "config": <?php echo $block->getJsonConfig(); ?>
+                    }
+                }
+            }
+        }
+    }
+</script>
+
+<style type="text/css">
+    #<?php echo $block->getModuleId() ?>_license_serial {
+        width: calc(100% - 170px);
+        margin-right: 5px;
+    }
+
+    #<?php echo $block->getModuleId() ?>_license_button {
+        width: 160px;
+        box-sizing: border-box;
+    }
+</style>

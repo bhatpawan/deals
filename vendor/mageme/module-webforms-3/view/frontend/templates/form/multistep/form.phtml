@@ -1,0 +1,114 @@
+<?php
+/** @var MageMe\WebForms\Block\Form\Element\Form $block */
+
+use MageMe\WebForms\Api\Data\FieldsetInterface;
+use MageMe\WebForms\Model\Logic;
+
+$_uid           = $block->getUid();
+$_form          = $block->getForm();
+$_formStructure = $_form->getFieldsToFieldsets();
+?>
+<form method="post"
+      name="webform_<?= $_uid ?>"
+      id="webform_<?= $_uid ?>" enctype="<?= $block->getEnctype() ?>"
+      class="form <?= $_form->getCssClass() ?>"
+      style="<?= $_form->getCssStyle() ?>">
+
+    <input name="form_key" type="hidden" value="<?php /* @escapeNotVerified */
+    echo $block->getFormKey() ?>"/>
+    <input type="hidden" name="submitForm_<?= $_form->getId() ?>" value="1"/>
+    <input type="hidden" name="form_id" value="<?= $_form->getId() ?>"/>
+    <?php if ($block->getResult() && $block->getResult()->getId()) { ?>
+        <input type="hidden" name="result_id" value="<?php echo $block->getResult()->getId() ?>"/>
+    <?php } ?>
+
+    <?php if (is_array($block->getData('hidden'))) {
+        foreach ($block->getData('hidden') as $key => $value) {
+            ?>
+            <input type="hidden" name="<?= $key ?>" value="<?= $value ?>"/>
+            <?php
+        }
+    } ?>
+
+    <?php if (count($_form->_getHidden())) {
+        foreach ($_form->_getHidden() as $field) {
+            echo $field->toHtml();
+        }
+    } ?>
+
+    <?php
+    $fieldsetExists = false;
+    foreach ($_formStructure as $fieldsetId => $fieldset) {
+        if (!empty($fieldset[FieldsetInterface::NAME])) {
+            $fieldsetExists = true;
+            break;
+        }
+    }
+    ?>
+
+    <?php if ($fieldsetExists) { ?>
+        <div id="wizard<?= $_uid?>">
+            <?php $i = 0 ?>
+
+            <div class="step-app">
+                <ul class="step-steps">
+                    <?php foreach ($_formStructure as $fieldsetId => $fieldset) { ?>
+                        <li id="title_fieldset_<?= $_uid . $fieldsetId ?>"
+                            <?php if ($fieldset['logic_visibility'] == Logic::VISIBILITY_HIDDEN) {
+                                echo 'style="display: none"';
+                            } ?>>
+                            <a href="#step<?= $fieldsetId ?>"><?= !empty($fieldset[FieldsetInterface::NAME]) ? $block->applyTranslation($fieldset[FieldsetInterface::NAME]): '...'; ?></a>
+                        </li>
+                    <?php } ?>
+                </ul>
+                <div class="step-content">
+                    <?php foreach ($_formStructure as $fieldsetId => $fieldset) {
+                        $fieldset[FieldsetInterface::NAME] = false;
+                        ?>
+                        <div class="step-tab-panel form-step" id="step<?= $fieldsetId ?>">
+                            <?= $block->getFieldsetBlock()
+                                ->setFieldsetId($fieldsetId)
+                                ->setFieldset($fieldset)
+                                ->toHtml() ?>
+
+                            <div class="actions-toolbar">
+                                <?php if ($i == count($_form->_getFieldsToFieldsets()) - 1) { ?>
+                                    <?php if ($_form->useCaptcha()) { ?>
+                                        <div id="recaptcha-container-<?= /* @noEscape */
+                                        $_uid ?>"
+                                             data-bind="scope:'<?= /* @noEscape */
+                                             $_uid ?>'">
+                                            <!-- ko template: getTemplate() --><!-- /ko -->
+                                        </div>
+                                    <?php } ?>
+                                <?php } ?>
+                            </div>
+                        </div>
+                        <?php $i++;
+                    } ?>
+                </div>
+
+                <div class="step-footer">
+                    <button type="button"
+                            data-direction="prev"
+                            class="step-btn button"><?= __('Back') ?></button>
+                    <button type="button"
+                            data-direction="next"
+                            class="step-btn action primary"><?= __('Next') ?></button>
+                    <button type="submit"
+                            data-direction="finish"
+                            id="webform_<?= $_uid ?>_submit_button"
+                            class="step-btn action submit primary <?php if ($_form->getSubmitButtonSize()) {
+                                echo 'sbtn-' . $_form->getSubmitButtonSize(); ?><?php } ?>"><?= $block->applyTranslation($_form->getSubmitButtonText()); ?></button>
+                    <div class="please-wait" id="webform_<?= $_uid ?>_sending_data"
+                         style="display:none;">
+                        <div class="loading-indicator"></div>
+                        <span id="webform_<?= $_uid ?>_progress_text"><?= __('Sending...') ?></span>
+                    </div>
+                </div>
+            </div>
+        </div>  <!--wizard-->
+    <?php } else { ?>
+        <p><?= __('Please add at least one fieldset to the form for multi-step functionality.') ?></p>
+    <?php } ?>
+</form>

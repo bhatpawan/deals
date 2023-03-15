@@ -1,0 +1,20 @@
+<ul class="webforms-result-submenu action-submenu" data-bind="foreach: {data: action.actions, as: 'action'},
+    css: { _active: action.visible }">
+    <li data-bind="css: { '_visible': $data.visible}">
+
+        <!-- ko if: !action.showInput -->
+        <span class="action-menu-item" data-bind="text: label, click: $parent.applyAction.bind($parent, type)"></span>
+        <!-- /ko -->
+
+        <!-- ko if: action.showInput -->
+        <span class="action-menu-item" data-bind="text: label"></span>
+        <div class="action-menu-item">
+            <input class="input-text" type="text" name="email"
+                   data-bind="value: action.input"/>
+            <button class="action-secondary" type="button"
+                    data-bind="text: 'Send',click: $parent.applyAction.bind($parent, type)"/>
+        </div>
+        <!-- /ko -->
+
+    </li>
+</ul>

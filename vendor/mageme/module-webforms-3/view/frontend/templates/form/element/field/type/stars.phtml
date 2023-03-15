@@ -1,0 +1,39 @@
+<?php
+/**
+ * @var Stars $block
+ */
+
+use MageMe\WebForms\Block\Form\Element\Field\Type\Stars;
+
+$validationRules = $block->getValidationRules();
+$validationDescriptions = $block->getValidationDescriptions();
+$initStars = $block->getFieldValue();
+$maxStars = $block->getMaxStars();
+?>
+<select id='<?= $block->getFieldId() ?>'
+        name='<?= $block->getFieldName() ?>'
+        class='<?= $block->getFieldClass() ?>'
+        <?php if ($validationRules) { ?>
+            data-validate="{<?= implode(", ", $validationRules); ?>}"
+        <?php } ?>
+        <?php foreach ($validationDescriptions as $key => $data) {
+            echo $key . '=' . '"' . htmlspecialchars((string)$data) . '"';
+        }
+        ?>
+        data-uid="<?= $block->getFieldUid() ?>"
+>
+    <?php if ($initStars < 1) { ?>
+        <option value=""></option>
+    <?php } ?>
+    <?php for ($i = 1; $i <= $maxStars; $i++) { ?>
+        <option value="<?= $i ?>" <?php if ($i == $initStars) echo 'selected' ?>><?= $i ?></option>
+    <?php } ?>
+</select>
+<script>
+    require(['MageMe_WebForms/js/stars'], function (rating) {
+        rating({
+            id: <?php var_export($block->getFieldId())?>,
+            theme: 'svg-stars'
+        });
+    });
+</script>

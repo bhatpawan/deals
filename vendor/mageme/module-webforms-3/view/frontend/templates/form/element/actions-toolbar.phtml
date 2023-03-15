@@ -1,0 +1,27 @@
+<?php
+/** @var MageMe\WebForms\Block\Form\Element\ActionsToolbar $block */
+
+$_form = $block->getForm();
+$_uid  = $block->getUid();
+
+?>
+<div id="submit<?= $_uid ?>" class="actions-toolbar <?php if ($_form->getSubmitButtonPosition()) {
+    echo 'submit-' . $_form->getSubmitButtonPosition(); ?><?php } ?>"
+     <?php if ($block->getSubmitVisibility() == 'hidden'){ ?>style="display: none"<?php } ?>>
+    <div class="primary">
+        <button type="submit" class="action submit primary <?php if ($_form->getSubmitButtonSize()) {
+            echo 'sbtn-' . $_form->getSubmitButtonSize(); ?><?php } ?>"
+                id="webform_<?= $_uid ?>_submit_button"
+                title="<?= $block->applyTranslation($_form->getSubmitButtonText()) ?>"
+                name="submit_button_<?= $_uid ?>">
+            <span><?= $block->applyTranslation($_form->getSubmitButtonText()) ?></span>
+        </button>
+    </div>
+    <div class="secondary">
+        <div class="please-wait" id="webform_<?= $_uid ?>_sending_data"
+             style="display:none;">
+            <div class="loading-indicator"></div>
+            <span id="webform_<?= $_uid ?>_progress_text"><?= __('Sending...') ?></span>
+        </div>
+    </div>
+</div>

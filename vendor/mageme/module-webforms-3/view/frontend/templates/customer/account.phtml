@@ -1,0 +1,19 @@
+<?php
+/** @var Account $block */
+
+use MageMe\WebForms\Block\Customer\Account;
+use MageMe\WebForms\Block\Customer\Account\Results;
+use MageMe\WebForms\Config\Options\Result\Permission;
+
+/** @var Results $resultsBlock */
+$resultsBlock = $block->getChildBlock('webforms.customer.account.results');
+$results_html = trim((string)$block->getChildHtml('webforms.customer.account.results'));
+?>
+<?php if ($resultsBlock->getPermission(Permission::VIEW)) { echo $results_html; } ?>
+
+<?php if ($resultsBlock->getPermission(Permission::ADD)) { ?>
+<div id="webforms-customer-account-form"
+     class="webforms-customer-account-form" >
+    <?= $block->getChildHtml('webforms.customer.account.form') ?>
+</div>
+<?php } ?>

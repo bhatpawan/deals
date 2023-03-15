@@ -1,0 +1,30 @@
+<?php
+/** @var Navigation $block */
+
+use MageMe\WebForms\Block\Customer\Account\Navigation;
+
+$_links = $block->getLinks();
+if (count($_links)) {
+    ?>
+    <div class="block widget block-webforms-navigation">
+        <div class="block-title">
+            <strong><?= $block->getBlockTitle() ?></strong>
+        </div>
+        <div class="block-content">
+            <ul class="nav items">
+                <?php $_index = 1; ?>
+                <?php $_count = count($_links); ?>
+                <?php foreach ($_links as $_link): ?>
+                    <?php $_last = ($_index++ >= $_count); ?>
+                    <?php if ($_link->getActive()) { ?>
+                        <li class="nav item current">
+                            <strong><?= $_link->getLabel() ?></strong></li>
+                    <?php } else { ?>
+                        <li class="nav item"><a
+                                    href="<?= $_link->getUrl() ?>"><?= $_link->getLabel() ?></a></li>
+                    <?php } ?>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
+<?php } ?>

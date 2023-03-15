@@ -1,0 +1,156 @@
+<?php
+/**
+ * @var GoogleMap $block
+ */
+
+use MageMe\WebForms\Block\Form\Element\Field\Type\GoogleMap;
+
+$validationRules = $block->getValidationRules();
+$validationDescriptions = $block->getValidationDescriptions();
+?>
+
+<div id="<?= $block->getFieldId() ?>map"
+     class='<?= $block->getFieldClass() ?>'
+     style='<?= $block->getFieldStyle() ?>'></div>
+<input id='<?= $block->getFieldId() ?>'
+       name='<?= $block->getFieldName() ?>'
+       type="hidden"
+       class="validate-hidden"
+       value="<?= htmlspecialchars((string)$block->getFieldValue()); ?>"
+        <?php if ($validationRules) { ?>
+            data-validate="{<?= implode(", ", $validationRules); ?>}"
+        <?php } ?>
+        <?php foreach ($validationDescriptions as $key => $data) {
+            echo $key . '=' . '"' . htmlspecialchars((string)$data) . '"';
+        }
+        ?>
+        <?= htmlspecialchars((string)$block->getCustomAttributes()) ?>
+       <?php if ($block->getIsLabelHidden()) { ?>aria-label="<?= $block->getFieldLabel() ?>"
+       <?php } else { ?> aria-labelledby="label_<?= $block->getFieldId() ?>" <?php } ?>
+       <?php if ($block->getIsRequired()) { ?>aria-required="true"<?php } ?>
+/>
+
+<script>
+    (() => {
+        function initMap() {
+            const defaultCoordinates = {
+                lat: parseFloat(<?= $block->getLatitude(); ?>),
+                lng: parseFloat(<?= $block->getLongitude(); ?>),
+            };
+            const input = document.getElementById("<?= $block->getFieldId(); ?>");
+            const map = new google.maps.Map(document.getElementById("<?= $block->getFieldId(); ?>map"), {
+                zoom: <?= $block->getZoom() ?>,
+                center: defaultCoordinates,
+            });
+            const geocoder = new google.maps.Geocoder();
+            const marker = new google.maps.Marker({
+                position: defaultCoordinates,
+                map: map,
+            });
+            google.maps.event.addListener(map, 'click', function(event) {
+                geocodeLatLng(map, geocoder, marker, input, event.latLng.lat(), event.latLng.lng());
+            });
+            if (input.value) {
+                const match = input.value.match(/([\d-.]+);([\d-.]+)/);
+                if (match) {
+                    geocodeLatLng(map, geocoder, marker, input, match[1], match[2]);
+                } else {
+                    geocodeAddress(map, geocoder, marker, input.value);
+                }
+            } else {
+                const defaultAddress = '<?= $block->getAddress(); ?>';
+                if (defaultAddress) {
+                    geocodeAddress(map, geocoder, marker, defaultAddress);
+                } else if (!defaultCoordinates.lat && !defaultCoordinates.lng) {
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition((position) => {
+                            const coordinates = {
+                                lat: position.coords.latitude,
+                                lng: position.coords.longitude
+                            }
+                            map.setCenter(coordinates);
+                            marker.setPosition(coordinates);
+                        });
+                    }
+                }
+            }
+
+            const searchInput = document.createElement('input');
+            searchInput.classList.add('mm-map-search');
+            searchInput.placeholder = "<?= __('Search'); ?>";
+            const searchBox = new google.maps.places.SearchBox(searchInput);
+            map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(searchInput);
+            google.maps.event.addListener(searchBox, 'places_changed', function() {
+                const places = searchBox.getPlaces();
+                if (places.length === 0) {
+                    return;
+                }
+                const bounds = new google.maps.LatLngBounds();
+                places.forEach(function (place) {
+                    if (!place.geometry) {
+                        return;
+                    }
+                    geocodeLatLng(map, geocoder, marker, input, place.geometry.location.lat(), place.geometry.location.lng());
+                    bounds.extend(place.geometry.location);
+                    if (place.geometry.viewport) {
+                        bounds.union(place.geometry.viewport);
+                    } else {
+                        bounds.extend(place.geometry.location);
+                    }
+                });
+                map.fitBounds(bounds);
+            });
+        }
+
+        function geocodeLatLng(map, geocoder, marker, input, lat, lng) {
+            const latLng = {
+                lat: parseFloat(lat),
+                lng: parseFloat(lng),
+            }
+            geocoder.geocode({
+                latLng: latLng
+            }, function(responses) {
+                if (responses && responses.length > 0) {
+                    input.value = responses[0].formatted_address;
+                } else {
+                    input.value = latLng.lat + ';' + latLng.lng;
+                }
+                map.setCenter(latLng);
+                marker.setPosition(latLng);
+            });
+        }
+
+        function geocodeAddress(map, geocoder, marker, address) {
+            geocoder.geocode({
+                address: address
+            }, function(results, status) {
+                if (status === 'OK') {
+                    map.setCenter(results[0].geometry.location);
+                    marker.setPosition(results[0].geometry.location);
+                } else {
+                    console.log('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+        }
+
+        const src = "https://maps.googleapis.com/maps/api/js?key=<?= $block->getApiKey(); ?>&libraries=places";
+        let script = document.querySelector('script[src="' + src + '"]');
+        if (!script) {
+            script = document.createElement("script");
+            script.type = 'text/javascript';
+            script.src = src;
+            script.addEventListener('load', () => {
+                initMap();
+            });
+            document.head.appendChild(script);
+        } else {
+            if (!window.google || !window.google.map) {
+                script.addEventListener('load', () => {
+                    initMap();
+                });
+            } else {
+                initMap();
+            }
+        }
+    })();
+</script>

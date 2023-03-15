@@ -1,0 +1,59 @@
+<?php
+/**
+ * @var Autocomplete $block
+ */
+
+use MageMe\WebForms\Block\Form\Element\Field\Type\Autocomplete;
+
+$validationRules = $block->getValidationRules();
+$validationDescriptions = $block->getValidationDescriptions();
+?>
+<input id='<?= $block->getFieldId() ?>'
+       name='<?= $block->getFieldName() ?>'
+       type='text'
+       class='<?= $block->getFieldClass() ?>'
+       style='<?= $block->getFieldStyle() ?>'
+       value="<?= htmlspecialchars((string)$block->getFieldValue()); ?>"
+       placeholder="<?= $block->getPlaceholder() ?>"
+       <?php if ($validationRules) { ?>
+           data-validate="{<?= implode(", ", $validationRules); ?>}"
+       <?php } ?>
+       <?php foreach ($validationDescriptions as $key => $data) {
+           echo $key . '=' . '"' . htmlspecialchars((string)$data) . '"';
+       }
+       ?>
+       <?php if ($block->getIsLabelHidden()) { ?>aria-label="<?= $block->getFieldLabel() ?>"
+       <?php } else { ?> aria-labelledby="label_<?= $block->getFieldId() ?>" <?php } ?>
+       <?php if ($block->getIsRequired()) { ?>aria-required="true"<?php } ?>
+       <?= htmlspecialchars((string)$block->getCustomAttributes()) ?>
+/>
+
+<script>
+    require([
+        'MageMe_WebForms/js/auto-complete'
+    ], function (autoComplete) {
+        new autoComplete({
+            selector: 'input[name="<?= $block->getFieldName() ?>"]',
+            minChars: 2,
+            source: function (term, suggest) {
+                term = term.toLowerCase();
+                var choices = <?= json_encode($block->getChoices())?>;
+                var matches = [];
+                for (var i = 0; i < choices.length; i++)
+                    if (~choices[i].toLowerCase().indexOf(term)) matches.push(choices[i]);
+                suggest(matches);
+            }
+        });
+    });
+</script>
+<?php if ($block->getMask()) { ?>
+    <script>
+        require(['MageMe_WebForms/js/inputmask'], function () {
+            var element = document.getElementById("<?= $block->getFieldId(); ?>");
+            if (element) {
+                var im = new Inputmask("<?= $block->getMask(); ?>");
+                im.mask(element);
+            }
+        });
+    </script>
+<?php } ?>

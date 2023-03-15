@@ -1,0 +1,23 @@
+<?php /** @var MageMe\WebForms\Block\Form\Element\Script\Submit $block */ ?>
+<?php
+$_form = $block->getForm();
+?>
+<script type="text/javascript">
+    require(['MageMe_WebForms/js/submit'], function (submitForm) {
+        return submitForm({
+            url: '<?= $block->getUrl('webforms/form/submit',
+                ['_secure' => true, 'ajax' => $block->isAjax()]); ?>',
+            uid: '<?= $block->getUid(); ?>',
+            isAjax: <?= var_export($block->isAjax()); ?>,
+            isDisplayedAfterSubmission: <?= var_export($_form->getIsDisplayedAfterSubmission()); ?>,
+            isScrolledAfterSubmission: <?= var_export($_form->getIsScrolledAfterSubmission()); ?>,
+            useCaptcha: <?= var_export($_form->useCaptcha()); ?>,
+            messageSuccess: '<?= __('Success!')?>',
+            messageError: '<?= __('Error')?>',
+            messageRecaptcha: '<?= __('Please click on the reCAPTCHA')?>',
+            messageRedirecting: '<?= __('Redirecting')?>',
+            messageComplete: '<?= __('Complete')?>',
+            messageUnknownError: '<?= __('Unknown error(s) occurred')?>'
+        });
+    });
+</script>

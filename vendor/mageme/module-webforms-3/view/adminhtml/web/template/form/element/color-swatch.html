@@ -1,0 +1,16 @@
+<div class="admin__field-value"
+     visible="visible"
+     css="$data.additionalClasses">
+     <div class="colorpicker-grid-swatch"
+          data-bind="
+             visible: !!value,
+             style: {
+                 'background-color': value
+         }"/>
+     <span data-bind="
+             text: value,
+             attr: {
+                 name: inputName,
+                 id: uid
+         }"/>
+</div>

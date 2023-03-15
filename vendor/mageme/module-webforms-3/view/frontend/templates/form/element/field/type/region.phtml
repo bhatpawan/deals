@@ -1,0 +1,65 @@
+<?php
+/**
+ * @var Region $block
+ */
+
+use MageMe\WebForms\Block\Form\Element\Field\Type\Region;
+
+$value = $block->getFieldValue();
+$validationRules = $block->getValidationRules();
+$validationDescriptions = $block->getValidationDescriptions();
+?>
+<select id='<?= $block->getFieldId() ?>region_id'
+        name='<?= $block->getFieldName() ?>[region_id]'
+        title='<?= $block->escapeHtml($block->getFieldName())?>'
+        class='<?= $block->getFieldClass() ?> region_id'
+        style='display:none;<?= $block->getFieldStyle() ?>'
+    <?php if ($validationRules) { ?>
+        data-validate="{<?= implode(", ", $validationRules); ?>}"
+    <?php } ?>
+    <?php foreach ($validationDescriptions as $key => $data) {
+        echo $key . '=' . '"' . htmlspecialchars((string)$data) . '"';
+    }
+    ?>
+        <?php if ($block->getIsLabelHidden()) { ?>aria-label="<?= $block->getFieldLabel() ?>"
+<?php } else { ?> aria-labelledby="label_<?= $block->getFieldId() ?>" <?php } ?>
+        <?php if ($block->getIsRequired()) { ?>aria-required="true"<?php } ?>
+        <?php if ($block->getAutocomplete()) { ?>autocomplete="<?= $block->getAutocomplete() ?>" <?php } ?>
+    <?= htmlspecialchars((string)$block->getCustomAttributes()) ?>
+>
+    <option value=""><?= $block->escapeHtml(__('Please select a region, state or province.')) ?></option>
+</select>
+<input id='<?= $block->getFieldId() ?>region'
+       name='<?= $block->getFieldName() ?>[region]'
+       type='text'
+       title='<?= $block->getFieldName()?>'
+       class='<?= $block->getFieldClass() ?> input-text'
+       style='display:none;<?= $block->getFieldStyle() ?>'
+       value="<?= htmlspecialchars((string)$value['region']); ?>"
+    <?php if ($validationRules) { ?>
+        data-validate="{<?= implode(", ", $validationRules); ?>}"
+    <?php } ?>
+    <?php foreach ($validationDescriptions as $key => $data) {
+        echo $key . '=' . '"' . htmlspecialchars((string)$data) . '"';
+    }
+    ?>
+       <?php if ($block->getIsLabelHidden()) { ?>aria-label="<?= $block->getFieldLabel() ?>"
+<?php } else { ?> aria-labelledby="label_<?= $block->getFieldId() ?>" <?php } ?>
+       <?php if ($block->getIsRequired()) { ?>aria-required="true"<?php } ?>
+       <?php if ($block->getAutocomplete()) { ?>autocomplete="<?= $block->getAutocomplete() ?>" <?php } ?>
+    <?= htmlspecialchars((string)$block->getCustomAttributes()) ?>
+/>
+<script type="text/x-magento-init">
+    {
+        "#<?= $block->getCountryFieldId()?>": {
+            "webformsRegion": {
+                "optionalRegionAllowed": true,
+                "regionListId": "#<?= $block->getFieldId()?>region_id",
+                "regionInputId": "#<?= $block->getFieldId()?>region",
+                "regionJson": <?= /* @noEscape */ $block->getRegionJson() ?>,
+                "isRegionRequired": <?php var_export($block->getIsRequired()) ?>,
+                "currentRegion": "<?= $value['region_id']?>"
+            }
+        }
+    }
+</script>

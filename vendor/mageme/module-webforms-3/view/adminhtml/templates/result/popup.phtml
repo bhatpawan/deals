@@ -1,0 +1,16 @@
+<?php
+/** @var Popup $block */
+
+use MageMe\WebForms\Block\Adminhtml\Result\Popup;
+
+?>
+<div class="page-main-actions" <?= $block->getUiId('content-header') ?>>
+    <div class="page-actions">
+        <div class="page-actions-inner">
+            <div class="page-actions-buttons">
+                <?= $this->getButtonsHtml() ?>
+            </div>
+        </div>
+    </div>
+</div>
+<?= $block->getChildHtml('result_view') ?>

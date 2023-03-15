@@ -1,0 +1,25 @@
+<!--@subject Your [{{var webform_name}}] submission status has changed @-->
+<!--@vars
+{"var webform_subject":"Generated subject from field values",
+"var webform_name":"Web-form name",
+"var webform_result|raw":"Detailed result html content",
+"var store_group":"Store Group",
+"var store_name":"Store Name",
+"var ip":"Customer IP address",
+"var customer_name":"Customer name",
+"var customer_email":"Customer email address",
+"var status":"Result status",
+"var result.field_id.name":"Field name with assigned id or code",
+"var result.field_id.value|raw":"Field value with assigned id or code",
+"var result.field_id.result_label":"Field result label with assigned id or code"}
+@-->
+
+<h1>Your "{{var webform_name}}" submission status has changed to "{{var status}}"</h1>
+
+<i>On {{var result.date}} you submitted:</i>
+
+<blockquote>
+
+    <p>{{var webform_result|html}}</p>
+
+</blockquote>

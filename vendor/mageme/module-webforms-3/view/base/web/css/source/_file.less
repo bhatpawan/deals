@@ -1,0 +1,120 @@
+/* File Renderer */
+.webforms-file-pool {
+  display: table;
+  margin-bottom: 10px;
+}
+
+.webforms-file-pool-selectall {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+
+  label {
+    color: #888;
+  }
+}
+
+.webforms-file-cell {
+  float: left;
+  flex: 1;
+  height: auto;
+  color: #888;
+  display: table-cell;
+
+  p {
+    label {
+      color: #888;
+    }
+  }
+
+  .webforms-image-box {
+    margin-left: 0;
+  }
+
+  .admin__field-complex-content {
+    max-width: 100% !important;
+  }
+}
+
+.webforms-file-link {
+  @_webforms__file-icon-size: 18px;
+
+  position: relative;
+  display: inline-flex !important;
+  float: left;
+  margin-right: 10px;
+  height: auto;
+  padding-left: @_webforms__file-icon-size+5px;
+  margin-bottom: 7px;
+
+  figure {
+    margin: 1em 10px;
+
+    p {
+      margin: 10px 0 5px 0;
+    }
+
+    img {
+      background: white;
+    }
+  }
+
+  &:before {
+    content: "";
+    background-image: url(../images/paperclip.svg);
+    background-size: @_webforms__file-icon-size @_webforms__file-icon-size;
+    background-repeat: no-repeat;
+    display: block;
+    width: @_webforms__file-icon-size;
+    height: @_webforms__file-icon-size;
+    position: absolute;
+    left: 0;
+  }
+}
+
+.webforms-file-link-name {
+  display: inline-flex;
+  max-width: 150px;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  word-wrap: normal !important;
+  white-space: nowrap !important;
+
+}
+
+.webforms-file-link-name-end {
+  display: inline;
+
+  &:before {
+    content: "...";
+  }
+}
+
+.webforms-file-delete-checkbox {
+  vertical-align: baseline;
+  margin-top: 0 !important;
+}
+
+.webforms-image-box {
+  background: #efefef;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  margin: 0 10px 10px 0;
+  cursor: pointer;
+  font-size: 12px;
+  border-radius: 2px;
+  padding: 2px 15px;
+  font-weight: bold;
+  white-space: nowrap;
+  float: left;
+
+  img {
+    max-width: none;
+  }
+
+  &:hover {
+    background: #9e9e9e;;
+    text-decoration: none;
+  }
+}

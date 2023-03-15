@@ -1,0 +1,67 @@
+<?php
+/** @var MageMe\WebForms\Block\Form\Element\Script\Logic $block */
+
+$_uid      = $block->getUid();
+$widgetUid = $_uid;
+if (!$widgetUid) {
+    $widgetUid = $block->getForm()->getId();
+}
+$fields_to_fieldsets = $block->getForm()->getFieldsToFieldsets();
+// create field map
+$field_map = [];
+foreach ($fields_to_fieldsets as $fieldset_id => $fieldset) {
+    foreach ($fieldset["fields"] as $field) {
+        $field_map['fieldset_' . $fieldset_id][] = $field->getId();
+    }
+}
+if (empty($field_map['fieldset_0'])) {
+    $field_map['fieldset_0'] = [];
+}
+$field_map['fieldset_0'][] = 'submit';
+$logic_rules               = $block->getForm()->getLogic(false);
+if (count($logic_rules)) {
+    ?>
+
+    <script type="text/javascript">
+        var logicRules_<?= $widgetUid?> = [];
+        var targets_<?= $widgetUid?> = <?= json_encode($block->getForm()->_getLogicTarget($_uid))?>;
+        var fieldMap_<?= $widgetUid?> = <?= json_encode($field_map)?>;
+        <?php
+        foreach ($logic_rules as $logic) {
+        if ($logic->getIsActive()) {
+        $targets = $logic->getTarget();
+        if ($_uid) {
+            for ($i = 0; $i < count($targets); $i++) {
+                if (strstr((string)$targets[$i], 'field_')) {
+                    $targets[$i] = str_replace('field_', 'field_' . $_uid, (string)$targets[$i]);
+                }
+                if (strstr((string)$targets[$i], 'fieldset_')) {
+                    $targets[$i] = str_replace('fieldset_', 'fieldset_' . $_uid, (string)$targets[$i]);
+                }
+                if (strstr((string)$targets[$i], 'submit')) {
+                    $targets[$i] = str_replace('submit', 'submit' . $_uid, (string)$targets[$i]);
+                }
+            }
+        }
+        ?>
+        logicRules_<?= $widgetUid?>.push({
+            'field_id': '<?= $logic->getFieldId()?>',
+            'action': '<?= $logic->getAction()?>',
+            'logic_condition': '<?= $logic->getLogicCondition()?>',
+            'aggregation': '<?= $logic->getAggregation()?>',
+            'value': <?= json_encode($logic->getFrontendValue())?>,
+            'target': <?= json_encode($targets)?>
+        });
+        <?php
+        }
+        }
+        ?>
+        // execute form logic
+        window.addEventListener("mm_webform_loaded<?= $widgetUid; ?>", () => {
+            require(['webformsLogic'], function (JSWebFormsLogic) {
+                JSWebFormsLogic(targets_<?= $widgetUid?>, logicRules_<?= $widgetUid?>, fieldMap_<?= $widgetUid?>, '<?= $_uid?>');
+            });
+        });
+    </script>
+
+<?php }

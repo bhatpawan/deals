@@ -1,0 +1,36 @@
+<?php
+/**
+ * @var Subscribe $block
+ */
+use MageMe\WebForms\Block\Form\Element\Field\Type\Subscribe;
+
+$validationRules = $block->getValidationRules();
+$validationDescriptions = $block->getValidationDescriptions();
+$label = $block->getLabel();
+?>
+<input id='<?= $block->getFieldId() . 0 ?>'
+       name='<?= $block->getFieldName() ?>'
+       type='checkbox'
+       class='checkbox'
+       style='float:left'
+       value='1'
+       <?php if ($validationRules) { ?>
+           data-validate="{<?= implode(", ", $validationRules); ?>}"
+       <?php } ?>
+       <?php foreach ($validationDescriptions as $key => $data) {
+           echo $key . '=' . '"' . htmlspecialchars((string)$data) . '"';
+       }
+       ?>
+       <?php if ($block->isChecked()) { echo 'checked'; } ?>
+       <?= htmlspecialchars((string)$block->getCustomAttributes()) ?>
+       />
+<label for='<?= $block->getFieldId() . 0 ?>'
+       class='<?= $block->getFieldClass() ?>'
+       style='<?= $block->getFieldStyle() ?>'
+><?= $label ?></label>
+<?php
+    $tooltip = $block->getField()->getTooltip();
+    if($tooltip){
+        echo $block->getTooltipBlock()->toHtml();
+    }
+?>

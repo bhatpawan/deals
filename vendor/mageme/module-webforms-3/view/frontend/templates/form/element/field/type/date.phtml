@@ -1,0 +1,275 @@
+<?php
+/**
+ * @var Date $block
+ */
+
+use MageMe\WebForms\Block\Form\Element\Field\Type\Date;
+use Magento\Framework\View\Element\Html\Calendar;
+
+$validationRules = $block->getValidationRules();
+$validationDescriptions = $block->getValidationDescriptions();
+$accessible = $block->isAccessible();
+?>
+<div class='webforms-datepicker'>
+    <div id='<?= $block->getFieldId() ?>_calendar' class='webforms-calendar'>
+        <input id='<?= $block->getFieldId() ?>'
+               name='<?= $block->getFieldName() ?>'
+               type='text'
+               class='<?= $block->getFieldClass() ?>'
+               style='<?= $block->getFieldStyle() ?>'
+               value='<?= $block->getFieldValue() ?>'
+               placeholder="<?= $block->getPlaceholder() ?>"
+               <?php if ($validationRules) { ?>
+                   data-validate="{<?= implode(", ", $validationRules); ?>}"
+               <?php } ?>
+               <?php foreach ($validationDescriptions as $key => $data) {
+                   echo $key . '=' . '"' . htmlspecialchars((string)$data) . '"';
+               }
+               ?>
+               <?php if ($block->getIsLabelHidden()) { ?>aria-label="<?= $block->getFieldLabel() ?>"
+               <?php } else { ?> aria-labelledby="label_<?= $block->getFieldId() ?>" <?php } ?>
+               <?php if ($block->getIsRequired()) { ?>aria-required="true"<?php } ?>
+               <?= htmlspecialchars((string)$block->getCustomAttributes()) ?>
+        />
+        <?php if ($accessible) { ?>
+            <button id='<?= $block->getFieldId() ?>_button' type="button" class="ui-datepicker-trigger v-middle"></button>
+        <?php } ?>
+    </div>
+</div>
+<script type='text/javascript'>
+    require([
+        'jquery',
+        'mageUtils',
+        'moment-timezone-with-data'
+    ], function ($, utils, moment) {
+        var value = '<?= $block->getFieldValue() ?>',
+            format = '<?= $block->getDateFormat()?>';
+        if (!value) {
+            return;
+        }
+        var convertedValue = moment.tz(value, 'UTC');
+        format = utils.convertToMomentFormat(format);
+        $("#<?= $block->getFieldId()?>").val(convertedValue.format(format));
+    });
+</script>
+<?php if ($accessible) { ?>
+    <script type='text/javascript'>
+        require([
+            'jquery',
+            'MageMe_WebForms/js/convert.format',
+            'accessibleTranslation',
+            'accessibleDatePicker',
+            'MageMe_WebForms/js/date.format'
+        ], function ($, convertFormat, translation) {
+            var isPastDisabled = <?php var_export($block->getIsPastDisabled()) ?>;
+            var isFutureDisabled = <?php var_export($block->getIsFutureDisabled()) ?>;
+            var isTodayDisabled = <?php var_export($block->getIsTodayDisabled()) ?>;
+            var isWeekNumbersShowed = <?php var_export($block->getIsWeekNumbersShowed()) ?>;
+            var pastOffset = <?php var_export($block->getPastOffset()) ?>;
+            var futureOffset = <?php var_export($block->getFutureOffset()) ?>;
+            var disabledWeekDays = <?= $block->getDisabledWeekDays() ?>;
+            var rules = <?= $block->getCustomRules() ?>;
+            var format = convertFormat('<?= $block->getDateFormat()?>', 'date');
+            var today = new Date();
+            var config = {
+                disable: [],
+                showWeekNumbers: isWeekNumbersShowed,
+                format: format,
+                formatSubmit: format
+            };
+            var lng = translation('<?= $block->getLocale() ?>');
+            if (lng) {
+                config = {...lng.datepicker, ...config};
+            }
+            if (config.rtl) {
+                $('#<?= $block->getFieldId() ?>_calendar').addClass('rtl');
+            }
+            if (isPastDisabled) {
+                config.min = pastOffset;
+            }
+            if (isFutureDisabled) {
+                config.max = futureOffset;
+            }
+            if (isTodayDisabled) {
+                config.disable.push(today);
+            }
+            for (var i = 0; i < disabledWeekDays.length; i++) {
+                config.disable.push(disabledWeekDays[i] + 1);
+            }
+            for (var i = 0; i < rules.length; i++) {
+                if (!rules[i].range) {
+                    if (rules[i].year !== undefined) {
+                        config.disable.push([
+                            rules[i].year,
+                            rules[i].month,
+                            rules[i].day,
+                        ]);
+                    } else if (rules[i].month !== undefined) {
+                        config.disable.push([
+                            rules[i].day,
+                            rules[i].month
+                        ]);
+                    } else {
+                        config.disable.push([
+                            rules[i].day
+                        ]);
+                    }
+                } else {
+                    if (rules[i].minYear !== undefined) {
+                        config.disable.push({
+                            from: [
+                                rules[i].minYear,
+                                rules[i].minMonth,
+                                rules[i].minDay
+                            ],
+                            to: [
+                                rules[i].maxYear,
+                                rules[i].maxMonth,
+                                rules[i].maxDay
+                            ],
+                        });
+                    } else if (rules[i].minMonth !== undefined) {
+                        config.disable.push({
+                            from: {
+                                date: rules[i].minDay,
+                                month: rules[i].minMonth
+                            },
+                            to: {
+                                date: rules[i].maxDay,
+                                month: rules[i].maxMonth
+                            },
+                            allYears: true
+                        });
+                    } else {
+                        config.disable.push({
+                            from: {
+                                date: rules[i].minDay
+                            },
+                            to: {
+                                date: rules[i].maxDay
+                            },
+                            allYears: true,
+                            allMonths: true
+                        });
+                    }
+                }
+            }
+
+            var input = $('#<?= $block->getFieldId() ?>').pickadate(config);
+            var picker = input.pickadate( 'picker' );
+
+            // button
+            $('#<?= $block->getFieldId() ?>_button').on('click', function (event) {
+                if (picker.get('open')) {
+                    picker.close()
+                } else {
+                    picker.open()
+                }
+                event.stopPropagation()
+            }).on('mousedown', function (event) {
+                event.preventDefault()
+            });
+        });
+    </script>
+
+<?php } else { ?>
+    <?= $block->getLayout()->createBlock(Calendar::class)->setTemplate('Magento_Theme::js/calendar.phtml')->toHtml()?>
+
+    <script type='text/javascript'>
+        require([
+            'jquery',
+            'mage/calendar'
+        ], function ($, mage) {
+            var isPastDisabled = <?php var_export($block->getIsPastDisabled()) ?>;
+            var isFutureDisabled = <?php var_export($block->getIsFutureDisabled()) ?>;
+            var isTodayDisabled = <?php var_export($block->getIsTodayDisabled()) ?>;
+            var isWeekNumbersShowed = <?php var_export($block->getIsWeekNumbersShowed()) ?>;
+            var pastOffset = <?php var_export($block->getPastOffset()) ?>;
+            var futureOffset = <?php var_export($block->getFutureOffset()) ?>;
+            var disabledWeekDays = <?= $block->getDisabledWeekDays() ?>;
+            var rules = <?= $block->getCustomRules() ?>;
+            var today = new Date();
+            var config = {
+                showButtonPanel: !isTodayDisabled,
+                dateFormat: '<?= $block->getDateFormat()?>',
+                showTimepicker: false,
+                showWeek: isWeekNumbersShowed,
+            }
+            if (isPastDisabled) {
+                config.minDate = new Date();
+                if (pastOffset) {
+                    config.minDate.setDate(config.minDate.getDate() + pastOffset)
+                }
+            }
+            if (isFutureDisabled) {
+                config.maxDate = new Date();
+                if (futureOffset) {
+                    config.maxDate.setDate(config.maxDate.getDate() + futureOffset)
+                }
+            }
+            if (disabledWeekDays || rules || isTodayDisabled) {
+                config.beforeShowDay = function (date) {
+                    if (isTodayDisabled) {
+                        if (date.getDate() === today.getDate() &&
+                            date.getMonth() === today.getMonth() &&
+                            date.getFullYear() === today.getFullYear()) {
+                            return false;
+                        }
+                    }
+                   if (disabledWeekDays.includes(date.getDay())) {
+                       return false;
+                   }
+                   for (var i = 0; i < rules.length; i++) {
+                       if (!rules[i].range) {
+                           if (rules[i].year !== undefined) {
+                               if (date.getDate() === rules[i].day &&
+                                   date.getMonth() === rules[i].month &&
+                                   date.getFullYear() === rules[i].year) {
+                                   return false;
+                               }
+                           } else if (rules[i].month !== undefined) {
+                               if (date.getDate() === rules[i].day &&
+                                   date.getMonth() === rules[i].month) {
+                                   return false;
+                               }
+                           } else {
+                               if (date.getDate() === rules[i].day) {
+                                   return false;
+                               }
+                           }
+                       } else {
+                           if (rules[i].minYear !== undefined) {
+                               var minDate = new Date(rules[i].minYear, rules[i].minMonth, rules[i].minDay);
+                               var maxDate = new Date(rules[i].maxYear, rules[i].maxMonth, rules[i].maxDay);
+                               if (date.getTime() >= minDate.getTime() && date.getTime() <= maxDate.getTime()) {
+                                   return false;
+                               }
+                           } else if (rules[i].minMonth !== undefined) {
+                               if (rules[i].minMonth === rules[i].maxMonth) {
+                                   if (date.getMonth() === rules[i].minMonth && date.getDate() >= rules[i].minDay && date.getDate() <= rules[i].maxDay) {
+                                       return false;
+                                   }
+                               } else if (date.getMonth() === rules[i].minMonth && date.getMonth() <= rules[i].maxMonth &&
+                                   date.getDate() >= rules[i].minDay  ||
+                                   date.getMonth() > rules[i].minMonth && date.getMonth() < rules[i].maxMonth ||
+                                   date.getMonth() === rules[i].maxMonth && date.getMonth() >= rules[i].minMonth &&
+                                   date.getDate() <= rules[i].maxDay) {
+                                   return false;
+                               }
+                           } else {
+                               if (date.getDate() >= rules[i].minDay &&
+                                   date.getDate() <= rules[i].maxDay) {
+                                   return false;
+                               }
+                           }
+                       }
+                   }
+                   return [
+                       true, ''
+                   ];
+               }
+            }
+            $("#<?= $block->getFieldId()?>").calendar(config);
+        });
+    </script>
+<?php } ?>

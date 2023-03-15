@@ -1,0 +1,221 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <type name="Magento\Framework\Acl\AclResource\Provider">
+        <plugin name="webforms_add_forms_to_acl" type="MageMe\WebForms\Plugin\Adminhtml\TreeBuilder"/>
+    </type>
+
+    <type name="MageMe\WebForms\Controller\Adminhtml\Fieldset\InlineEdit">
+        <arguments>
+            <argument name="repository" xsi:type="object">MageMe\WebForms\Api\FieldsetRepositoryInterface</argument>
+        </arguments>
+    </type>
+
+    <type name="MageMe\WebForms\Controller\Adminhtml\Field\InlineEdit">
+        <arguments>
+            <argument name="repository" xsi:type="object">MageMe\WebForms\Api\FieldRepositoryInterface</argument>
+        </arguments>
+    </type>
+
+    <type name="MageMe\WebForms\Controller\Adminhtml\Logic\InlineEdit">
+        <arguments>
+            <argument name="repository" xsi:type="object">MageMe\WebForms\Api\LogicRepositoryInterface</argument>
+        </arguments>
+    </type>
+
+    <type name="MageMe\WebForms\Controller\Adminhtml\Quickresponse\InlineEdit">
+        <arguments>
+            <argument name="repository" xsi:type="object">MageMe\WebForms\Api\QuickresponseRepositoryInterface</argument>
+        </arguments>
+    </type>
+
+    <type name="MageMe\WebForms\Controller\Adminhtml\Result\MassDelete">
+        <arguments>
+            <argument name="repository" xsi:type="object">MageMe\WebForms\Api\ResultRepositoryInterface</argument>
+        </arguments>
+    </type>
+
+    <type name="MageMe\WebForms\Controller\Adminhtml\Field\Duplicate">
+        <arguments>
+            <argument name="fieldRepository" xsi:type="object">MageMe\WebForms\Api\FieldRepositoryInterface</argument>
+        </arguments>
+    </type>
+
+    <type name="MageMe\WebForms\Controller\Adminhtml\File\DropzoneDownload">
+        <arguments>
+            <argument name="repository" xsi:type="object">MageMe\WebForms\Api\FileDropzoneRepositoryInterface</argument>
+        </arguments>
+    </type>
+
+    <type name="MageMe\WebForms\Controller\Adminhtml\File\MessageDownload">
+        <arguments>
+            <argument name="repository" xsi:type="object">MageMe\WebForms\Api\FileMessageRepositoryInterface</argument>
+        </arguments>
+    </type>
+
+    <type name="MageMe\WebForms\Controller\Adminhtml\File\CustomerNotificationDownload">
+        <arguments>
+            <argument name="repository" xsi:type="object">MageMe\WebForms\Api\FileCustomerNotificationRepositoryInterface</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="MageMe\WebForms\Ui\Component\Field\Form\Modifier\Pool"
+                 type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="logic" xsi:type="array">
+                    <item name="class" xsi:type="string">MageMe\WebForms\Ui\Component\Field\Form\Modifier\Logic
+                    </item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+                <item name="typeAttributes" xsi:type="array">
+                    <item name="class" xsi:type="string">MageMe\WebForms\Ui\Component\Field\Form\Modifier\TypeAttributes
+                    </item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="MageMe\WebForms\Ui\Component\Field\Form\DataProvider">
+        <arguments>
+            <argument name="pool" xsi:type="object">MageMe\WebForms\Ui\Component\Field\Form\Modifier\Pool</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="MageMe\WebForms\Ui\Component\Result\Info\Form\Modifier\Pool"
+                 type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="info" xsi:type="array">
+                    <item name="class" xsi:type="string">MageMe\WebForms\Ui\Component\Result\Info\Form\Modifier\Info</item>
+                    <item name="sortOrder" xsi:type="number">1</item>
+                </item>
+                <item name="result" xsi:type="array">
+                    <item name="class" xsi:type="string">MageMe\WebForms\Ui\Component\Result\Info\Form\Modifier\Result</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+                <item name="messages" xsi:type="array">
+                    <item name="class" xsi:type="string">MageMe\WebForms\Ui\Component\Result\Info\Form\Modifier\Messages</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
+                </item>
+                <item name="other" xsi:type="array">
+                    <item name="class" xsi:type="string">MageMe\WebForms\Ui\Component\Result\Info\Form\Modifier\Other</item>
+                    <item name="sortOrder" xsi:type="number">40</item>
+                </item>
+                <item name="orders" xsi:type="array">
+                    <item name="class" xsi:type="string">MageMe\WebForms\Ui\Component\Result\Info\Form\Modifier\Orders</item>
+                    <item name="sortOrder" xsi:type="number">50</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="MageMe\WebForms\Ui\Component\Result\Info\Form\DataProvider">
+        <arguments>
+            <argument name="pool" xsi:type="object">MageMe\WebForms\Ui\Component\Result\Info\Form\Modifier\Pool</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="MageMe\WebForms\Ui\Component\Form\Form\Modifier\Pool"
+                 type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="customerNotificationAttachments" xsi:type="array">
+                    <item name="class" xsi:type="string">
+                        MageMe\WebForms\Ui\Component\Form\Form\Modifier\CustomerNotificationAttachments
+                    </item>
+                    <item name="sortOrder" xsi:type="number">100</item>
+                </item>
+                <item name="fieldsets" xsi:type="array">
+                    <item name="class" xsi:type="string">MageMe\WebForms\Ui\Component\Form\Form\Modifier\Fieldsets</item>
+                    <item name="sortOrder" xsi:type="number">110</item>
+                </item>
+                <item name="fields" xsi:type="array">
+                    <item name="class" xsi:type="string">MageMe\WebForms\Ui\Component\Form\Form\Modifier\Fields</item>
+                    <item name="sortOrder" xsi:type="number">120</item>
+                </item>
+                <item name="logicRules" xsi:type="array">
+                    <item name="class" xsi:type="string">MageMe\WebForms\Ui\Component\Form\Form\Modifier\LogicRules</item>
+                    <item name="sortOrder" xsi:type="number">130</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="MageMe\WebForms\Ui\Component\Form\Form\DataProvider">
+        <arguments>
+            <argument name="pool" xsi:type="object">MageMe\WebForms\Ui\Component\Form\Form\Modifier\Pool</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="MageMe\WebForms\Ui\Component\Logic\Form\Modifier\Pool"
+                 type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="value" xsi:type="array">
+                    <item name="class" xsi:type="string">MageMe\WebForms\Ui\Component\Logic\Form\Modifier\Value</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+                <item name="target" xsi:type="array">
+                    <item name="class" xsi:type="string">MageMe\WebForms\Ui\Component\Logic\Form\Modifier\Target</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                </item>
+                <item name="aggregation" xsi:type="array">
+                    <item name="class" xsi:type="string">MageMe\WebForms\Ui\Component\Logic\Form\Modifier\Aggregation</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="MageMe\WebForms\Ui\Component\Logic\Form\DataProvider">
+        <arguments>
+            <argument name="pool" xsi:type="object">MageMe\WebForms\Ui\Component\Logic\Form\Modifier\Pool</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Store\Model\ResourceModel\Store">
+        <plugin name="update_webforms_url_rewrites_after_store_save" type="MageMe\WebForms\Plugin\Store\View"/>
+    </type>
+
+    <type name="Magento\Customer\Model\Customer\DataProvider">
+        <plugin name="webforms_customer_result_listing" type="MageMe\WebForms\Plugin\Magento\Customer\Model\Customer\DataProviderWithDefaultAddresses\CustomerResultListing"/>
+    </type>
+    <type name="Magento\Customer\Model\Customer\DataProviderWithDefaultAddresses">
+        <plugin name="webforms_customer_result_listing" type="MageMe\WebForms\Plugin\Magento\Customer\Model\Customer\DataProviderWithDefaultAddresses\CustomerResultListing"/>
+    </type>
+
+    <type name="MageMe\WebForms\Ui\Component\Common\Listing\MassAction\SubAction\AbstractAjaxUpdateStatus">
+        <arguments>
+            <argument name="status" xsi:type="object">MageMe\WebForms\Config\Options\Status</argument>
+        </arguments>
+    </type>
+
+    <type name="MageMe\WebForms\Ui\Component\Result\Listing\MassActions\SubActions\AjaxIsReplied">
+        <arguments>
+            <argument name="status" xsi:type="object">MageMe\WebForms\Config\Options\YesNo</argument>
+        </arguments>
+    </type>
+
+    <type name="MageMe\WebForms\Ui\Component\Result\Listing\MassActions\SubActions\AjaxIsRead">
+        <arguments>
+            <argument name="status" xsi:type="object">MageMe\WebForms\Config\Options\YesNo</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="WebFormsLicenseUi"
+                 type="MageMe\Core\Ui\License">
+        <arguments>
+            <argument name="groupId" xsi:type="string">webforms</argument>
+            <argument name="groupLabel" xsi:type="string" translatable="true">WebForms</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="MageMe\WebForms\Helper\LicenseHelper">
+        <arguments>
+            <argument name="ui" xsi:type="object">WebFormsLicenseUi</argument>
+        </arguments>
+    </type>
+</config>

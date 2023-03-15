@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="mageme" translate="label" sortOrder="500" class="mageme-extensions">
+            <label>MageMe Extensions</label>
+        </tab>
+        <section id="mageme" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0"
+                 showInStore="0">
+            <label>Information &amp; Licenses</label>
+            <tab>mageme</tab>
+            <resource>MageMe_Core::info</resource>
+            <group id="license" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="0"
+                   showInStore="0">
+                <label>Information &amp; Licenses</label>
+            </group>
+        </section>
+    </system>
+</config>

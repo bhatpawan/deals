@@ -44,6 +44,11 @@ class Info extends Container
     protected $_template = 'result/reply/info.phtml';
 
     /**
+     * @var string
+     */
+    protected $_nameInLayout = 'webforms_result_info';
+
+    /**
      * Info constructor.
      * @param GroupRepositoryInterface $groupRepository
      * @param Context $context

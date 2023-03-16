@@ -37,6 +37,11 @@ class View extends Container
     protected $_template = 'MageMe_WebForms::result/view.phtml';
 
     /**
+     * @var string
+     */
+    protected $_nameInLayout = 'webforms_result_view';
+
+    /**
      * @return array
      */
     public function getOptions(): array

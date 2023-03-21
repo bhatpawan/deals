@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * @copyright: Copyright © 2019 Firebear Studio. All rights reserved.
+ * @author   : Firebear Studio <fbeardev@gmail.com>
+ */
+-->
+<requisition_lists>
+    <requisition_list>
+        <customer_id></customer_id>
+        <customer_email>john@gmail.com</customer_email>
+        <name>First list name</name>
+        <description>Description for first list</description>
+        <item:sku>24-WG02</item:sku>
+        <item:store_id>1</item:store_id>
+        <item:qty>1</item:qty>
+        <item:options></item:options>
+    </requisition_list>
+    <requisition_list>
+        <item:sku>24-WB03</item:sku>
+        <item:store_id>1</item:store_id>
+        <item:qty>2</item:qty>
+        <item:options></item:options>
+    </requisition_list>
+    <requisition_list>
+        <item:sku>24-MB06</item:sku>
+        <item:store_id>1</item:store_id>
+        <item:qty>3</item:qty>
+        <item:options></item:options>
+    </requisition_list>
+    <requisition_list>
+        <item:sku>24-MB05</item:sku>
+        <item:store_id>1</item:store_id>
+        <item:qty>4</item:qty>
+        <item:options></item:options>
+    </requisition_list>
+    <requisition_list>
+        <item:sku>24-WB04</item:sku>
+        <item:store_id>1</item:store_id>
+        <item:qty>5</item:qty>
+        <item:options></item:options>
+    </requisition_list>
+    <requisition_list>
+        <customer_id></customer_id>
+        <customer_email>billy@microsoft.com</customer_email>
+        <name>Second list name</name>
+        <description>Description for second list</description>
+        <item:sku>24-UB02</item:sku>
+        <item:store_id>1</item:store_id>
+        <item:qty>1</item:qty>
+        <item:options></item:options>
+    </requisition_list>
+    <requisition_list>
+        <item:sku>24-MG04</item:sku>
+        <item:store_id>1</item:store_id>
+        <item:qty>2</item:qty>
+        <item:options></item:options>
+    </requisition_list>
+    <requisition_list>
+        <item:sku>24-UG03</item:sku>
+        <item:store_id>1</item:store_id>
+        <item:qty>1</item:qty>
+        <item:options></item:options>
+    </requisition_list>
+    <requisition_list>
+        <item:sku>24-MB06</item:sku>
+        <item:store_id>1</item:store_id>
+        <item:qty>1</item:qty>
+        <item:options></item:options>
+    </requisition_list>
+    <requisition_list>
+        <item:sku>24-WB03</item:sku>
+        <item:store_id>1</item:store_id>
+        <item:qty>1</item:qty>
+        <item:options></item:options>
+    </requisition_list>
+    <requisition_list>
+        <customer_id></customer_id>
+        <customer_email>steve@apple.com</customer_email>
+        <name>Another list</name>
+        <description>Some text</description>
+        <item:sku>24-MB01</item:sku>
+        <item:store_id>1</item:store_id>
+        <item:qty>1</item:qty>
+        <item:options></item:options>
+    </requisition_list>
+    <requisition_list>
+        <item:sku>24-MB04</item:sku>
+        <item:store_id>1</item:store_id>
+        <item:qty>1</item:qty>
+        <item:options></item:options>
+    </requisition_list>
+    <requisition_list>
+        <item:sku>24-MB03</item:sku>
+        <item:store_id>1</item:store_id>
+        <item:qty>33</item:qty>
+        <item:options></item:options>
+    </requisition_list>
+    <requisition_list>
+        <item:sku>24-UB02</item:sku>
+        <item:store_id>1</item:store_id>
+        <item:qty>4</item:qty>
+        <item:options></item:options>
+    </requisition_list>
+    <requisition_list>
+        <item:sku>24-UG07</item:sku>
+        <item:store_id>1</item:store_id>
+        <item:qty>1</item:qty>
+        <item:options></item:options>
+    </requisition_list>
+</requisition_lists>

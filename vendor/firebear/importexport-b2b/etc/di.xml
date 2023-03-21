@@ -1,0 +1,528 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @copyright: Copyright © 2019 Firebear Studio. All rights reserved.
+ * @author   : Firebear Studio <fbeardev@gmail.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Firebear\ImportExportB2b\Model\Export\Company"
+                 type="Firebear\ImportExportB2b\Model\Export\Entity">
+        <arguments>
+            <argument name="entityCollection" xsi:type="object">
+                Magento\Company\Model\ResourceModel\Company\Collection
+            </argument>
+            <argument name="entityTypeCode" xsi:type="string">
+                company
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Firebear\ImportExportB2b\Model\Export\SharedCatalog"
+                 type="Firebear\ImportExportB2b\Model\Export\Entity">
+        <arguments>
+            <argument name="entityCollection" xsi:type="object">
+                Magento\SharedCatalog\Model\ResourceModel\SharedCatalog\Collection
+            </argument>
+            <argument name="entityTypeCode" xsi:type="string">
+                shared_catalog
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Firebear\ImportExportB2b\Model\Export\Quote"
+                 type="Firebear\ImportExportB2b\Model\Export\Entity">
+        <arguments>
+            <argument name="entityCollection" xsi:type="object">
+                Magento\Quote\Model\ResourceModel\Quote\Collection
+            </argument>
+            <argument name="entityTypeCode" xsi:type="string">
+                quote
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Firebear\ImportExportB2b\Model\Export\RequisitionList"
+                 type="Firebear\ImportExportB2b\Model\Export\Entity">
+        <arguments>
+            <argument name="entityCollection" xsi:type="object">
+                Magento\RequisitionList\Model\ResourceModel\RequisitionList\Collection
+            </argument>
+            <argument name="entityTypeCode" xsi:type="string">
+                requisition_list
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Firebear\ImportExportB2b\Model\Import\Company">
+        <arguments>
+            <argument name="entityTypeCode" xsi:type="string">
+                company
+            </argument>
+            <argument name="adapters" xsi:type="array">
+                <item name="entity" xsi:type="object">
+                    Firebear\ImportExportB2b\Model\Import\Company\Entity
+                </item>
+                <item name="customer" xsi:type="object">
+                    Firebear\ImportExportB2b\Model\Import\Company\Customer
+                </item>
+                <item name="customerAdvanced" xsi:type="object">
+                    Firebear\ImportExportB2b\Model\Import\Company\CustomerAdvanced
+                </item>
+                <item name="structure" xsi:type="object">
+                    Firebear\ImportExportB2b\Model\Import\Company\Structure
+                </item>
+                <item name="role" xsi:type="object">
+                    Firebear\ImportExportB2b\Model\Import\Company\Role
+                </item>
+                <item name="credit" xsi:type="object">
+                    Firebear\ImportExportB2b\Model\Import\Company\Credit
+                </item>
+                <item name="creditHistory" xsi:type="object">
+                    Firebear\ImportExportB2b\Model\Import\Company\CreditHistory
+                </item>
+                <item name="quoteConfig" xsi:type="object">
+                    Firebear\ImportExportB2b\Model\Import\Company\QuoteConfig
+                </item>
+                <item name="payment" xsi:type="object">
+                    Firebear\ImportExportB2b\Model\Import\Company\Payment
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Firebear\ImportExportB2b\Model\Import\CompanyRole"
+                 type="Firebear\ImportExportB2b\Model\Import\Entity">
+        <arguments>
+            <argument name="entityTypeCode" xsi:type="string">
+                company_role
+            </argument>
+            <argument name="adapters" xsi:type="array">
+                <item name="entity" xsi:type="object">
+                    Firebear\ImportExportB2b\Model\Import\CompanyRole\Entity
+                </item>
+                <item name="user" xsi:type="object">
+                    Firebear\ImportExportB2b\Model\Import\CompanyRole\User
+                </item>
+                <item name="customerAdvanced" xsi:type="object">
+                    Firebear\ImportExportB2b\Model\Import\CompanyRole\CustomerAdvanced
+                </item>
+                <item name="permission" xsi:type="object">
+                    Firebear\ImportExportB2b\Model\Import\CompanyRole\Permission
+                </item>
+                <item name="companyStructure" xsi:type="object">
+                    Firebear\ImportExportB2b\Model\Import\CompanyRole\CompanyStructure
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Firebear\ImportExportB2b\Model\Import\SharedCatalog">
+        <arguments>
+            <argument name="entityTypeCode" xsi:type="string">
+                shared_catalog
+            </argument>
+            <argument name="adapters" xsi:type="array">
+                <item name="entity" xsi:type="object">
+                    Firebear\ImportExportB2b\Model\Import\SharedCatalog\Entity
+                </item>
+                <item name="customerGroup" xsi:type="object">
+                    Firebear\ImportExportB2b\Model\Import\SharedCatalog\CustomerGroup
+                </item>
+                <item name="company" xsi:type="object">
+                    Firebear\ImportExportB2b\Model\Import\SharedCatalog\Company
+                </item>
+                <item name="productItem" xsi:type="object">
+                    Firebear\ImportExportB2b\Model\Import\SharedCatalog\ProductItem
+                </item>
+                <item name="categoryPermission" xsi:type="object">
+                    Firebear\ImportExportB2b\Model\Import\SharedCatalog\CategoryPermission
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Firebear\ImportExportB2b\Model\Import\Quote"
+                 type="Firebear\ImportExportB2b\Model\Import\Entity">
+        <arguments>
+            <argument name="entityTypeCode" xsi:type="string">
+                quote
+            </argument>
+            <argument name="adapters" xsi:type="array">
+                <item name="entity" xsi:type="object">
+                    Firebear\ImportExportB2b\Model\Import\Quote\Entity
+                </item>
+                <item name="item" xsi:type="object">
+                    Firebear\ImportExportB2b\Model\Import\Quote\Item
+                </item>
+                <item name="itemOption" xsi:type="object">
+                    Firebear\ImportExportB2b\Model\Import\Quote\ItemOption
+                </item>
+                <item name="address" xsi:type="object">
+                    Firebear\ImportExportB2b\Model\Import\Quote\Address
+                </item>
+                <item name="negotiableEntity" xsi:type="object">
+                    Firebear\ImportExportB2b\Model\Import\Quote\Negotiable\Entity
+                </item>
+                <item name="negotiableItem" xsi:type="object">
+                    Firebear\ImportExportB2b\Model\Import\Quote\Negotiable\Item
+                </item>
+                <item name="negotiablePurgedContent" xsi:type="object">
+                    Firebear\ImportExportB2b\Model\Import\Quote\Negotiable\PurgedContent
+                </item>
+                <item name="negotiableHistory" xsi:type="object">
+                    Firebear\ImportExportB2b\Model\Import\Quote\Negotiable\History
+                </item>
+                <item name="negotiableGrid" xsi:type="object">
+                    Firebear\ImportExportB2b\Model\Import\Quote\Negotiable\Grid
+                </item>
+                <item name="negotiableComment" xsi:type="object">
+                    Firebear\ImportExportB2b\Model\Import\Quote\Negotiable\Comment
+                </item>
+                <item name="negotiableCommentAttachment" xsi:type="object">
+                    Firebear\ImportExportB2b\Model\Import\Quote\Negotiable\CommentAttachment
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Firebear\ImportExportB2b\Model\Import\RequisitionList"
+                 type="Firebear\ImportExportB2b\Model\Import\Entity">
+        <arguments>
+            <argument name="entityTypeCode" xsi:type="string">
+                requisition_list
+            </argument>
+            <argument name="adapters" xsi:type="array">
+                <item name="entity" xsi:type="object">
+                    Firebear\ImportExportB2b\Model\Import\RequisitionList\Entity
+                </item>
+                <item name="item" xsi:type="object">
+                    Firebear\ImportExportB2b\Model\Import\RequisitionList\Item
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Firebear\ImportExportB2b\Model\Import\Company\Entity">
+        <arguments>
+            <argument name="resourceModel" xsi:type="object">
+                Magento\Company\Model\ResourceModel\Company
+            </argument>
+            <argument name="data" xsi:type="array">
+                <item name="adminUserResourceModel" xsi:type="object">
+                    Magento\User\Model\ResourceModel\User
+                </item>
+                <item name="regionResourceModel" xsi:type="object">
+                    Magento\Directory\Model\ResourceModel\Region
+                </item>
+                <item name="customerGroupResourceModel" xsi:type="object">
+                    Magento\Customer\Model\ResourceModel\Group
+                </item>
+                <item name="companyStatus" xsi:type="object">
+                    Magento\Company\Model\Company\Source\Status
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Firebear\ImportExportB2b\Model\Import\Company\Customer">
+        <arguments>
+            <argument name="resourceModel" xsi:type="object">
+                Magento\Customer\Model\ResourceModel\Customer
+            </argument>
+        </arguments>
+    </type>
+    <type name="Firebear\ImportExportB2b\Model\Import\Company\CustomerAdvanced">
+        <arguments>
+            <argument name="resourceModel" xsi:type="object">
+                Magento\Company\Model\ResourceModel\Customer
+            </argument>
+        </arguments>
+    </type>
+    <type name="Firebear\ImportExportB2b\Model\Import\Company\Structure">
+        <arguments>
+            <argument name="resourceModel" xsi:type="object">
+                Magento\Company\Model\ResourceModel\Structure
+            </argument>
+        </arguments>
+    </type>
+    <type name="Firebear\ImportExportB2b\Model\Import\Company\Role">
+        <arguments>
+            <argument name="resourceModel" xsi:type="object">
+                Magento\Company\Model\ResourceModel\Role
+            </argument>
+            <argument name="data" xsi:type="array">
+                <item name="permissionManagement" xsi:type="object">
+                    Magento\Company\Model\PermissionManagementInterface
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Firebear\ImportExportB2b\Model\Import\Company\Credit">
+        <arguments>
+            <argument name="resourceModel" xsi:type="object">
+                Magento\CompanyCredit\Model\ResourceModel\CreditLimit
+            </argument>
+        </arguments>
+    </type>
+    <type name="Firebear\ImportExportB2b\Model\Import\Company\CreditHistory">
+        <arguments>
+            <argument name="resourceModel" xsi:type="object">
+                Magento\CompanyCredit\Model\ResourceModel\History
+            </argument>
+            <argument name="data" xsi:type="array">
+                <item name="userContext" xsi:type="object">
+                    Magento\Authorization\Model\UserContextInterface
+                </item>
+                <item name="serializer" xsi:type="object">
+                    Magento\Framework\Serialize\SerializerInterface
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Firebear\ImportExportB2b\Model\Import\Company\QuoteConfig">
+        <arguments>
+            <argument name="resourceModel" xsi:type="object">
+                Magento\NegotiableQuote\Model\ResourceModel\CompanyQuoteConfig
+            </argument>
+        </arguments>
+    </type>
+    <type name="Firebear\ImportExportB2b\Model\Import\Company\Payment">
+        <arguments>
+            <argument name="resourceModel" xsi:type="object">
+                Magento\CompanyPayment\Model\ResourceModel\CompanyPaymentMethod
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Firebear\ImportExportB2b\Model\Import\CompanyRole\Entity">
+        <arguments>
+            <argument name="resourceModel" xsi:type="object">
+                Magento\Company\Model\ResourceModel\Role
+            </argument>
+            <argument name="data" xsi:type="array">
+                <item name="companyResourceModel" xsi:type="object">
+                    Magento\Company\Model\ResourceModel\Company
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Firebear\ImportExportB2b\Model\Import\CompanyRole\CompanyStructure">
+        <arguments>
+            <argument name="resourceModel" xsi:type="object">
+                Magento\Company\Model\ResourceModel\Structure
+            </argument>
+        </arguments>
+    </type>
+    <type name="Firebear\ImportExportB2b\Model\Import\CompanyRole\User">
+        <arguments>
+            <argument name="resourceModel" xsi:type="object">
+                Magento\Company\Model\ResourceModel\UserRole
+            </argument>
+            <argument name="data" xsi:type="array">
+                <item name="customerResourceModel" xsi:type="object">
+                    Magento\Customer\Model\ResourceModel\Customer
+                </item>
+                <item name="companyResourceModel" xsi:type="object">
+                    Magento\Company\Model\ResourceModel\Company
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Firebear\ImportExportB2b\Model\Import\CompanyRole\CustomerAdvanced">
+        <arguments>
+            <argument name="resourceModel" xsi:type="object">
+                Magento\Company\Model\ResourceModel\Customer
+            </argument>
+            <argument name="data" xsi:type="array">
+                <item name="companyRoleResourceModel" xsi:type="object">
+                    Magento\Company\Model\ResourceModel\Role
+                </item>
+                <item name="companyRoleUserResourceModel" xsi:type="object">
+                    Magento\Company\Model\ResourceModel\UserRole
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Firebear\ImportExportB2b\Model\Import\CompanyRole\Permission">
+        <arguments>
+            <argument name="resourceModel" xsi:type="object">
+                Magento\Company\Model\ResourceModel\Permission
+            </argument>
+            <argument name="data" xsi:type="array">
+                <item name="resourceProvider" xsi:type="object">
+                    Magento\Company\Acl\AclResource\Provider
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Firebear\ImportExportB2b\Model\Import\SharedCatalog\Entity">
+        <arguments>
+            <argument name="resourceModel" xsi:type="object">
+                Magento\SharedCatalog\Model\ResourceModel\SharedCatalog
+            </argument>
+            <argument name="data" xsi:type="array">
+                <item name="userContext" xsi:type="object">
+                    Magento\Authorization\Model\UserContextInterface
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Firebear\ImportExportB2b\Model\Import\SharedCatalog\CustomerGroup">
+        <arguments>
+            <argument name="resourceModel" xsi:type="object">
+                Magento\Customer\Model\ResourceModel\Group
+            </argument>
+        </arguments>
+    </type>
+    <type name="Firebear\ImportExportB2b\Model\Import\SharedCatalog\Company">
+        <arguments>
+            <argument name="resourceModel" xsi:type="object">
+                Magento\Company\Model\ResourceModel\Company
+            </argument>
+        </arguments>
+    </type>
+    <type name="Firebear\ImportExportB2b\Model\Import\SharedCatalog\ProductItem">
+        <arguments>
+            <argument name="resourceModel" xsi:type="object">
+                Magento\SharedCatalog\Model\ResourceModel\ProductItem
+            </argument>
+        </arguments>
+    </type>
+    <type name="Firebear\ImportExportB2b\Model\Import\SharedCatalog\CategoryPermission">
+        <arguments>
+            <argument name="resourceModel" xsi:type="object">
+                Magento\SharedCatalog\Model\ResourceModel\Permission
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Firebear\ImportExportB2b\Model\Import\Quote\Entity">
+        <arguments>
+            <argument name="resourceModel" xsi:type="object">
+                Magento\Quote\Model\ResourceModel\Quote
+            </argument>
+            <argument name="data" xsi:type="array">
+                <item name="quoteItemResourceModel" xsi:type="object">
+                    Magento\Quote\Model\ResourceModel\Quote\Item
+                </item>
+                <item name="negotiableQuoteResourceModel" xsi:type="object">
+                    Magento\NegotiableQuote\Model\ResourceModel\NegotiableQuote
+                </item>
+                <item name="negotiableQuoteGridResourceModel" xsi:type="object">
+                    Magento\NegotiableQuote\Model\ResourceModel\QuoteGrid
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Firebear\ImportExportB2b\Model\Import\Quote\Item">
+        <arguments>
+            <argument name="resourceModel" xsi:type="object">
+                Magento\Quote\Model\ResourceModel\Quote\Item
+            </argument>
+        </arguments>
+    </type>
+    <type name="Firebear\ImportExportB2b\Model\Import\Quote\ItemOption">
+        <arguments>
+            <argument name="resourceModel" xsi:type="object">
+                Magento\Quote\Model\ResourceModel\Quote\Item\Option
+            </argument>
+        </arguments>
+    </type>
+    <type name="Firebear\ImportExportB2b\Model\Import\Quote\Address">
+        <arguments>
+            <argument name="resourceModel" xsi:type="object">
+                Magento\Quote\Model\ResourceModel\Quote\Address
+            </argument>
+        </arguments>
+    </type>
+    <type name="Firebear\ImportExportB2b\Model\Import\Quote\Negotiable\Entity">
+        <arguments>
+            <argument name="resourceModel" xsi:type="object">
+                Magento\NegotiableQuote\Model\ResourceModel\NegotiableQuote
+            </argument>
+            <argument name="data" xsi:type="array">
+                <item name="quoteModelFactory" xsi:type="object">
+                    Magento\Quote\Model\QuoteFactory
+                </item>
+                <item name="quoteResourceModelFactory" xsi:type="object">
+                    Magento\Quote\Model\ResourceModel\QuoteFactory
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Firebear\ImportExportB2b\Model\Import\Quote\Negotiable\Item">
+        <arguments>
+            <argument name="resourceModel" xsi:type="object">
+                Magento\NegotiableQuote\Model\ResourceModel\NegotiableQuoteItem
+            </argument>
+        </arguments>
+    </type>
+    <type name="Firebear\ImportExportB2b\Model\Import\Quote\Negotiable\PurgedContent">
+        <arguments>
+            <argument name="resourceModel" xsi:type="object">
+                Magento\NegotiableQuote\Model\ResourceModel\PurgedContent
+            </argument>
+            <argument name="data" xsi:type="array">
+                <item name="serializer" xsi:type="object">
+                    Magento\Framework\Serialize\SerializerInterface
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Firebear\ImportExportB2b\Model\Import\Quote\Negotiable\History">
+        <arguments>
+            <argument name="resourceModel" xsi:type="object">
+                Magento\NegotiableQuote\Model\ResourceModel\History
+            </argument>
+        </arguments>
+    </type>
+    <type name="Firebear\ImportExportB2b\Model\Import\Quote\Negotiable\Grid">
+        <arguments>
+            <argument name="resourceModel" xsi:type="object">
+                Magento\NegotiableQuote\Model\ResourceModel\QuoteGrid
+            </argument>
+        </arguments>
+    </type>
+    <type name="Firebear\ImportExportB2b\Model\Import\Quote\Negotiable\Comment">
+        <arguments>
+            <argument name="resourceModel" xsi:type="object">
+                Magento\NegotiableQuote\Model\ResourceModel\Comment
+            </argument>
+            <argument name="data" xsi:type="array">
+                <item name="dateTime" xsi:type="object">
+                    Magento\Framework\Stdlib\DateTime\DateTime
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Firebear\ImportExportB2b\Model\Import\Quote\Negotiable\CommentAttachment">
+        <arguments>
+            <argument name="resourceModel" xsi:type="object">
+                Magento\NegotiableQuote\Model\ResourceModel\CommentAttachment
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Firebear\ImportExportB2b\Model\Import\RequisitionList\Entity">
+        <arguments>
+            <argument name="resourceModel" xsi:type="object">
+                Magento\RequisitionList\Model\ResourceModel\RequisitionList
+            </argument>
+            <argument name="data" xsi:type="array">
+                <item name="dateTime" xsi:type="object">
+                    Magento\Framework\Stdlib\DateTime\DateTime
+                </item>
+                <item name="requisitionListItemResourceModel" xsi:type="object">
+                    Magento\RequisitionList\Model\ResourceModel\RequisitionListItem
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Firebear\ImportExportB2b\Model\Import\RequisitionList\Item">
+        <arguments>
+            <argument name="resourceModel" xsi:type="object">
+                Magento\RequisitionList\Model\ResourceModel\RequisitionListItem
+            </argument>
+            <argument name="data" xsi:type="array">
+                <item name="serializer" xsi:type="object">
+                    Magento\Framework\Serialize\SerializerInterface
+                </item>
+            </argument>
+        </arguments>
+    </type>
+</config>

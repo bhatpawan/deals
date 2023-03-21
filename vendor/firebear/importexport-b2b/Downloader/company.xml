@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * @copyright: Copyright © 2019 Firebear Studio. All rights reserved.
+ * @author   : Firebear Studio <fbeardev@gmail.com>
+ */
+-->
+<companies>
+    <company>
+        <company_name>FireBear</company_name>
+        <status>0</status>
+        <company_email>email@firebear.com</company_email>
+        <legal_name>FireBear</legal_name>
+        <comment>FireBear Company</comment>
+        <street>street</street>
+        <city>Moscow</city>
+        <country_id>RU</country_id>
+        <postcode>12888</postcode>
+        <telephone>3444</telephone>
+        <customer_group_id>1</customer_group_id>
+        <website_id>1</website_id>
+        <email>john@gmail.com</email>
+        <job_title>Director</job_title>
+        <firstname>John</firstname>
+        <lastname>Smitt</lastname>
+        <credit_limit>67</credit_limit>
+        <exceed_limit>1</exceed_limit>
+        <credit_comment>Reason change</credit_comment>
+        <is_quote_enabled>1</is_quote_enabled>
+        <applicable_payment_method>2</applicable_payment_method>
+        <use_config_settings>1</use_config_settings>
+        <available_payment_methods>amazon_payment,cashondelivery</available_payment_methods>
+    </company>
+    <company>
+        <company_name>Microsoft</company_name>
+        <status>1</status>
+        <company_email>billy@microsoft.com</company_email>
+        <legal_name>Microsoft</legal_name>
+        <comment>Microsoft Company</comment>
+        <street>street</street>
+        <city>New York</city>
+        <country_id>AF</country_id>
+        <postcode>12888</postcode>
+        <telephone>6777</telephone>
+        <customer_group_id>1</customer_group_id>
+        <website_id>1</website_id>
+        <email>billy@microsoft.com</email>
+        <job_title>Developer</job_title>
+        <firstname>Bill</firstname>
+        <lastname>Gates</lastname>
+        <credit_limit>45</credit_limit>
+        <exceed_limit>0</exceed_limit>
+        <credit_comment></credit_comment>
+        <is_quote_enabled></is_quote_enabled>
+        <applicable_payment_method>1</applicable_payment_method>
+        <use_config_settings></use_config_settings>
+        <available_payment_methods></available_payment_methods>
+    </company>
+    <company>
+        <company_name>Apple</company_name>
+        <status>0</status>
+        <company_email>steve@apple.com</company_email>
+        <legal_name>Apple</legal_name>
+        <comment>Apple Company</comment>
+        <street>street</street>
+        <city>Los Angeles</city>
+        <country_id>RU</country_id>
+        <postcode>12888</postcode>
+        <telephone>8967</telephone>
+        <customer_group_id>1</customer_group_id>
+        <website_id>1</website_id>
+        <email>steve@apple.com</email>
+        <job_title>Tester</job_title>
+        <firstname>Steve</firstname>
+        <lastname>Jobs</lastname>
+        <credit_limit>23</credit_limit>
+        <exceed_limit>1</exceed_limit>
+        <credit_comment></credit_comment>
+        <is_quote_enabled></is_quote_enabled>
+        <applicable_payment_method>1</applicable_payment_method>
+        <use_config_settings></use_config_settings>
+        <available_payment_methods></available_payment_methods>
+    </company>
+</companies>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * @copyright: Copyright © 2019 Firebear Studio. All rights reserved.
+ * @author   : Firebear Studio <fbeardev@gmail.com>
+ */
+-->
+<quotes>
+    <quote>
+        <increment_id>1</increment_id>
+        <store_id>1</store_id>
+        <customer_email>john@gmail.com</customer_email>
+        <item:sku>24-WG02</item:sku>
+        <item:qty>1</item:qty>
+        <item_option:code></item_option:code>
+        <item_option:value></item_option:value>
+        <negotiable:negotiated_price_type></negotiable:negotiated_price_type>
+        <negotiable:negotiated_price_value>5</negotiable:negotiated_price_value>
+        <negotiable:quote_name>Test quote for John</negotiable:quote_name>
+        <negotiable_comment:creator_type></negotiable_comment:creator_type>
+        <negotiable_comment:creator_id></negotiable_comment:creator_id>
+        <negotiable_comment:comment>First test comment</negotiable_comment:comment>
+        <negotiable_comment:created_at>2018-11-01 17:16:09</negotiable_comment:created_at>
+        <negotiable_comment_attachment:file_name>test.txt</negotiable_comment_attachment:file_name>
+        <negotiable_comment_attachment:file_path>pub</negotiable_comment_attachment:file_path>
+    </quote>
+    <quote>
+        <item:sku>24-WB03</item:sku>
+        <item:qty>2</item:qty>
+        <item_option:code>first code</item_option:code>
+        <item_option:value>first value</item_option:value>
+        <negotiable_comment:creator_type>2</negotiable_comment:creator_type>
+        <negotiable_comment:creator_id>1</negotiable_comment:creator_id>
+        <negotiable_comment:comment>Second test comment</negotiable_comment:comment>
+        <negotiable_comment:created_at>2018-11-01 17:16:16</negotiable_comment:created_at>
+        <negotiable_comment_attachment:file_name>first_attachment.gif</negotiable_comment_attachment:file_name>
+        <negotiable_comment_attachment:file_path>pub/attachments</negotiable_comment_attachment:file_path>
+    </quote>
+    <quote>
+        <item_option:code>second code</item_option:code>
+        <item_option:value>second value</item_option:value>
+        <negotiable_comment_attachment:file_name>second_attachment.jpg</negotiable_comment_attachment:file_name>
+        <negotiable_comment_attachment:file_path>pub/attachments</negotiable_comment_attachment:file_path>
+    </quote>
+    <quote>
+        <item_option:code>third code</item_option:code>
+        <item_option:value>third value</item_option:value>
+    </quote>
+    <quote>
+        <item:sku>24-MB06</item:sku>
+        <item:qty>5</item:qty>
+    </quote>
+    <quote>
+        <item:sku>24-MB05</item:sku>
+        <item:qty>10</item:qty>
+    </quote>
+    <quote>
+        <item:sku>24-WB04</item:sku>
+        <item:qty>11</item:qty>
+    </quote>
+    <quote>
+        <increment_id>2</increment_id>
+        <store_id>1</store_id>
+        <customer_email>steve@apple.com</customer_email>
+        <item:sku>24-UB02</item:sku>
+        <item:qty>1</item:qty>
+        <item_option:code></item_option:code>
+        <item_option:value></item_option:value>
+        <negotiable:negotiated_price_type>2</negotiable:negotiated_price_type>
+        <negotiable:negotiated_price_value>100</negotiable:negotiated_price_value>
+        <negotiable:quote_name>Test quote for Steve</negotiable:quote_name>
+        <negotiable_comment:creator_type></negotiable_comment:creator_type>
+        <negotiable_comment:creator_id></negotiable_comment:creator_id>
+        <negotiable_comment:comment>First test comment</negotiable_comment:comment>
+        <negotiable_comment:created_at>2018-11-01 17:16:09</negotiable_comment:created_at>
+        <negotiable_comment_attachment:file_name>attachment.txt</negotiable_comment_attachment:file_name>
+        <negotiable_comment_attachment:file_path>pub</negotiable_comment_attachment:file_path>
+    </quote>
+    <quote>
+        <item:sku>24-MG04</item:sku>
+        <item:qty>3</item:qty>
+    </quote>
+    <quote>
+        <item:sku>24-UG03</item:sku>
+        <item:qty>4</item:qty>
+    </quote>
+    <quote>
+        <item:sku>24-MB06</item:sku>
+        <item:qty>5</item:qty>
+    </quote>
+    <quote>
+        <item:sku>24-WB03</item:sku>
+        <item:qty>2</item:qty>
+    </quote>
+    <quote>
+        <increment_id>3</increment_id>
+        <store_id>1</store_id>
+        <customer_email>doe@test.com</customer_email>
+        <item:sku>24-MB01</item:sku>
+        <item:qty>1</item:qty>
+        <item_option:code></item_option:code>
+        <item_option:value></item_option:value>
+        <negotiable:negotiated_price_type>3</negotiable:negotiated_price_type>
+        <negotiable:negotiated_price_value>250</negotiable:negotiated_price_value>
+        <negotiable:quote_name>Test quote for Doe</negotiable:quote_name>
+        <negotiable_comment:creator_type></negotiable_comment:creator_type>
+        <negotiable_comment:creator_id></negotiable_comment:creator_id>
+        <negotiable_comment:comment></negotiable_comment:comment>
+        <negotiable_comment:created_at></negotiable_comment:created_at>
+        <negotiable_comment_attachment:file_name></negotiable_comment_attachment:file_name>
+        <negotiable_comment_attachment:file_path></negotiable_comment_attachment:file_path>
+    </quote>
+    <quote>
+        <item:sku>24-MB04</item:sku>
+        <item:qty>2</item:qty>
+    </quote>
+    <quote>
+        <item:sku>24-MB03</item:sku>
+        <item:qty>3</item:qty>
+        <item_option:code>first code</item_option:code>
+        <item_option:value>first value</item_option:value>
+    </quote>
+    <quote>
+        <item_option:code>second code</item_option:code>
+        <item_option:value>second value</item_option:value>
+    </quote>
+    <quote>
+        <item:sku>24-UB02</item:sku>
+        <item:qty>5</item:qty>
+        <item_option:code>option with empty value</item_option:code>
+        <item_option:value></item_option:value>
+    </quote>
+    <quote>
+        <item:sku>24-UG07</item:sku>
+        <item:qty>6</item:qty>
+    </quote>
+</quotes>

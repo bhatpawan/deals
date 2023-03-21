@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * @copyright: Copyright © 2019 Firebear Studio. All rights reserved.
+ * @author   : Firebear Studio <fbeardev@gmail.com>
+ */
+-->
+<shared_catalogs>
+    <shared_catalog>
+        <name>Shared Catalog 1</name>
+        <description>Description of Shared Catalog 1</description>
+        <tax_class_id>3</tax_class_id>
+        <type></type>
+        <company>email@firebear.com</company>
+        <category>15,18</category>
+        <sku>24-MB04,24-MB03</sku>
+    </shared_catalog>
+    <shared_catalog>
+        <name>Shared Catalog 2</name>
+        <description></description>
+        <tax_class_id>4</tax_class_id>
+        <type></type>
+        <company>billy@microsoft.com,steve@apple.com</company>
+        <category>4,6</category>
+        <sku></sku>
+    </shared_catalog>
+</shared_catalogs>

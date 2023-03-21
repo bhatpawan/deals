@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @copyright: Copyright © 2019 Firebear Studio. All rights reserved.
+ * @author   : Firebear Studio <fbeardev@gmail.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Firebear_ImportExport:etc/di_export.xsd">
+    <entity name="company" label="Company" model="Firebear\ImportExportB2b\Model\Export\Company">
+        <item name="company_entity" label="Company"
+              model="Firebear\ImportExportB2b\Model\Export\Company\Entity" main_field="" />
+        <item name="company_customer" label="Customer"
+              model="Firebear\ImportExportB2b\Model\Export\Company\Customer" main_field="" />
+        <item name="company_customer_advanced" label="Customer Advanced"
+              model="Firebear\ImportExportB2b\Model\Export\Company\CustomerAdvanced" main_field="" />
+        <item name="company_credit" label="Credit"
+              model="Firebear\ImportExportB2b\Model\Export\Company\Credit" main_field="" />
+        <item name="company_quote_config" label="Quote Config"
+              model="Firebear\ImportExportB2b\Model\Export\Company\QuoteConfig" main_field="" />
+        <item name="company_payment" label="Payment"
+              model="Firebear\ImportExportB2b\Model\Export\Company\Payment" main_field="" />
+    </entity>
+    <entity name="shared_catalog" label="Shared Catalog" model="Firebear\ImportExportB2b\Model\Export\SharedCatalog">
+        <item name="shared_catalog_entity" label="Shared Catalog"
+              model="Firebear\ImportExportB2b\Model\Export\SharedCatalog\Entity" main_field="" />
+        <item name="shared_catalog_customer_group" label="Customer Group"
+              model="Firebear\ImportExportB2b\Model\Export\SharedCatalog\CustomerGroup" main_field="" />
+        <item name="shared_catalog_company" label="Company"
+              model="Firebear\ImportExportB2b\Model\Export\SharedCatalog\Company" main_field="" />
+        <item name="shared_catalog_product_item" label="Product Item"
+              model="Firebear\ImportExportB2b\Model\Export\SharedCatalog\ProductItem" main_field="" />
+        <item name="shared_catalog_category_permission" label="Category Permission"
+              model="Firebear\ImportExportB2b\Model\Export\SharedCatalog\CategoryPermission" main_field="" />
+    </entity>
+    <entity name="quote" label="Quote" model="Firebear\ImportExportB2b\Model\Export\Quote">
+        <item name="quote_entity" label="Quote"
+              model="Firebear\ImportExportB2b\Model\Export\Quote\Entity" main_field="" />
+        <item name="quote_item" label="Item"
+              model="Firebear\ImportExportB2b\Model\Export\Quote\Item" main_field="" />
+        <item name="negotiable_quote_entity" label="Negotiable Quote"
+              model="Firebear\ImportExportB2b\Model\Export\Quote\Negotiable\Entity" main_field="" />
+        <item name="negotiable_quote_comment" label="Negotiable Quote Comment"
+              model="Firebear\ImportExportB2b\Model\Export\Quote\Negotiable\Comment" main_field="" />
+    </entity>
+    <entity name="requisition_list" label="Requisition List"
+            model="Firebear\ImportExportB2b\Model\Export\RequisitionList">
+        <item name="requisition_list_entity" label="Requisition List"
+              model="Firebear\ImportExportB2b\Model\Export\RequisitionList\Entity" main_field="" />
+        <item name="requisition_list_item" label="Item"
+              model="Firebear\ImportExportB2b\Model\Export\RequisitionList\Item" main_field="" />
+    </entity>
+</config>

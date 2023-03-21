@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @copyright: Copyright © 2019 Firebear Studio. All rights reserved.
+ * @author   : Firebear Studio <fbeardev@gmail.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Firebear_ImportExport:etc/firebear_import.xsd">
+    <entity name="company" label="Company" model="Firebear\ImportExportB2b\Model\Import\Company"
+            behaviorModel="Firebear\ImportExportB2b\Model\Source\Import\Behavior\Company"/>
+    <entity name="company_role" label="Company Role" model="Firebear\ImportExportB2b\Model\Import\CompanyRole"
+            behaviorModel="Firebear\ImportExportB2b\Model\Source\Import\Behavior\CompanyRole"/>
+    <entity name="shared_catalog" label="Shared Catalog" model="Firebear\ImportExportB2b\Model\Import\SharedCatalog"
+            behaviorModel="Firebear\ImportExportB2b\Model\Source\Import\Behavior\SharedCatalog"/>
+    <entity name="quote" label="Quote" model="Firebear\ImportExportB2b\Model\Import\Quote"
+            behaviorModel="Firebear\ImportExportB2b\Model\Source\Import\Behavior\Quote"/>
+    <entity name="requisition_list" label="Requisition List" model="Firebear\ImportExportB2b\Model\Import\RequisitionList"
+            behaviorModel="Firebear\ImportExportB2b\Model\Source\Import\Behavior\RequisitionList"/>
+</config>

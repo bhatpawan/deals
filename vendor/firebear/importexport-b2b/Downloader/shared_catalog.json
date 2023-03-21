@@ -1,0 +1,22 @@
+{
+    "shared_catalogs": [
+        {
+            "name": "Shared Catalog 1",
+            "description": "Description of Shared Catalog 1",
+            "tax_class_id": "3",
+            "type": "",
+            "company": "email@firebear.com",
+            "category": "15,18",
+            "sku": "24-MB04,24-MB03"
+        },
+        {
+            "name": "Shared Catalog 2",
+            "description": "",
+            "tax_class_id": "4",
+            "type": "",
+            "company": "billy@microsoft.com,steve@apple.com",
+            "category": "4,6",
+            "sku": ""
+        }
+    ]
+}

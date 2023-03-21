@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @copyright: Copyright © 2018 Firebear Studio. All rights reserved.
+ * @author   : Firebear Studio <fbeardev@gmail.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:module:Firebear_ImportExport:etc/firebear_import.xsd">
+    <entity name="stock_sources_qty" label="Stock Sources Qty" model="Firebear\ImportExportMsi\Model\Import\StockSourceQty"
+            behaviorModel="Magento\ImportExport\Model\Source\Import\Behavior\Basic"/>
+    <entity name="stock_sources" label="Stock Sources" model="Firebear\ImportExportMsi\Model\Import\StockSource"
+            behaviorModel="Magento\ImportExport\Model\Source\Import\Behavior\Basic"/>
+</config>

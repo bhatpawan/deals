@@ -1,0 +1,16 @@
+image: firebear/magento2
+
+pipelines:
+  default:
+    - step:
+        name: PHP CodeSniffer
+        caches:
+          - coding-standard
+        script:
+          - composer config http-basic.repo.magento.com $MAGENTO_AUTH_LOGIN $MAGENTO_AUTH_PASS
+          - test -d magento-coding-standard/vendor || composer create-project magento/magento-coding-standard --stability=dev magento-coding-standard
+          - magento-coding-standard/vendor/bin/phpcs -p --standard=Magento2 --warning-severity=10 --ignore=/magento-coding-standard/*,/coding-standard/ .
+
+definitions:
+  caches:
+    coding-standard: coding-standard

@@ -1,0 +1,106 @@
+{
+    "requisition_lists": [
+        {
+            "customer_id": "",
+            "customer_email": "john@gmail.com",
+            "name": "First list name",
+            "description": "Description for first list",
+            "item:sku": "24-WG02",
+            "item:store_id": "1",
+            "item:qty": "1",
+            "item:options": ""
+        },
+        {
+            "item:sku": "24-WB03",
+            "item:store_id": "1",
+            "item:qty": "2",
+            "item:options": ""
+        },
+        {
+            "item:sku": "24-MB06",
+            "item:store_id": "1",
+            "item:qty": "3",
+            "item:options": ""
+        },
+        {
+            "item:sku": "24-MB05",
+            "item:store_id": "1",
+            "item:qty": "4",
+            "item:options": ""
+        },
+        {
+            "item:sku": "24-WB04",
+            "item:store_id": "1",
+            "item:qty": "5",
+            "item:options": ""
+        },
+        {
+            "customer_id": "",
+            "customer_email": "billy@microsoft.com",
+            "name": "Second list name",
+            "description": "Description for second list",
+            "item:sku": "24-UB02",
+            "item:store_id": "1",
+            "item:qty": "1",
+            "item:options": ""
+        },
+        {
+            "item:sku": "24-MG04",
+            "item:store_id": "1",
+            "item:qty": "2",
+            "item:options": ""
+        },
+        {
+            "item:sku": "24-UG03",
+            "item:store_id": "1",
+            "item:qty": "1",
+            "item:options": ""
+        },
+        {
+            "item:sku": "24-MB06",
+            "item:store_id": "1",
+            "item:qty": "1",
+            "item:options": ""
+        },
+        {
+            "item:sku": "24-WB03",
+            "item:store_id": "1",
+            "item:qty": "1",
+            "item:options": ""
+        },
+        {
+            "customer_id": "",
+            "customer_email": "steve@apple.com",
+            "name": "Another list",
+            "description": "Some text",
+            "item:sku": "24-MB01",
+            "item:store_id": "1",
+            "item:qty": "1",
+            "item:options": ""
+        },
+        {
+            "item:sku": "24-MB04",
+            "item:store_id": "1",
+            "item:qty": "1",
+            "item:options": ""
+        },
+        {
+            "item:sku": "24-MB03",
+            "item:store_id": "1",
+            "item:qty": "33",
+            "item:options": ""
+        },
+        {
+            "item:sku": "24-UB02",
+            "item:store_id": "1",
+            "item:qty": "4",
+            "item:options": ""
+        },
+        {
+            "item:sku": "24-UG07",
+            "item:store_id": "1",
+            "item:qty": "1",
+            "item:options": ""
+        }
+    ]
+}
